@@ -1,7 +1,14 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { Button } from 'react-native-elements';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import auth from '@react-native-firebase/auth';
+
 
 const login = () => {
+
+    const [email, setEmail] = useState(null);
+    const [password, setpassword] = useState(null)
+
     return (
         <View style={styles.container}>
 
@@ -13,6 +20,8 @@ const login = () => {
                     <TextInput
                         style={styles.input}
                         autoCapitalize="none"
+                        onChangeText={email => setEmail(email)}
+                        value={email}
                     ></TextInput>
                 </View>
 
@@ -23,16 +32,45 @@ const login = () => {
                         style={styles.input}
                         autoCapitalize="none"
                         secureTextEntry={true}
+                        onChangeText={password => setpassword(password)}
+                        value={password}
                     ></TextInput>
                 </View>
 
-                <TouchableOpacity style={styles.button}>
-                    <Text>Login</Text>
-                </TouchableOpacity>
+
+                <Button title="Login" onPress={() => onlogin(email, password)} />
+
+
+                <View style={{ alignSelf: "center", marginTop: 25 }}>
+                    <Text style={{ color: "#414959", fontSize: 15, fontWeight: "bold" }}>
+                        No account? <Text style={{ color: "#E9446A" }}>Sign Up</Text>
+                    </Text>
+                </View>
 
             </View>
-        </View>
+        </View >
     )
+}
+
+const onlogin = (email, password) => {
+    auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
+            console.log("signed-In");
+
+        })
+        .catch(error => {
+            if (error.code === 'auth/email-already-in-use') {
+                console.log('That email address is already in use!');
+            }
+
+            if (error.code === 'auth/invalid-email') {
+                console.log('That email address is invalid!');
+            }
+
+            console.error(error);
+        });
+
 }
 const styles = StyleSheet.create({
     container: {
@@ -58,16 +96,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: StyleSheet.hairlineWidth,
         height: 40,
         marginBottom: 10
-    },
-    button: {
-        marginHorizontal: 5,
-        backgroundColor="#74003D",
-        alignItems: "center",
-        justifyContent: "center",
-        height: 30,
-        borderRadius: 4,
-        marginTop: 20,
-
     }
 });
 export default login;

@@ -1,39 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar
+  StyleSheet
 } from 'react-native';
 
-import * as Firebase from 'firebase';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import firebase from '@react-native-firebase/app';
+import Loading from './components/loading';
 import Login from './components/login';
 import Home from './components/home';
-
-var firebaseConfig = {
-  apiKey: "AIzaSyDVjd53HtkWR5FtZqY3xJdeKrhQhGU03oA",
-  authDomain: "deliverydb-5d01d.firebaseapp.com",
-  databaseURL: "https://deliverydb-5d01d.firebaseio.com",
-  projectId: "deliverydb-5d01d",
-  storageBucket: "deliverydb-5d01d.appspot.com",
-  messagingSenderId: "951086271432",
-  appId: "1:951086271432:web:1f84b328c4cc0b2cc04efd",
-  measurementId: "G-7KEF5GWFL6"
-};
-// Initialize Firebase
-//Firebase.initializeApp(firebaseConfig);
-
+import Register from './components/register';
 
 const App = () => {
-  const [loggedIn, userLogInState] = useState(false);
-  return (
-    <View style={styles.container}>
-      {loggedIn ? <Home /> : <Login />}
-    </View>
-  )
 
+  useEffect(() => {
+    var firebaseConfig = {
+      apiKey: "AIzaSyDVjd53HtkWR5FtZqY3xJdeKrhQhGU03oA",
+      authDomain: "deliverydb-5d01d.firebaseapp.com",
+      databaseURL: "https://deliverydb-5d01d.firebaseio.com",
+      projectId: "deliverydb-5d01d",
+      storageBucket: "deliverydb-5d01d.appspot.com",
+      messagingSenderId: "951086271432",
+      appId: "1:951086271432:web:1f84b328c4cc0b2cc04efd",
+      measurementId: "G-7KEF5GWFL6"
+    };
+    // Initialize Firebase
+    if (!firebase) {
+      firebase.initializeApp(firebaseConfig);
+    }
+  }, []);
 };
 
 const styles = StyleSheet.create({
@@ -44,4 +39,26 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+const AppStack = createStackNavigator({
+  Home: Home
+})
+
+const AuthStack = createStackNavigator({
+  SignIn: Login,
+  SignUp: Register
+})
+
+const navigationConfig = createSwitchNavigator(
+  {
+    Loading: {
+      screen: Loading
+    },
+    App: AppStack,
+    Auth: AuthStack
+  },
+  {
+    initialRouteName: 'Loading'
+  }
+)
+
+export default createAppContainer(navigationConfig);

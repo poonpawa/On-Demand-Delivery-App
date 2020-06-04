@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "951086271432",
+    "firebase_url": "https://deliverydb-5d01d.firebaseio.com",
+    "project_id": "deliverydb-5d01d",
+    "storage_bucket": "deliverydb-5d01d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951086271432:android:8da8902cc613683cc04efd",
+        "android_client_info": {
+          "package_name": "com.ondemanddelivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "951086271432-s6o7tr5d285e45v7dr5povm2dpp08vtj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQUgrWHPa_Pj5cES6R4x3e68V19xoyiME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951086271432-s6o7tr5d285e45v7dr5povm2dpp08vtj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
