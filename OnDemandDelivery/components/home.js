@@ -6,16 +6,8 @@ import firebase from '@react-native-firebase/app';
 
 const home = (props) => {
     let useObj = {};
-    const [displayName, setdisplayName] = useState(null)
     const { navigate } = props.navigation;
-    const [initalizing, setinitalizing] = useState(false)
-
-    useEffect(() => {
-        setdisplayName(firebase.auth().currentUser.displayName);
-        if (displayName) setinitalizing(true)
-    });
-
-    if (!initalizing) return null;
+    const displayName = firebase.auth().currentUser.displayName;
 
     return (
         <View style={styles.container}>
