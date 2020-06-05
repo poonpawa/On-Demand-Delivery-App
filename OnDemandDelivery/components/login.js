@@ -4,9 +4,9 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 import auth from '@react-native-firebase/auth';
 
 
-const login = () => {
-
-    const [email, setEmail] = useState(null);
+const login = (props) => {
+    const { navigate } = props.navigation
+    const [email, setEmail] = useState(null)
     const [password, setpassword] = useState(null)
 
     return (
@@ -38,12 +38,12 @@ const login = () => {
                 </View>
 
 
-                <Button title="Login" onPress={() => onlogin(email, password)} />
+                <Button title="Login" onPress={() => onlogin(email, password, navigate)} buttonStyle={styles.btn} />
 
 
                 <View style={{ alignSelf: "center", marginTop: 25 }}>
                     <Text style={{ color: "#414959", fontSize: 15, fontWeight: "bold" }}>
-                        No account? <Text style={{ color: "#E9446A" }}>Sign Up</Text>
+                        No account?<Text style={{ color: "#0000ff" }} onPress={() => { navigate("SignUp") }}> Sign Up</Text>
                     </Text>
                 </View>
 
@@ -52,11 +52,12 @@ const login = () => {
     )
 }
 
-const onlogin = (email, password) => {
+const onlogin = (email, password, navigate) => {
     auth()
         .signInWithEmailAndPassword(email, password)
         .then(() => {
             console.log("signed-In");
+            navigate("Home")
 
         })
         .catch(error => {
@@ -74,7 +75,8 @@ const onlogin = (email, password) => {
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        marginHorizontal: 20
     },
     title: {
         marginTop: 15,
@@ -84,7 +86,8 @@ const styles = StyleSheet.create({
     },
     form: {
         marginTop: 30,
-        marginHorizontal: 5
+        marginHorizontal: 5,
+        height: 150
     },
     inputText: {
         fontSize: 20,
@@ -95,7 +98,11 @@ const styles = StyleSheet.create({
         borderBottomColor: "#8A8F9E",
         borderBottomWidth: StyleSheet.hairlineWidth,
         height: 40,
-        marginBottom: 10
+        marginBottom: 15
+    },
+    btn: {
+        width: 120,
+        alignSelf: "center"
     }
 });
 export default login;
