@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 import firebase from '@react-native-firebase/app';
+import Geolocation from "../services/geolocation";
 
 const home = (props) => {
     let useObj = {};
@@ -12,6 +13,7 @@ const home = (props) => {
     return (
         <View style={styles.container}>
             <Text style={{ fontSize: 40 }}>Welcome {displayName}</Text>
+            <Geolocation />
             <Button title="Sign-Out" buttonStyle={styles.btn} onPress={() => {
                 signOut(navigate)
             }} />
