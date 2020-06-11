@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
-import auth from '@react-native-firebase/auth';
 import firebase from '@react-native-firebase/app';
-import Geolocation from "../services/geolocation";
+import Geolocation from "../components/geolocation";
 
 const home = (props) => {
     let useObj = {};
@@ -22,7 +21,7 @@ const home = (props) => {
 }
 
 const signOut = (navigate) => {
-    auth().signOut()
+    firebase.auth().signOut()
         .then(() => {
             console.log('User signed out!')
             navigate('Auth')
