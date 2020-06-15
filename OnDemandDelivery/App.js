@@ -1,15 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import {
-  StyleSheet
-} from 'react-native';
-
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import React, { useEffect } from 'react';
+import Navigator from './navigation/index';
 import firebase from '@react-native-firebase/app';
-import Loading from './components/loading';
-import Login from './components/login';
-import Home from './components/home';
-import Register from './components/register';
 
 const App = () => {
 
@@ -29,36 +20,10 @@ const App = () => {
       firebase.initializeApp(firebaseConfig);
     }
   }, []);
+
+  return (
+    <Navigator />
+  )
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-});
-
-const AppStack = createStackNavigator({
-  Home: Home
-})
-
-const AuthStack = createStackNavigator({
-  SignIn: Login,
-  SignUp: Register
-})
-
-const navigationConfig = createSwitchNavigator(
-  {
-    Loading: {
-      screen: Loading
-    },
-    App: AppStack,
-    Auth: AuthStack
-  },
-  {
-    initialRouteName: 'Loading'
-  }
-)
-
-export default createAppContainer(navigationConfig);
+export default App;

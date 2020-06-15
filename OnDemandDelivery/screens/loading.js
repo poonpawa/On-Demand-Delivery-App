@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
-import firebase from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
 
 const loading = (props) => {

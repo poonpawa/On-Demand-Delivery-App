@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, Input, Text } from 'react-native-elements';
 import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import UserService from '../services/user-service';
 
 const register = (props) => {
     const [email, setEmail] = useState(null),
@@ -83,6 +84,8 @@ const onRegister = (name, email, password, confirmpass, navigate) => {
             User.user.updateProfile({
                 displayName: name
             }).then(() => {
+                console.log(auth().currentUser.uid);
+                UserService().AddUserDetails({ name, email })
                 navigate("App")
             })
 
