@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Button, Text } from 'react-native-elements';
 import Geolocation from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
@@ -17,7 +17,7 @@ const geolocation = () => {
             position => {
                 setLocation(position);
                 getAddress(position.coords.latitude, position.coords.longitude).then(
-                    (data) => {
+                    () => {
                         UserService().UpdateLocation(position.coords)
                     }
                 );
@@ -27,7 +27,7 @@ const geolocation = () => {
                 enableHighAccuracy: true,
                 timeout: 20000,
                 maximumAge: 1000,
-                distanceFilter: 1 //for frequent update accuracy
+                distanceFilter: 1 //for 1metre accuracy
             }
         );
     };
@@ -45,11 +45,27 @@ const geolocation = () => {
 
     return (
         <View>
-            <Button title="Get Device Location" onPress={() => getLocation()} />
-            <Text>{address}</Text>
+            <Button title="Get Device Location" buttonStyle={styles.btn} onPress={() => getLocation()} />
+            <Text style={styles.textContainer}>{address}</Text>
         </View>
     )
 }
+const styles = StyleSheet.create({
+    textContainer: {
+        width: 350,
+        marginTop: 20,
+        alignSelf: "center",
+        fontSize: 15,
+        height: 35
+    },
+    btn: {
+        width: 200,
+        backgroundColor: "#C75300",
+        marginTop: 40,
+        alignSelf: "center"
+    }
+})
+
 
 
 

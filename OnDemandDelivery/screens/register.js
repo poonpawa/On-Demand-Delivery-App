@@ -7,14 +7,13 @@ import UserService from '../services/user-service';
 const register = (props) => {
     const [email, setEmail] = useState(null),
         [password, setpassword] = useState(null),
-        [name, setName] = useState(null),
-        [confirmpass, setconfirmpass] = useState(null)
+        [name, setName] = useState(null)
     const { navigate } = props.navigation
 
     return (
         <View style={styles.container}>
 
-            <Text style={styles.title}>{`Register\n On Demand Delivery`}</Text>
+            <Text style={styles.title}>{`Register\n On Demand Delivery`}<Text style={{ color: "#C75300" }}> Buyer</Text></Text>
 
             <View style={styles.form}>
                 <View>
@@ -49,25 +48,12 @@ const register = (props) => {
                     ></Input>
                 </View>
 
-
-                <View>
-                    <Input
-                        placeholder="Confirm Password"
-                        inputStyle={styles.input}
-                        autoCapitalize="none"
-                        secureTextEntry={true}
-                        onChangeText={confirmpass => setconfirmpass(confirmpass)}
-                        value={confirmpass}
-                    ></Input>
-                </View>
-
-
-                <Button title="Sign Up" onPress={() => onRegister(name, email, password, confirmpass, navigate)} buttonStyle={styles.btn} />
+                <Button title="Sign Up" onPress={() => onRegister(name, email, password, navigate)} buttonStyle={styles.btn} />
 
 
                 <View style={{ alignSelf: "center", marginTop: 25 }}>
                     <Text style={{ color: "#414959", fontSize: 15, fontWeight: "bold" }}>
-                        Already have an account?<Text style={{ color: "#0000ff" }} onPress={() => { navigate("SignIn") }}> Login</Text>
+                        Already have an account?<Text style={{ color: "#C75300" }} onPress={() => { navigate("SignIn") }}> Login</Text>
                     </Text>
                 </View>
 
@@ -76,7 +62,7 @@ const register = (props) => {
     )
 }
 
-const onRegister = (name, email, password, confirmpass, navigate) => {
+const onRegister = (name, email, password, navigate) => {
     auth()
         .createUserWithEmailAndPassword(email, password)
         .then((User) => {
@@ -123,7 +109,8 @@ const styles = StyleSheet.create({
     btn: {
         width: 120,
         alignSelf: "center",
-        margin: 15
+        margin: 15,
+        backgroundColor: "#C75300"
     }
 });
 

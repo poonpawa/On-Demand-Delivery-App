@@ -12,7 +12,7 @@ const login = (props) => {
     return (
         <View style={styles.container}>
 
-            <Text style={styles.title}>{`Login\n On Demand Delivery`}</Text>
+            <Text style={styles.title}>{`Login\n On Demand Delivery`}<Text style={{ color: "#C75300" }}> Buyer</Text></Text>
 
             <View style={styles.form}>
                 <View>
@@ -43,7 +43,7 @@ const login = (props) => {
 
                 <View style={{ alignSelf: "center", marginTop: 25 }}>
                     <Text style={{ color: "#414959", fontSize: 15, fontWeight: "bold" }}>
-                        No account?<Text style={{ color: "#0000ff" }} onPress={() => { navigate("SignUp") }}> Sign Up</Text>
+                        No account?<Text style={{ color: "#C75300" }} onPress={() => { navigate("SignUp") }}> Sign Up</Text>
                     </Text>
                 </View>
 
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     },
     title: {
         marginTop: 15,
-        fontSize: 32,
+        fontSize: 30,
         fontWeight: "100",
         textAlign: "center"
     },
@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
     },
     btn: {
         width: 120,
-        alignSelf: "center"
+        alignSelf: "center",
+        backgroundColor: "#C75300"
     }
 });
 export default login;
