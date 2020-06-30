@@ -1,14 +1,18 @@
 import firebase from "@react-native-firebase/app";
 import firestore from '@react-native-firebase/firestore';
-import React, { useState, useRef } from 'react'
 
 const UserService = () => {
-    const userId = firebase.auth().currentUser.uid;
+
+    //getting the Buyer collection DB reference
+    const getBuyerDBReference = () => {
+        const userId = firebase.auth().currentUser.uid;
+        return firestore().collection('Buyers').doc(userId)
+    }
 
     //for creating initial user entry
     const AddUserDetails = (userData) => {
         const { name, email } = userData;
-        firestore().collection('Buyers').doc(userId).set({
+        getBuyerDBReference().set({
             Name: name,
             Email: email
         })
@@ -16,9 +20,7 @@ const UserService = () => {
 
     //for real time buyers location update
     const UpdateLocation = (value) => {
-        const collRef = firestore().collection('Buyers').doc(userId)
-
-        collRef.update({
+        getBuyerDBReference().update({
             Location: new firestore.GeoPoint(value.latitude, value.longitude)
         })
     }
@@ -26,16 +28,23 @@ const UserService = () => {
     //To add values in Buyers collection
     const AddData = (key, value) => {
         if (value) {
-            const dbReference = firestore().collection('Buyers').doc(userId)
-
             let data = {}
             data[key] = value
-            dbReference.update(data)
+            getBuyerDBReference().update(data)
         }
     }
 
+    //to get any value from from buyer collection
+    const getValue = async (key) => {
+        let dbValue;
+        await getBuyerDBReference().get().then((doc) => {
+            dbValue = doc.data()[key];
+        })
+        return dbValue;
+    }
+
     return {
-        AddUserDetails, UpdateLocation, AddData
+        AddUserDetails, UpdateLocation, AddData, getValue
     }
 }
 
