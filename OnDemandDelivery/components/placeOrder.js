@@ -4,6 +4,8 @@ import { StyleSheet, View } from 'react-native';
 import * as geolib from 'geolib';
 import RiderService from "../services/rider-service";
 import UserService from "../services/user-service";
+import NotificationTokenService from "../services/notification-token-service";
+import * as _ from 'lodash';
 
 const placeOrder = () => {
     return (
@@ -21,24 +23,40 @@ const convertGeopoint = (geopointObj) => {
 }
 
 //find all the available riders within 2Km radius
-const findNearestRiders = () => {
+const findNearestRiders = async () => {
     let nearestRiders = [];
-    UserService().getValue('Location').then((currentLocation) => {
-        RiderService().getAvailableRiders()
-            .then((querySnapshot) => {
-                querySnapshot.forEach(function (doc) {
-                    if (geolib.isPointWithinRadius(convertGeopoint(doc.data()['Location']), convertGeopoint(currentLocation), 2000)) {
-                        nearestRiders.push(doc.id)
-                    }
-                })
-                return nearestRiders;
-            })
+    let riderTokens = [];
+    let currentLocation = await UserService().getValue('Location');
+    let querySnapshot = await RiderService().getAvailableRiders()
+
+    querySnapshot.forEach(function (doc) {
+        //if (geolib.isPointWithinRadius(convertGeopoint(doc.data()['Location']), convertGeopoint(currentLocation), 2000)) {
+        const locationCoords = convertGeopoint(doc.data()['Location'])
+        nearestRiders.push(
+            locationCoords
+        )
+
+        riderTokens.push({
+            location: locationCoords,
+            token: doc.data()['NotificationTokens'][1]
+        })
+        //}
     })
+
+    let riderCoordinates = geolib.findNearest(convertGeopoint(currentLocation), nearestRiders);
+    return _.find(riderTokens, { location: riderCoordinates }).token
 }
 
-
 const assignRider = () => {
-    findNearestRiders()
+    findNearestRiders().then(
+        (riderToken) => {
+            NotificationTokenService().sendOrderRequestToRiders(riderToken, Math.random().toString(10).substr(2, 7))
+                .then((rider) => {
+                    console.log('Order Assigned');
+
+                })
+        }
+    )
 }
 
 
