@@ -22,6 +22,9 @@ const home = (props) => {
             <Text style={{ fontSize: 25 }}>Welcome <Text style={{ color: "#C75300", fontWeight: "bold" }}>{displayName}</Text></Text>
             <Geolocation />
             <PlaceOrder />
+            <Button title="Proceed" buttonStyle={styles.btn} onPress={() => {
+                navigate('Store')
+            }} />
             <Button title="Sign-Out" buttonStyle={styles.btn} onPress={() => {
                 signOut(navigate)
             }} />

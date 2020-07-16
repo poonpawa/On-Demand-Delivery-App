@@ -38,11 +38,19 @@ const NotificationTokenService = () => {
         const message = {
             to: listOfRiders,
             data: {
-                orderNumber: orderNo
+                orderNumber: orderNo,
+                redirectTo: 'home'
             },
+            content_available: true,
             notification: {
                 title: 'Order Available',
                 body: 'Would you like to accept the order?'
+            },
+            priority: 'high',
+            webpush: {
+                fcm_options: {
+                    link: '/home'
+                }
             }
         }
 
