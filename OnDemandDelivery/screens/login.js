@@ -43,7 +43,7 @@ const login = (props) => {
 
                 <View style={{ alignSelf: "center", marginTop: 25 }}>
                     <Text style={{ color: "#414959", fontSize: 15, fontWeight: "bold" }}>
-                        No account?<Text style={{ color: "#C75300" }} onPress={() => { navigate("SignUp") }}> Sign Up</Text>
+                        No account?<Text style={{ color: "#C75300" }} onPress={() => { navigate("Register") }}> Sign Up</Text>
                     </Text>
                 </View>
 
@@ -57,7 +57,7 @@ const onlogin = (email, password, navigate) => {
         .signInWithEmailAndPassword(email, password)
         .then(() => {
             console.log("signed-In");
-            navigate("Home")
+            navigate("App")
 
         })
         .catch(error => {

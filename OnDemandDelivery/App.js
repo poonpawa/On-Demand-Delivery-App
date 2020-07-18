@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Navigator from './navigation/index';
+import Navigator from './navigation/navigator';
 import firebase from '@react-native-firebase/app';
 
 const App = () => {

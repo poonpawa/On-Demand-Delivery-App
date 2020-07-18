@@ -13,17 +13,17 @@ const store = (props) => {
         {
             id: 'veggies',
             name: 'Vegetables',
-            imageSrc: require('../assets/Images/tesco.png'),
+            imageSrc: require('../assets/Images/vegetables.png'),
         },
         {
             id: 'bakery',
             name: 'Bakery',
-            imageSrc: require('../assets/Images/tesco.png'),
+            imageSrc: require('../assets/Images/breads.png'),
         },
         {
             id: 'toiletry',
             name: 'Toiletry',
-            imageSrc: require('../assets/Images/tesco.png'),
+            imageSrc: require('../assets/Images/toiletry.png'),
         },
     ]
 
@@ -34,7 +34,7 @@ const store = (props) => {
                 return (
                     <Tile
                         key={prop.id}
-                        imageSrc={require('../assets/Images/tesco.png')}
+                        imageSrc={prop.imageSrc}
                         title={prop.id}
                         featured
                         onPress={() => selectCategory(prop.name, navigate)}

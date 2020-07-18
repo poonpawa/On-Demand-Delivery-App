@@ -53,7 +53,7 @@ const register = (props) => {
 
                 <View style={{ alignSelf: "center", marginTop: 25 }}>
                     <Text style={{ color: "#414959", fontSize: 15, fontWeight: "bold" }}>
-                        Already have an account?<Text style={{ color: "#C75300" }} onPress={() => { navigate("SignIn") }}> Login</Text>
+                        Already have an account?<Text style={{ color: "#C75300" }} onPress={() => { navigate("Login") }}> Login</Text>
                     </Text>
                 </View>
 
