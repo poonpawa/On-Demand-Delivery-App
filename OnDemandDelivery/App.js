@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import Navigator from './navigation/navigator';
 import firebase from '@react-native-firebase/app';
+import { createStore } from "redux";
+import Reducer from './store/reducer';
+import { Provider } from "react-redux";
 
 const App = () => {
 
@@ -21,8 +24,12 @@ const App = () => {
     }
   }, []);
 
+  const store = createStore(Reducer)
+
   return (
-    <Navigator />
+    <Provider store={store}>
+      <Navigator />
+    </Provider>
   )
 };
 

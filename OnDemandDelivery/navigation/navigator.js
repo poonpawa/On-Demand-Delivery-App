@@ -9,6 +9,7 @@ import Product from '../screens/product';
 import Cart from '../screens/cart';
 import Login from '../screens/login';
 import Register from '../screens/register';
+import CartIcon from '../components/cartIcon';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -17,7 +18,12 @@ const bottomNavigation = () => {
     return (
         <Tab.Navigator>
             <Tab.Screen name="Order" component={OrderNavigation} />
-            <Tab.Screen name="Cart" component={Cart} />
+            <Tab.Screen name="Cart" component={Cart}
+                options={{
+                    tabBarIcon: ({ focused, color, size }) => (
+                        <CartIcon />
+                    )
+                }} />
             <Tab.Screen name="Account" component={Store} />
         </Tab.Navigator>
     )
@@ -25,7 +31,7 @@ const bottomNavigation = () => {
 
 const OrderNavigation = () => {
     return (
-        <Stack.Navigator initialRouteName="Order" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="address" component={Home} />
             <Stack.Screen name="Store" component={Store} />
             <Stack.Screen name="Category" component={Category} />
@@ -56,7 +62,7 @@ const AuthNavigation = () => {
 const navigator = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Auth" screenOptions={{ headerShown: false }}>
+            <Stack.Navigator initialRouteName="App" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="App" component={AppNavigation} />
                 <Stack.Screen name="Auth" component={AuthNavigation} />
             </Stack.Navigator>

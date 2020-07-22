@@ -47,7 +47,7 @@ const store = (props) => {
 
 const selectStore = (props, navigate) => {
     console.log(props);
-    navigate('Category')
+    navigate('Category', props)
 }
 
 const styles = StyleSheet.create({

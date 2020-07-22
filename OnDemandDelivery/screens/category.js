@@ -2,8 +2,9 @@ import React from 'react'
 import { StyleSheet, ScrollView, Text } from 'react-native'
 import { Tile } from 'react-native-elements';
 
-const store = (props) => {
-    const { navigate } = props.navigation;
+const store = ({ navigation, route }) => {
+    const { navigate } = navigation;
+    const selectedStore = route.params;
     const listOfStores = [
         {
             id: 'fruits',
@@ -37,19 +38,17 @@ const store = (props) => {
                         imageSrc={prop.imageSrc}
                         title={prop.id}
                         featured
-                        onPress={() => selectCategory(prop.name, navigate)}
+                        onPress={() => selectCategory(prop.name, navigate, selectedStore)}
                     />
                 )
             })
             }
-
         </ScrollView>
     )
 }
 
-const selectCategory = (props, navigate) => {
-    console.log(props);
-    navigate('Product')
+const selectCategory = (category, navigate, store) => {
+    navigate('Product', { store, category })
 }
 
 const styles = StyleSheet.create({
