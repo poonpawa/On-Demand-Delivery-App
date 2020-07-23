@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, ScrollView, View } from 'react-native'
 import StoreService from '../services/store-service';
 import { Card, Button, Text } from 'react-native-elements';
+import { connect } from 'react-redux';
 
-const product = ({ navigation, route }) => {
+const product = (props) => {
     const [productList, setproductList] = useState([])
     const [count, setCounter] = useState(0)
 
     useEffect(() => {
         let array = [];
-        StoreService().getProducts(route.params.store, route.params.category).then((querySnapshot) => {
+        StoreService().getProducts(props.route.params.store, props.route.params.category).then((querySnapshot) => {
             querySnapshot.forEach(function (doc) {
                 doc.data()['count'] = 0;
                 array.push(doc.data());
@@ -54,7 +55,7 @@ const product = ({ navigation, route }) => {
                                     color: "black"
                                 }}
                                 type="solid"
-                                onPress={() => incrementCounter(count)} />
+                                onPress={() => props.addToCart(prop)} />
                             <Text style={{ marginHorizontal: 12, height: 20, alignContent: "center" }}>{count}</Text>
                             <Button
                                 buttonStyle={styles.counterBtn}
@@ -65,13 +66,28 @@ const product = ({ navigation, route }) => {
                                     color: "black"
                                 }}
                                 type="solid"
-                                onPress={() => decrementCounter(count)} />
+                                onPress={() => props.removeFromCart()} />
                         </View>
                     </Card>
                 )
             })}
         </View>
     )
+}
+
+const mapStateToProps = (state) => {
+    return {
+        products: state.products,
+        total: state.total,
+        price: state.price
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToCart: (product) => dispatch({ type: 'ADD_TO_CART', product: product }),
+        removeFromCart: () => dispatch({ type: 'REMOVE_FROM_CART' }),
+    }
 }
 
 const styles = StyleSheet.create({
@@ -87,4 +103,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default product
+export default connect(mapStateToProps, mapDispatchToProps)(product)
