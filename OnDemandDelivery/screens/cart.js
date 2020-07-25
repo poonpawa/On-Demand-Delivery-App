@@ -9,12 +9,15 @@ const cart = (props) => {
             <Text>Product List</Text>
             {props.products.map((prop, key) => {
                 return (
-                    <ListItem
-                        key={key}
-                        title={prop.ProductName}
-                        subtitle={prop.Price}
-                        bottomDivider
-                    />
+                    <View>
+                        <ListItem
+                            key={key}
+                            title={prop.ProductName}
+                            subtitle={prop.Price}
+                            rightTitle={prop.quantity}
+                            bottomDivider
+                        />
+                    </View>
                 )
             })}
             <Divider style={{ height: 1, backgroundColor: 'blue' }} />

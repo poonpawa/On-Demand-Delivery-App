@@ -6,30 +6,26 @@ import { connect } from 'react-redux';
 
 const product = (props) => {
     const [productList, setproductList] = useState([])
-    const [count, setCounter] = useState(0)
 
     useEffect(() => {
-        let array = [];
+        let array = [], product;
         StoreService().getProducts(props.route.params.store, props.route.params.category).then((querySnapshot) => {
             querySnapshot.forEach(function (doc) {
-                doc.data()['count'] = 0;
+                product = getQuantityFromStore(props, doc.data().ProductId);
+                doc.data()['quantity'] = product ? product.quantity : 0;
                 array.push(doc.data());
             })
             setproductList(array);
         }).catch((err) => {
             console.log(err);
         });
+
     }, [])
 
-    const incrementCounter = () => {
-        setCounter(count => count + 1)
+    const getQuantityFromStore = (props, id) => {
+        return props.products.find((item) => item.ProductId === id);
     }
 
-    const decrementCounter = () => {
-        if (count > 0) {
-            setCounter(count => count - 1)
-        }
-    }
 
     return (
         <View>
@@ -56,7 +52,7 @@ const product = (props) => {
                                 }}
                                 type="solid"
                                 onPress={() => props.addToCart(prop)} />
-                            <Text style={{ marginHorizontal: 12, height: 20, alignContent: "center" }}>{count}</Text>
+                            <Text style={{ marginHorizontal: 12, height: 20, alignContent: "center" }}>{prop.quantity}</Text>
                             <Button
                                 buttonStyle={styles.counterBtn}
                                 iconContainerStyle={styles.icon}
@@ -66,7 +62,7 @@ const product = (props) => {
                                     color: "black"
                                 }}
                                 type="solid"
-                                onPress={() => props.removeFromCart()} />
+                                onPress={() => props.removeFromCart(prop)} />
                         </View>
                     </Card>
                 )
@@ -86,7 +82,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         addToCart: (product) => dispatch({ type: 'ADD_TO_CART', product: product }),
-        removeFromCart: () => dispatch({ type: 'REMOVE_FROM_CART' }),
+        removeFromCart: (product) => dispatch({ type: 'REMOVE_FROM_CART', product: product }),
     }
 }
 
