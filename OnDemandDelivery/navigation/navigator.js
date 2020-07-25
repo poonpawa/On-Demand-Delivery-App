@@ -10,6 +10,7 @@ import Cart from '../screens/cart';
 import Login from '../screens/login';
 import Register from '../screens/register';
 import CartIcon from '../components/cartIcon';
+import Loading from '../screens/loading';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -62,7 +63,8 @@ const AuthNavigation = () => {
 const navigator = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="App" screenOptions={{ headerShown: false }}>
+            <Stack.Navigator initialRouteName="Loading" screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="Loading" component={Loading} />
                 <Stack.Screen name="App" component={AppNavigation} />
                 <Stack.Screen name="Auth" component={AuthNavigation} />
             </Stack.Navigator>

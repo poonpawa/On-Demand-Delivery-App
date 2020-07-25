@@ -37,7 +37,7 @@ const product = (props) => {
             {productList.map((prop, key) => {
                 return (
                     <Card
-                        key={prop.ProductID}
+                        key={key}
                         image={require('../assets/Images/fruits.png')}>
                         <Text style={{ marginBottom: 10 }}>
                             {prop.ProductName}
