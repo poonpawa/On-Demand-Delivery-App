@@ -22,7 +22,9 @@ export default (state = initialState, action) => {
                 action.product.quantity--;
             }
             return {
-                products: state.products.filter(item => item.id !== action.product.ProductId),
+                products: action.product.quantity === 0
+                    ? state.products.filter(item => item.ProductId !== action.product.ProductId)
+                    : state.products,
                 total: state.total - 1,
                 price: +remainingPrice.toFixed(2)
             }
