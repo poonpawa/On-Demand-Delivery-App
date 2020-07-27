@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
 import messaging from '@react-native-firebase/messaging';
 import firebase from "@react-native-firebase/app";
 import firestore from '@react-native-firebase/firestore';
+import UserService from "../services/user-service";
+
 
 const NotificationTokenService = () => {
 
@@ -23,7 +24,7 @@ const NotificationTokenService = () => {
             .collection('Buyers')
             .doc(userId)
             .update({
-                NotificationTokens: firestore.FieldValue.arrayUnion(token),  //a user can be logged in from multiple devices
+                NotificationTokens: token,
             });
     }
 
@@ -35,11 +36,18 @@ const NotificationTokenService = () => {
             'Authorization': 'key=AAAA3XEoy8g:APA91bEmvcXQWmQc0P_0soiyVPu5SDjLGDTy6gzToQxcyF5yXMEEiAzFArYTNJlYkOHiRKkc9GV1NKg9fjCl8EY9ZBBQrL_27368oblCJdej3zjxbJ960BAB2Gzumtt3F-WSgvI2GiR4'
         })
 
+        const details = await UserService().getBuyerDetails();
+
+        console.log(details);
         const message = {
             to: listOfRiders,
             data: {
                 orderNumber: orderNo,
-                redirectTo: 'home'
+                time: '26 / 9',
+                number: '987889746',
+                address: details.Address,
+                store: 'Tesco',
+                token: details.NotificationTokens
             },
             content_available: true,
             notification: {
@@ -59,6 +67,9 @@ const NotificationTokenService = () => {
             headers,
             body: JSON.stringify(message)
         })
+
+
+
     }
 
     return { getTokenAndStore, saveTokenToDatabase, sendOrderRequestToRiders }

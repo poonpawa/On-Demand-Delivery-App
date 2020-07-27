@@ -38,7 +38,7 @@ const findNearestRiders = async () => {
 
         riderTokens.push({
             location: locationCoords,
-            token: doc.data()['NotificationTokens'][1]
+            token: doc.data()['NotificationTokens']
         })
         //}
     })

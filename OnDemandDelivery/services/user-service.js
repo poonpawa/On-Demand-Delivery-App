@@ -33,6 +33,14 @@ const UserService = () => {
             getBuyerDBReference().update(data)
         }
     }
+    //to get all the buyer details
+    const getBuyerDetails = async () => {
+        let userData;
+        await getBuyerDBReference().get().then((doc) => {
+            userData = doc.data();
+        })
+        return userData;
+    }
 
     //to get any value from from buyer collection
     const getValue = async (key) => {
@@ -44,7 +52,7 @@ const UserService = () => {
     }
 
     return {
-        AddUserDetails, UpdateLocation, AddData, getValue
+        AddUserDetails, UpdateLocation, AddData, getValue, getBuyerDetails
     }
 }
 
