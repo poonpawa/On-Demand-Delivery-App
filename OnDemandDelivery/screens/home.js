@@ -23,7 +23,7 @@ const home = (props) => {
             <Text h2>Buyer's App</Text>
             <Text style={{ fontSize: 25 }}>Welcome <Text style={{ color: "#C75300", fontWeight: "bold" }}>{displayName}</Text></Text>
             <Geolocation />
-            <PlaceOrder />
+            <PlaceOrder navigation={navigate} />
             <Button title="Proceed" buttonStyle={styles.btn} onPress={() => {
                 navigate('Store')
             }} />

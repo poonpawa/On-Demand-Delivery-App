@@ -43,22 +43,17 @@ const NotificationTokenService = () => {
             to: listOfRiders,
             data: {
                 orderNumber: orderNo,
-                time: '26 / 9',
+                time: new Date().toLocaleTimeString(),
                 number: '987889746',
                 address: details.Address,
                 store: 'Tesco',
                 token: details.NotificationTokens
             },
-            content_available: true,
+            priority: 'high',
             notification: {
                 title: 'Order Available',
-                body: 'Would you like to accept the order?'
-            },
-            priority: 'high',
-            webpush: {
-                fcm_options: {
-                    link: '/home'
-                }
+                body: 'Would you like to accept the order?',
+                click_action: 'OPEN'
             }
         }
 
@@ -67,9 +62,6 @@ const NotificationTokenService = () => {
             headers,
             body: JSON.stringify(message)
         })
-
-
-
     }
 
     return { getTokenAndStore, saveTokenToDatabase, sendOrderRequestToRiders }

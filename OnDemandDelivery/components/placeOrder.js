@@ -7,10 +7,11 @@ import UserService from "../services/user-service";
 import NotificationTokenService from "../services/notification-token-service";
 import * as _ from 'lodash';
 
-const placeOrder = () => {
+const placeOrder = (props) => {
+    const navigate = props.navigation;
     return (
         <View>
-            <Button title="Place Order" onPress={() => assignRider()} buttonStyle={styles.btn} />
+            <Button title="Place Order" onPress={() => assignRider(navigate)} buttonStyle={styles.btn} />
         </View>
     )
 }
@@ -47,12 +48,12 @@ const findNearestRiders = async () => {
     return _.find(riderTokens, { location: riderCoordinates }).token
 }
 
-const assignRider = () => {
+const assignRider = (navigate) => {
     findNearestRiders().then(
         (riderToken) => {
             NotificationTokenService().sendOrderRequestToRiders(riderToken, Math.random().toString(10).substr(2, 7))
                 .then((rider) => {
-                    console.log('Order Assigned');
+                    navigate('RiderWait')
 
                 })
         }

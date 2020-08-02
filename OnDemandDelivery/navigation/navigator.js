@@ -11,6 +11,8 @@ import Login from '../screens/login';
 import Register from '../screens/register';
 import CartIcon from '../components/cartIcon';
 import Loading from '../screens/loading';
+import RiderWait from '../screens/riderWait';
+import Tracking from '../screens/tracking';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -45,7 +47,8 @@ const AppNavigation = () => {
     return (
         <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Home" component={bottomNavigation} />
-            <Stack.Screen name="Checkout" component={Product} />
+            <Stack.Screen name="RiderWait" component={RiderWait} />
+            <Stack.Screen name="Tracking" component={Tracking} />
         </Stack.Navigator>
     )
 }
