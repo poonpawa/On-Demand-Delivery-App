@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native'
-import { Text, ListItem, Button, Divider } from 'react-native-elements';
+import { Text, ListItem, Button, Divider, Icon } from 'react-native-elements';
 
 const cart = (props) => {
     return (
@@ -13,7 +13,17 @@ const cart = (props) => {
                         <ListItem
                             key={key}
                             title={prop.ProductName}
-                            rightTitle={prop.Price * prop.quantity}
+                            rightTitle={
+                                <View style={styles.quantityView}>
+                                    <Icon style={styles.iconStyle}
+                                        name="delete"
+                                        size={20}
+                                        color="red"
+                                        onPress={() => props.deleteItem(prop)}
+                                    />
+                                    <Text> {prop.Price * prop.quantity}</Text>
+                                </View>
+                            }
                             subtitle={
                                 <View style={styles.quantityView}>
                                     <Button
@@ -63,6 +73,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addToCart: (product) => dispatch({ type: 'ADD_TO_CART', product: product }),
         removeFromCart: (product) => dispatch({ type: 'REMOVE_FROM_CART', product: product }),
+        deleteItem: (product) => dispatch({ type: 'DELETE_ITEM', product: product })
     }
 }
 
@@ -77,6 +88,10 @@ const styles = StyleSheet.create({
         height: 20
     },
     quantityView: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        paddingVertical: 5
+    },
+    iconStyle: {
+        paddingHorizontal: 5
     }
 })
