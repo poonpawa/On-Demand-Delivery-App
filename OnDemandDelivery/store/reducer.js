@@ -30,11 +30,12 @@ export default (state = initialState, action) => {
             }
         case 'DELETE_ITEM':
             let itemPrice = state.price - (action.product.Price * action.product.quantity);
+            let itemQuantity = action.product.quantity;
             action.product.quantity = 0;
 
             return {
                 products: state.products.filter(item => item.ProductId !== action.product.ProductId),
-                total: state.total - action.product.quantity,
+                total: state.total - itemQuantity,
                 price: +itemPrice.toFixed(2),
 
 
