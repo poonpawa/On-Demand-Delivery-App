@@ -52,7 +52,7 @@ const UserService = () => {
     }
 
     return {
-        AddUserDetails, UpdateLocation, AddData, getValue, getBuyerDetails
+        getBuyerDBReference, AddUserDetails, UpdateLocation, AddData, getValue, getBuyerDetails
     }
 }
 
