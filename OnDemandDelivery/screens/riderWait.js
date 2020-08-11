@@ -10,7 +10,7 @@ const riderWait = (props) => {
         messaging().onMessage((payload) => {
             if (payload.data.response) {
                 let orderDetails = JSON.parse(payload.data.orderDetails)
-                UserService().AddData('orderId', payload.data.orderNumber)
+                UserService().AddData('orderID', payload.data.orderNumber)
                 OrderService().createOrderCollection(payload.data.orderNumber, orderDetails, payload.data)
                 navigate('Tracking')
             } else {

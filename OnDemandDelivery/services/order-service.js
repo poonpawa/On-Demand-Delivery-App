@@ -18,8 +18,8 @@ export const OrderService = (props) => {
                 },
                 riderToken: data.riderToken,
                 buyerToken: data.buyerToken,
-                /* products: props.products,
-                totalPrice: props.price, */
+                //products: props.products,
+                //totalPrice: props.price, 
                 active: true
             })
         }
