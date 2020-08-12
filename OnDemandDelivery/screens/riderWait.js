@@ -10,9 +10,10 @@ const riderWait = (props) => {
         messaging().onMessage((payload) => {
             if (payload.data.response) {
                 let orderDetails = JSON.parse(payload.data.orderDetails)
-                UserService().AddData('orderID', payload.data.orderNumber)
-                OrderService().createOrderCollection(payload.data.orderNumber, orderDetails, payload.data)
-                navigate('Tracking')
+                let orderId = payload.data.orderNumber
+                UserService().AddData('orderID', orderId)
+                OrderService().createOrderCollection(orderId, orderDetails, payload.data)
+                navigate('Tracking', { orderId })
             } else {
                 console.log('Order Rejected');
             }

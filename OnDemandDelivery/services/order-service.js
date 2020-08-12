@@ -2,9 +2,7 @@ import firestore from '@react-native-firebase/firestore';
 import { connect } from 'react-redux';
 
 export const OrderService = (props) => {
-    console.log(props);
     const createOrderCollection = async (orderId, orderdata, data) => {
-
         let orderDbData = await firestore().collection('Orders').doc(orderId).get();
         //check wheather the order data already exits
         if (!orderDbData.exists) {
@@ -18,6 +16,7 @@ export const OrderService = (props) => {
                 },
                 riderToken: data.riderToken,
                 buyerToken: data.buyerToken,
+                riderName: data.riderName,
                 //products: props.products,
                 //totalPrice: props.price, 
                 active: true
@@ -25,8 +24,16 @@ export const OrderService = (props) => {
         }
     }
 
+    const getOrderData = async (orderId) => {
+        let data;
+        await firestore().collection('Orders').doc(orderId).get().then((doc) => {
+            data = doc.data();
+        })
+        return data;
+    }
+
     return {
-        createOrderCollection
+        createOrderCollection, getOrderData
     }
 }
 
