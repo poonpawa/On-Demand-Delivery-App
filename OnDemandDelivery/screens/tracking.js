@@ -4,13 +4,12 @@ import { Text } from 'react-native-elements'
 import { useEffect, useState } from 'react'
 import { OrderService } from '../services/order-service'
 
-const tracking = ({ navigation, route }) => {
-    let orderId = route.params.orderId
+const tracking = (props) => {
+    let orderId = props.route.params.orderId
     const [data, setData] = useState(null)
     useEffect(() => {
         OrderService().getOrderData(orderId).then((DBdata) => {
             setData(DBdata)
-            console.log(DBdata);
         })
     }, [])
 
@@ -30,10 +29,12 @@ const tracking = ({ navigation, route }) => {
     )
 }
 
-export default tracking
-
 const styles = StyleSheet.create({
     container: {
 
     }
 })
+
+export default tracking;
+
+
