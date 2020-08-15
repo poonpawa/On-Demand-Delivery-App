@@ -25,8 +25,8 @@ const riderWait = (props) => {
                 console.log('Order Rejected');
             }
         });
-
     }, [])
+
     return (
         <View style={styles.container}>
             <Text>Waiting for Rider to accept the order</Text>

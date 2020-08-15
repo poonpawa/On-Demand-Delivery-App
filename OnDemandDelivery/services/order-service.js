@@ -31,7 +31,6 @@ export const OrderService = (props) => {
             data = doc.data();
         })
         return data;
-
     }
 
     return {

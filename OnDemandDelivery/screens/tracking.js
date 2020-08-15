@@ -3,23 +3,34 @@ import { StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-elements'
 import { useEffect, useState } from 'react'
 import { OrderService } from '../services/order-service'
+import firestore from '@react-native-firebase/firestore';
 
 const tracking = (props) => {
     let orderId = props.route.params.orderId
     const [data, setData] = useState(null)
+    const [riderStatus, setriderStatus] = useState()
     useEffect(() => {
         OrderService().getOrderData(orderId).then((DBdata) => {
             setData(DBdata)
+            setriderStatus(DBdata.riderStatus.status)
         })
-    }, [])
 
+        const unsubscribe = firestore().collection("Orders").doc(orderId).onSnapshot((doc) => {
+            setriderStatus(doc.get('riderStatus.status'))
+        });
+
+        return () => {
+            unsubscribe();
+        }
+
+    }, [])
 
     return (
         <View style={styles.container}>
             {data ?
                 <View>
                     <Text>Order Id: {orderId}</Text>
-                    <Text>{data.riderStatus.status}</Text>
+                    <Text>{riderStatus}</Text>
                     <Text>{data.riderName} is on the way to {data.store}</Text>
                     <Text>Total Price</Text>
                 </View>
