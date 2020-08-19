@@ -13,6 +13,7 @@ import CartIcon from '../components/cartIcon';
 import Loading from '../screens/loading';
 import RiderWait from '../screens/riderWait';
 import Tracking from '../screens/tracking';
+import Delivered from '../screens/delivered';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -49,6 +50,7 @@ const AppNavigation = () => {
             <Stack.Screen name="Home" component={bottomNavigation} />
             <Stack.Screen name="RiderWait" component={RiderWait} />
             <Stack.Screen name="Tracking" component={Tracking} />
+            <Stack.Screen name="Delivered" component={Delivered} />
         </Stack.Navigator>
     )
 }

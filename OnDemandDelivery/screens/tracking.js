@@ -16,7 +16,11 @@ const tracking = (props) => {
         })
 
         const unsubscribe = firestore().collection("Orders").doc(orderId).onSnapshot((doc) => {
-            setriderStatus(doc.get('riderStatus.status'))
+            let status = doc.get('riderStatus.status')
+            setriderStatus(status)
+            if (status === 'Order Delivered') {
+                props.navigation.navigate('Delivered')
+            }
         });
 
         return () => {
