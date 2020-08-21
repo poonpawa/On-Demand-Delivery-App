@@ -4,6 +4,7 @@ import { Text } from 'react-native-elements'
 import { useEffect, useState } from 'react'
 import { OrderService } from '../services/order-service'
 import firestore from '@react-native-firebase/firestore';
+import MapView from 'react-native-maps';
 
 const tracking = (props) => {
     let orderId = props.route.params.orderId
@@ -34,6 +35,15 @@ const tracking = (props) => {
             {data ?
                 <View>
                     <Text>Order Id: {orderId}</Text>
+                    <MapView
+                        style={styles.map}
+                        initialRegion={{
+                            latitude: 37.78825,
+                            longitude: -122.4324,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+                    />
                     <Text>{riderStatus}</Text>
                     <Text>{data.riderName} is on the way to {data.store}</Text>
                     <Text>Total Price</Text>
@@ -46,8 +56,12 @@ const tracking = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-
-    }
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
+    map: {
+        ...StyleSheet.absoluteFillObject,
+    },
 })
 
 export default tracking;

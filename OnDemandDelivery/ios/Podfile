@@ -36,6 +36,8 @@ target 'OnDemandDelivery' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'react-native-maps', :path => '../node_modules/react-native-maps'
+
   target 'OnDemandDeliveryTests' do
     inherit! :search_paths
     # Pods for testing
