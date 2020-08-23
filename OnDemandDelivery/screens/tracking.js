@@ -31,19 +31,21 @@ const tracking = (props) => {
     }, [])
 
     return (
-        <View style={styles.container}>
+        <View >
             {data ?
-                <View>
+                <View style={styles.container}>
+                    <View style={styles.mapContainer}>
+                        <MapView
+                            style={styles.map}
+                            initialRegion={{
+                                latitude: 37.78825,
+                                longitude: -122.4324,
+                                latitudeDelta: 0.0922,
+                                longitudeDelta: 0.0421,
+                            }}
+                        />
+                    </View>
                     <Text>Order Id: {orderId}</Text>
-                    <MapView
-                        style={styles.map}
-                        initialRegion={{
-                            latitude: 37.78825,
-                            longitude: -122.4324,
-                            latitudeDelta: 0.0922,
-                            longitudeDelta: 0.0421,
-                        }}
-                    />
                     <Text>{riderStatus}</Text>
                     <Text>{data.riderName} is on the way to {data.store}</Text>
                     <Text>Total Price</Text>
@@ -56,12 +58,18 @@ const tracking = (props) => {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1
+    },
+    mapContainer: {
+        ...StyleSheet.absoluteFillObject,
+        height: 500,
+        width: 450,
         justifyContent: 'flex-end',
         alignItems: 'center',
     },
     map: {
         ...StyleSheet.absoluteFillObject,
-    },
+    }
 })
 
 export default tracking;
