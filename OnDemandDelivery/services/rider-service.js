@@ -7,6 +7,11 @@ const RiderService = () => {
             .where('IsAvailable', "==", true)
             .get()
     }
+    //need Rider ID for getting the location
+
+    /* const getCurrentLocation = async () => {
+        return await firestore
+    } */
 
     return {
         getAvailableRiders

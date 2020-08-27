@@ -12,16 +12,22 @@ const tracking = (props) => {
     const [data, setData] = useState(null)
     const [riderStatus, setriderStatus] = useState()
     const [buyerLocation, setbuyerLocation] = useState(null)
+    const [riderLocation, setriderLocation] = useState(null)
     useEffect(() => {
         OrderService().getOrderData(orderId).then((DBdata) => {
             setData(DBdata)
             setriderStatus(DBdata.riderStatus.status)
+            const locationSubscribe = firestore().collection("Riders").doc(DBdata.riderId).onSnapshot((doc) => {
+                setriderLocation(doc.data()["Location"])
+            })
         })
 
         UserService().getValue('Location').then((location) => {
             console.log(location);
             setbuyerLocation(location)
         })
+
+
 
 
         const unsubscribe = firestore().collection("Orders").doc(orderId).onSnapshot((doc) => {
@@ -43,19 +49,24 @@ const tracking = (props) => {
             {data ?
                 <View style={styles.container}>
                     <View style={styles.mapContainer}>
-                        {buyerLocation ?
+                        {buyerLocation && riderLocation ?
                             <MapView
                                 style={styles.map}
                                 initialRegion={{
                                     latitude: buyerLocation.latitude,
                                     longitude: buyerLocation.longitude,
                                     latitudeDelta: 0.012,
-                                    longitudeDelta: 0.021,
+                                    longitudeDelta: 0.011,
                                 }}>
                                 <Marker
                                     coordinate={{ latitude: buyerLocation.latitude, longitude: buyerLocation.longitude }}
                                     title="buyer"
-                                    image={require('../assets/Icons/BM.png')}
+                                    image={require('../assets/Icons/Buyer_marker.png')}
+                                />
+                                <Marker
+                                    coordinate={{ latitude: riderLocation.latitude, longitude: riderLocation.longitude }}
+                                    title="Rider"
+                                    image={require('../assets/Icons/Rider_marker.png')}
                                 />
                             </MapView> : null
 

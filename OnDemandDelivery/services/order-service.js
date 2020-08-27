@@ -1,10 +1,12 @@
 import firestore from '@react-native-firebase/firestore';
+import firebase from "@react-native-firebase/app";
 
 export const OrderService = (props) => {
-    console.log(props);
     const createOrderCollection = async (orderId, orderdata, data) => {
         console.log(props);
         let orderDbData = await firestore().collection('Orders').doc(orderId).get();
+        let buyerId = firebase.auth().currentUser.uid;
+
         //check wheather the order data already exits
         if (!orderDbData.exists) {
             return await firestore().collection('Orders').doc(orderId).set({
@@ -16,6 +18,8 @@ export const OrderService = (props) => {
                     timeUpdated: orderdata.time
                 },
                 riderToken: data.riderToken,
+                riderId: data.riderId,
+                buyerId: buyerId,
                 buyerToken: data.buyerToken,
                 riderName: data.riderName,
                 products: orderdata.products,
