@@ -44,10 +44,13 @@ const NotificationTokenService = () => {
             data: {
                 orderNumber: orderNo,
                 time: new Date().toLocaleTimeString(),
+                buyer: {
+                    address: details.Address,
+                    token: details.NotificationTokens,
+                    location: details.Location
+                },
                 number: '987889746',
-                address: details.Address,
                 store: 'Tesco',
-                token: details.NotificationTokens
             },
             priority: 'high',
             notification: {

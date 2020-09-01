@@ -17,6 +17,7 @@ export const OrderService = (props) => {
                     status: 'Rider Assigned',
                     timeUpdated: orderdata.time
                 },
+                destination: data.buyerLocation,
                 riderToken: data.riderToken,
                 riderId: data.riderId,
                 buyerId: buyerId,
