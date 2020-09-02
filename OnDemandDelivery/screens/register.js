@@ -7,7 +7,8 @@ import UserService from '../services/user-service';
 const register = (props) => {
     const [email, setEmail] = useState(null),
         [password, setpassword] = useState(null),
-        [name, setName] = useState(null)
+        [name, setName] = useState(null),
+        [phone, setPhone] = useState(null)
     const { navigate } = props.navigation
 
     return (
@@ -36,6 +37,16 @@ const register = (props) => {
                     ></Input>
                 </View>
 
+                <View>
+                    <Input
+                        placeholder="phone"
+                        inputStyle={styles.input}
+                        autoCapitalize="none"
+                        onChangeText={phone => setPhone(phone)}
+                        value={phone}
+                    ></Input>
+                </View>
+
 
                 <View>
                     <Input
@@ -48,7 +59,7 @@ const register = (props) => {
                     ></Input>
                 </View>
 
-                <Button title="Sign Up" onPress={() => onRegister(name, email, password, navigate)} buttonStyle={styles.btn} />
+                <Button title="Sign Up" onPress={() => onRegister(name, email, phone, password, navigate)} buttonStyle={styles.btn} />
 
 
                 <View style={{ alignSelf: "center", marginTop: 25 }}>
@@ -62,7 +73,7 @@ const register = (props) => {
     )
 }
 
-const onRegister = (name, email, password, navigate) => {
+const onRegister = (name, email, phone, password, navigate) => {
     auth()
         .createUserWithEmailAndPassword(email, password)
         .then((User) => {
@@ -71,7 +82,7 @@ const onRegister = (name, email, password, navigate) => {
                 displayName: name
             }).then(() => {
                 console.log(auth().currentUser.uid);
-                UserService().AddUserDetails({ name, email })
+                UserService().AddUserDetails({ name, email, phone })
                 navigate("App")
             })
 

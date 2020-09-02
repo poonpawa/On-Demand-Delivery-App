@@ -2,6 +2,9 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Text, Icon, Button } from 'react-native-elements';
+import SplashScreen from '../screens/splashScreen';
+import { View } from 'react-native';
 import Home from '../screens/home';
 import Store from '../screens/store';
 import Category from '../screens/category';
@@ -57,10 +60,24 @@ const AppNavigation = () => {
 
 const AuthNavigation = () => {
     return (
-        <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Login" component={Login} />
+        <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: true }} >
+            <Stack.Screen name="Login" component={Login} options={{
+                header: ({ navigation }) => (
+                    <View style={{ height: 30, marginVertical: 10 }}>
+                        <Text style={{ width: 30 }}>Title</Text>
+                        <Button
+                            icon={{
+                                name: "close",
+                                size: 26,
+                                color: 'white'
+                            }}
+                            onPress={() => navigation.goBack()}
+                        />
+                    </View>
+                )
+            }} />
             <Stack.Screen name="Register" component={Register} />
-        </Stack.Navigator>
+        </Stack.Navigator >
     )
 
 }
@@ -68,7 +85,8 @@ const AuthNavigation = () => {
 const navigator = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Loading" screenOptions={{ headerShown: false }}>
+            <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="Splash" component={SplashScreen} />
                 <Stack.Screen name="Loading" component={Loading} />
                 <Stack.Screen name="App" component={AppNavigation} />
                 <Stack.Screen name="Auth" component={AuthNavigation} />

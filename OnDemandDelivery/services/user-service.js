@@ -11,10 +11,11 @@ const UserService = () => {
 
     //for creating initial user entry
     const AddUserDetails = (userData) => {
-        const { name, email } = userData;
+        const { name, email, phone } = userData;
         getBuyerDBReference().set({
             Name: name,
-            Email: email
+            Email: email,
+            Phone: phone
         })
     }
 
