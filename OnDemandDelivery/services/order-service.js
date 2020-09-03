@@ -38,9 +38,21 @@ export const OrderService = (props) => {
         return data;
     }
 
-    return {
-        createOrderCollection, getOrderData
+    const getAllOrders = async (buyerId) => {
+        let allOrders = [];
+        await firestore().collection('Orders').where('buyerId', '==', buyerId).get().then((doc) => {
+            doc.forEach(item => {
+                allOrders.push(item.data())
+            });
+        })
+        return allOrders
     }
+
+    return {
+        createOrderCollection, getOrderData, getAllOrders
+    }
+
+
 }
 
 /* const mapStateToProps = (state) => {

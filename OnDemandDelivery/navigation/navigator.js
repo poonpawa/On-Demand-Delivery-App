@@ -17,6 +17,7 @@ import Loading from '../screens/loading';
 import RiderWait from '../screens/riderWait';
 import Tracking from '../screens/tracking';
 import Delivered from '../screens/delivered';
+import Account from '../screens/account';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -31,7 +32,7 @@ const bottomNavigation = () => {
                         <CartIcon />
                     )
                 }} />
-            <Tab.Screen name="Account" component={Store} />
+            <Tab.Screen name="Account" component={Account} />
         </Tab.Navigator>
     )
 }
@@ -85,7 +86,7 @@ const AuthNavigation = () => {
 const navigator = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
+            <Stack.Navigator initialRouteName="Loading" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Splash" component={SplashScreen} />
                 <Stack.Screen name="Loading" component={Loading} />
                 <Stack.Screen name="App" component={AppNavigation} />

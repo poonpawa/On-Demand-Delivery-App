@@ -34,14 +34,6 @@ const home = (props) => {
     )
 }
 
-const signOut = (navigate) => {
-    auth().signOut()
-        .then(() => {
-            console.log('User signed out!')
-            navigate('Auth')
-        });
-}
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,

@@ -25,7 +25,7 @@ const loading = (props) => {
     if (user) {
         navigate("App");
     } else {
-        navigate("Auth");
+        navigate("Splash");
     }
 
 
