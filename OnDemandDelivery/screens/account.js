@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { OrderService } from '../services/order-service'
 import firebase from "@react-native-firebase/app"
-import { ListItem, Button } from 'react-native-elements'
+import { ListItem, Button, Text } from 'react-native-elements'
 import auth from '@react-native-firebase/auth';
 
 const account = (props) => {
@@ -26,7 +26,7 @@ const account = (props) => {
 
     return (
         <ScrollView>
-            <Text>Account Screen</Text>
+            <Text h4>Account</Text>
             <View>
                 <ListItem
                     title={'Logout'}
@@ -35,6 +35,7 @@ const account = (props) => {
                     chevron
                 />
             </View>
+            <Text h4>Previous Orders</Text>
             <View>
                 {
                     orders.map((item, key) => (

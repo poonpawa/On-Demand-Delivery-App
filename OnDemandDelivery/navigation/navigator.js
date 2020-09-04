@@ -2,7 +2,6 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text, Icon, Button } from 'react-native-elements';
 import SplashScreen from '../screens/splashScreen';
 import { View } from 'react-native';
 import Home from '../screens/home';
@@ -18,6 +17,7 @@ import RiderWait from '../screens/riderWait';
 import Tracking from '../screens/tracking';
 import Delivered from '../screens/delivered';
 import Account from '../screens/account';
+import ModalHeader from '../components/headers/modalHeader';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -64,20 +64,14 @@ const AuthNavigation = () => {
         <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: true }} >
             <Stack.Screen name="Login" component={Login} options={{
                 header: ({ navigation }) => (
-                    <View style={{ height: 30, marginVertical: 10 }}>
-                        <Text style={{ width: 30 }}>Title</Text>
-                        <Button
-                            icon={{
-                                name: "close",
-                                size: 26,
-                                color: 'white'
-                            }}
-                            onPress={() => navigation.goBack()}
-                        />
-                    </View>
+                    <ModalHeader navigation={navigation} title={'Login'} />
                 )
             }} />
-            <Stack.Screen name="Register" component={Register} />
+            <Stack.Screen name="Register" component={Register} options={{
+                header: ({ navigation }) => (
+                    <ModalHeader navigation={navigation} title={'Create an account'} />
+                )
+            }} />
         </Stack.Navigator >
     )
 
