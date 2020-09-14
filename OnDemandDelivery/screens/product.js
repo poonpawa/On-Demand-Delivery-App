@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, ScrollView, View } from 'react-native'
+import { StyleSheet, ScrollView, View, Image, TouchableOpacity } from 'react-native'
 import StoreService from '../services/store-service';
 import { Card, Button, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -28,43 +28,41 @@ const product = (props) => {
 
 
     return (
-        <View>
-            <Text>Product List</Text>
+        <View style={styles.productContainer}>
+            <Text style={styles.productHeading}>Product List</Text>
             {productList.map((prop, key) => {
                 return (
-                    <Card
-                        key={key}
-                        image={require('../assets/Images/fruits.png')}>
-                        <Text style={{ marginBottom: 10 }}>
-                            {prop.ProductName}
-                        </Text>
-                        <Text style={{ marginBottom: 10 }}>
-                            {prop.Price}
-                        </Text>
-                        <View style={styles.quantityView}>
-                            <Button
-                                buttonStyle={styles.counterBtn}
-                                iconContainerStyle={styles.icon}
-                                icon={{
-                                    name: "add",
-                                    size: 8,
-                                    color: "black"
-                                }}
-                                type="solid"
-                                onPress={() => props.addToCart(prop)} />
-                            <Text style={{ marginHorizontal: 12, height: 20, alignContent: "center" }}>{prop.quantity}</Text>
-                            <Button
-                                buttonStyle={styles.counterBtn}
-                                iconContainerStyle={styles.icon}
-                                icon={{
-                                    name: "remove",
-                                    size: 8,
-                                    color: "black"
-                                }}
-                                type="solid"
-                                onPress={() => props.removeFromCart(prop)} />
+                    <View style={styles.eachproduct}
+                        key={key}>
+                        <View style={styles.eachproductImgContainer}>
+                            <Image 
+                                style={styles.eachproductImg}
+                                source={require('../assets/Images/fruits.png')} />
                         </View>
-                    </Card>
+                        <View style={styles.eachproductDesc}>
+                            <Text style={styles.eachproductName}>
+                                {prop.ProductName}
+                            </Text>
+                            <Text style={styles.eachproductPrice}>
+                                {prop.Price} Euro
+                            </Text>
+                            <View style={styles.quantityView}>
+                                <TouchableOpacity onPress={() => props.removeFromCart(prop)}>
+                                    <Image 
+                                        style={styles.removeProduct}
+                                        source={require('../assets/Images/removeProduct.png')}
+                                    />
+                                </TouchableOpacity>
+                                <Text style={styles.productQuantity}>{prop.quantity}</Text>
+                                <TouchableOpacity onPress={() => props.addToCart(prop)}>
+                                    <Image 
+                                        style={styles.addProduct}
+                                        source={require('../assets/Images/addProduct.png')}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
                 )
             })}
         </View>
@@ -87,16 +85,62 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const styles = StyleSheet.create({
-    icon: {
-        width: 25
+    productContainer: {
+        backgroundColor: 'white',
+        paddingLeft: 16,
+        paddingRight: 16,
+        height: '100%'
     },
-    counterBtn: {
-        width: 25,
-        height: 20
+    productHeading: {
+        fontSize: 20,
+        color: '#383F51',
+        fontFamily: "NunitoSans-Bold",
+        marginTop: 20,
+    },
+    eachproduct: {
+        flexDirection: 'row',
+        borderColor: 'transparent',
+        borderBottomColor: '#EFF2F9',
+        borderWidth: 1,
+        marginTop: 16,
+        paddingBottom: 16
+    },
+    eachproductImgContainer: {
+        width: 106,
+        height: 84,
+        paddingRight: 16
+    },
+    eachproductImg: {
+        width: '100%',
+        height: '100%'
+    },
+    eachproductName: {
+        fontSize: 16,
+        fontFamily: "NunitoSans-SemiBold",
+        color: '#383F51'
+    },
+    eachproductPrice: {
+        fontSize: 16,
+        fontFamily: "NunitoSans-Bold",
+        color: '#383F51',
+        marginTop: 4,
     },
     quantityView: {
-        flexDirection: 'row'
-    }
+        flexDirection: 'row',
+        marginTop: 4,
+        alignItems: 'center'
+    },
+    removeProduct: {
+        marginRight: 12
+    },
+    productQuantity: {
+        color: '#383F51',
+        fontFamily: "NunitoSans-Bold",
+        fontSize: 16
+    },
+    addProduct: {
+        marginLeft: 12
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(product)
