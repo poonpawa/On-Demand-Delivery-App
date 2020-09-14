@@ -1,6 +1,5 @@
 import React from 'react'
-import { StyleSheet, ScrollView, View } from 'react-native'
-import { Tile } from 'react-native-elements';
+import { StyleSheet, ScrollView, View, Image, TouchableOpacity, Text } from 'react-native'
 
 const store = (props) => {
     const { navigate } = props.navigation;
@@ -8,40 +7,45 @@ const store = (props) => {
         {
             id: 'tesco',
             name: 'Tesco',
-            imageSrc: require('../assets/Images/tesco.png'),
+            imageSrc: require('../assets/Images/Tesco.png'),
         },
         {
             id: 'lidl',
             name: 'Lidl',
-            imageSrc: require('../assets/Images/Lidl_logo.png'),
+            imageSrc: require('../assets/Images/Lidl.png'),
         },
         {
             id: 'centra',
             name: 'Centra',
-            imageSrc: require('../assets/Images/centra-logo.png'),
+            imageSrc: require('../assets/Images/SuperValu.png'),
         },
         {
             id: 'spar',
             name: 'Spar',
-            imageSrc: require('../assets/Images/spar.png'),
+            imageSrc: require('../assets/Images/Spar.png'),
         },
     ]
 
     return (
-        <ScrollView>
-            {listOfStores.map((prop, key) => {
-                return (
-                    <Tile
-                        key={prop.id}
-                        imageSrc={prop.imageSrc}
-                        title={prop.id}
-                        featured
-                        onPress={() => selectStore(prop.name, navigate)}
-                    />
-                )
-            })
-            }
-        </ScrollView>
+        <View style={styles.store}>
+            <Text style={styles.heading}>Select store</Text>
+            <ScrollView>
+                <View style={styles.storeImgContainer}>
+                    {listOfStores.map((prop, key) => {
+                        return (
+                            <TouchableOpacity key={prop.id} onPress={() => selectStore(prop.name, navigate)}>
+                                <Image 
+                                    style={styles.eachStore}
+                                    key={prop.id}
+                                    source={prop.imageSrc}
+                                />
+                            </TouchableOpacity>
+                        )
+                    })
+                    }
+                </View>
+            </ScrollView>
+        </View>
     )
 }
 
@@ -51,10 +55,21 @@ const selectStore = (props, navigate) => {
 }
 
 const styles = StyleSheet.create({
-    tile: {
-        width: 10,
-        height: 10,
-        padding: 3
+    store: {
+        paddingLeft: 16,
+        paddingRight: 16,
+        backgroundColor: 'white'
+    },
+    heading: {
+        fontSize: 24,
+        color: '#383F51',
+        marginTop: 16,
+        fontFamily: "NunitoSans-Bold"
+    },
+    eachStore: {
+        width: '100%',
+        marginTop: 16,
+        borderRadius: 4
     }
 })
 

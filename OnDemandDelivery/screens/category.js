@@ -1,11 +1,10 @@
 import React from 'react'
-import { StyleSheet, ScrollView, Text } from 'react-native'
-import { Tile } from 'react-native-elements';
+import { StyleSheet, ScrollView, View, Image, TouchableOpacity, Text } from 'react-native'
 
 const store = ({ navigation, route }) => {
     const { navigate } = navigation;
     const selectedStore = route.params;
-    const listOfStores = [
+    const listOfCategory = [
         {
             id: 'fruits',
             name: 'Fruits',
@@ -19,7 +18,7 @@ const store = ({ navigation, route }) => {
         {
             id: 'bakery',
             name: 'Bakery',
-            imageSrc: require('../assets/Images/breads.png'),
+            imageSrc: require('../assets/Images/bakery.png'),
         },
         {
             id: 'toiletry',
@@ -29,21 +28,25 @@ const store = ({ navigation, route }) => {
     ]
 
     return (
-        <ScrollView>
-            <Text>Choose Category</Text>
-            {listOfStores.map((prop, key) => {
-                return (
-                    <Tile
-                        key={prop.id}
-                        imageSrc={prop.imageSrc}
-                        title={prop.id}
-                        featured
-                        onPress={() => selectCategory(prop.name, navigate, selectedStore)}
-                    />
-                )
-            })
-            }
-        </ScrollView>
+        <View style={styles.category}>
+            <Text style={styles.heading}>Choose category</Text>
+            <ScrollView>
+                <View style={styles.categoryImgContainer}>
+                    {listOfCategory.map((prop, key) => {
+                        return (
+                            <TouchableOpacity key={prop.id} onPress={() => selectCategory(prop.name, navigate, selectedStore)}>
+                                <Image 
+                                    style={styles.eachCategory}
+                                    key={prop.id}
+                                    source={prop.imageSrc}
+                                />
+                            </TouchableOpacity>
+                        )
+                    })
+                    }
+                </View>
+            </ScrollView>
+        </View>
     )
 }
 
@@ -52,10 +55,21 @@ const selectCategory = (category, navigate, store) => {
 }
 
 const styles = StyleSheet.create({
-    tile: {
-        width: 10,
-        height: 10,
-        padding: 3
+    category: {
+        paddingLeft: 16,
+        paddingRight: 16,
+        backgroundColor: 'white'
+    },
+    heading: {
+        fontSize: 24,
+        color: '#383F51',
+        marginTop: 16,
+        fontFamily: "NunitoSans-Bold"
+    },
+    eachCategory: {
+        width: '100%',
+        marginTop: 16,
+        borderRadius: 4
     }
 })
 
