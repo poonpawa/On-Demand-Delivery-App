@@ -20,15 +20,12 @@ const home = (props) => {
     return (
         <View style={styles.container}>
 
-            <Text h2>Buyer's App</Text>
+            <Text h2>Add address</Text>
             <Text style={{ fontSize: 25 }}>Welcome <Text style={{ color: "#C75300", fontWeight: "bold" }}>{displayName}</Text></Text>
             <Geolocation />
             <PlaceOrder navigation={navigate} />
             <Button title="Proceed" buttonStyle={styles.btn} onPress={() => {
                 navigate('Store')
-            }} />
-            <Button title="Sign-Out" buttonStyle={styles.btn} onPress={() => {
-                signOut(navigate)
             }} />
         </View>
     )

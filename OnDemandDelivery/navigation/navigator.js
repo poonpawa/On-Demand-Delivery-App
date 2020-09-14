@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SplashScreen from '../screens/splashScreen';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import Home from '../screens/home';
 import Store from '../screens/store';
 import Category from '../screens/category';
@@ -24,12 +24,24 @@ const Tab = createBottomTabNavigator();
 
 const bottomNavigation = () => {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator 
+            tabBarOptions={{
+                activeTintColor: '#C75300',
+                inactiveTintColor: '#6D7C8C',
+                style: {
+                    borderTopColor: '#EAEAEA',
+                },
+                labelStyle: {
+                    textAlign: 'center',
+                    fontSize: 12,
+                    fontFamily: "NunitoSans-SemiBold",
+                }
+            }}>
             <Tab.Screen name="Order" component={OrderNavigation} />
             <Tab.Screen name="Cart" component={Cart}
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
-                        <CartIcon />
+                        <CartIcon color={color} />
                     )
                 }} />
             <Tab.Screen name="Account" component={Account} />
