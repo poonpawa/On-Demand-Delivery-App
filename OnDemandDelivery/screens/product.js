@@ -54,7 +54,7 @@ const product = (props) => {
                                     />
                                 </TouchableOpacity>
                                 <Text style={styles.productQuantity}>{prop.quantity}</Text>
-                                <TouchableOpacity onPress={() => props.addToCart(prop)}>
+                                <TouchableOpacity onPress={() => props.addToCart(prop)    }>
                                     <Image 
                                         style={styles.addProduct}
                                         source={require('../assets/Images/addProduct.png')}
