@@ -8,6 +8,18 @@ import { connect } from 'react-redux';
 const riderWait = (props) => {
     const { navigate } = props.navigation;
     useEffect(() => {
+
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            () => {
+                navigate.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({ routeName: 'Menu' })
+                    ]
+                })
+            }
+        );
         messaging().onMessage((payload) => {
             if (payload.data.response) {
                 let productData = {
@@ -30,7 +42,7 @@ const riderWait = (props) => {
     return (
         <View style={styles.container}>
             <Text>Waiting for Rider to accept the order</Text>
-            <ActivityIndicator size="large"></ActivityIndicator>
+            <ActivityIndicator size="large" />
         </View>
     )
 }

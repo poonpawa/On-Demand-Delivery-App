@@ -18,13 +18,14 @@ import Tracking from '../screens/tracking';
 import Delivered from '../screens/delivered';
 import Account from '../screens/account';
 import ModalHeader from '../components/headers/modalHeader';
+import CustomizedHeader from '../components/headers/customizedHeader';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const bottomNavigation = () => {
     return (
-        <Tab.Navigator 
+        <Tab.Navigator
             tabBarOptions={{
                 activeTintColor: '#C75300',
                 inactiveTintColor: '#6D7C8C',
@@ -36,12 +37,16 @@ const bottomNavigation = () => {
                     fontSize: 12,
                     fontFamily: "NunitoSans-SemiBold",
                 }
-            }}>
+            }}
+            screenOptions={{ headerShown: true }}>
             <Tab.Screen name="Order" component={OrderNavigation} />
             <Tab.Screen name="Cart" component={Cart}
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
                         <CartIcon color={color} />
+                    ),
+                    header: ({ navigation }) => (
+                        <ModalHeader navigation={navigation} title={'Cart'} />
                     )
                 }} />
             <Tab.Screen name="Account" component={Account} />
@@ -51,19 +56,38 @@ const bottomNavigation = () => {
 
 const OrderNavigation = () => {
     return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="address" component={Home} />
-            <Stack.Screen name="Store" component={Store} />
-            <Stack.Screen name="Category" component={Category} />
-            <Stack.Screen name="Product" component={Product} />
+        <Stack.Navigator screenOptions={{ headerShown: true }}>
+            <Stack.Screen name="address" component={Home} options={{
+                headerShown: false
+            }} />
+            <Stack.Screen name="Store" component={Store} options={{
+                header: ({ navigation }) => (
+                    <ModalHeader navigation={navigation} title={'Select Store'} />
+                )
+            }} />
+            <Stack.Screen name="Category" component={Category} options={{
+                header: ({ navigation }) => (
+                    <CustomizedHeader navigation={navigation} title={'Store Name'} isSearch={true} />
+                )
+
+            }} />
+            <Stack.Screen name="Product" component={Product} options={{
+                header: ({ navigation }) => (
+                    <CustomizedHeader navigation={navigation} title={'Category'} isRight={true} isSearch={true} />
+                )
+            }} />
         </Stack.Navigator>
     )
 }
 
 const AppNavigation = () => {
     return (
-        <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Home" component={bottomNavigation} />
+        <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: true }}>
+            <Stack.Screen name="Home" component={bottomNavigation}
+                options={{
+                    headerShown: false
+                }}
+            />
             <Stack.Screen name="RiderWait" component={RiderWait} />
             <Stack.Screen name="Tracking" component={Tracking} />
             <Stack.Screen name="Delivered" component={Delivered} />

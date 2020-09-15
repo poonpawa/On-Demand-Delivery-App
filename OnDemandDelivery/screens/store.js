@@ -7,7 +7,7 @@ const store = (props) => {
         {
             id: 'tesco',
             name: 'Tesco',
-            imageSrc: require('../assets/Images/Tesco.png'),
+            imageSrc: require('../assets/Images/tesco.png'),
         },
         {
             id: 'lidl',
@@ -22,7 +22,7 @@ const store = (props) => {
         {
             id: 'spar',
             name: 'Spar',
-            imageSrc: require('../assets/Images/Spar.png'),
+            imageSrc: require('../assets/Images/spar.png'),
         },
     ]
 
@@ -34,7 +34,7 @@ const store = (props) => {
                     {listOfStores.map((prop, key) => {
                         return (
                             <TouchableOpacity key={prop.id} onPress={() => selectStore(prop.name, navigate)}>
-                                <Image 
+                                <Image
                                     style={styles.eachStore}
                                     key={prop.id}
                                     source={prop.imageSrc}
