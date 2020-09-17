@@ -11,7 +11,7 @@ const placeOrder = (props) => {
     const navigate = props.navigation;
     return (
         <View>
-            <Button title="Place Order" onPress={() => assignRider(navigate)} buttonStyle={styles.btn} />
+            <Button title="Place Order" onPress={() => assignRider(navigate)} buttonStyle={props.btnStyle} />
         </View>
     )
 }

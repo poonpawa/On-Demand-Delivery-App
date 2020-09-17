@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SplashScreen from '../screens/splashScreen';
+import { Icon } from 'react-native-elements';
 import { View, Image } from 'react-native';
 import Home from '../screens/home';
 import Store from '../screens/store';
@@ -39,7 +40,11 @@ const bottomNavigation = () => {
                 }
             }}
             screenOptions={{ headerShown: true }}>
-            <Tab.Screen name="Order" component={OrderNavigation} />
+            <Tab.Screen name="Order" component={OrderNavigation} options={{
+                tabBarIcon: ({ focused, color, size }) => (
+                    <Icon type='octicon' name='package' />
+                )
+            }} />
             <Tab.Screen name="Cart" component={Cart}
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
@@ -49,7 +54,14 @@ const bottomNavigation = () => {
                         <ModalHeader navigation={navigation} title={'Cart'} />
                     )
                 }} />
-            <Tab.Screen name="Account" component={Account} />
+            <Tab.Screen name="Account" component={Account} options={{
+                tabBarIcon: ({ focused, color, size }) => (
+                    <Icon name='account-box' />
+                ),
+                header: ({ navigation }) => (
+                    <ModalHeader navigation={navigation} title={'Account'} />
+                )
+            }} />
         </Tab.Navigator>
     )
 }

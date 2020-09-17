@@ -5,7 +5,7 @@ import firebase from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
 import Geolocation from "../components/geolocation";
 import NotificationTokenService from "../services/notification-token-service";
-import PlaceOrder from "../components/placeOrder";
+
 
 const home = (props) => {
     let useObj = {};
@@ -23,7 +23,6 @@ const home = (props) => {
             <Text h2>Add address</Text>
             <Text style={{ fontSize: 25 }}>Welcome <Text style={{ color: "#C75300", fontWeight: "bold" }}>{displayName}</Text></Text>
             <Geolocation />
-            <PlaceOrder navigation={navigate} />
             <Button title="Proceed" buttonStyle={styles.btn} onPress={() => {
                 navigate('Store')
             }} />

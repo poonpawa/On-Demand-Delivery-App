@@ -2,24 +2,26 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { StyleSheet, View, Image, TouchableOpacity, Text } from 'react-native'
 import { ListItem, Button, Divider, Icon } from 'react-native-elements';
+import PlaceOrder from "../components/placeOrder";
 
 const cart = (props) => {
+    const { navigate } = props.navigation;
     return (
         <View style={styles.cartContainer}>
-            <Text style={styles.cartHeading}>Cart</Text>
+            <Text style={styles.cartHeading}>Carts</Text>
             {props.products.map((prop, key) => {
                 return (
                     <View key={key}>
                         <View style={styles.eachCartContainer}>
-                            
+
                             <View style={styles.eachCartLeft}>
-                                
+
                                 <View style={styles.eachproductImgContainer}>
-                                    <Image 
+                                    <Image
                                         style={styles.eachproductImg}
                                         source={require('../assets/Images/fruits.png')} />
                                 </View>
-                                
+
                                 <View style={styles.eachCartDescContainer}>
                                     <View style={styles.eachCartDesc}>
                                         <Text style={styles.eachproductName}>
@@ -28,32 +30,32 @@ const cart = (props) => {
                                     </View>
                                     <View style={styles.quantityView}>
                                         <TouchableOpacity onPress={() => props.removeFromCart(prop)}>
-                                            <Image 
+                                            <Image
                                                 style={styles.removeProduct}
                                                 source={require('../assets/Images/removeProduct.png')}
                                             />
                                         </TouchableOpacity>
                                         <Text style={styles.productQuantity}>{prop.quantity}</Text>
                                         <TouchableOpacity onPress={() => props.addToCart(prop)}>
-                                            <Image 
+                                            <Image
                                                 style={styles.addProduct}
                                                 source={require('../assets/Images/addProduct.png')}
                                             />
                                         </TouchableOpacity>
                                         <TouchableOpacity onPress={() => props.removeFromCart(prop)}>
-                                            <Image 
+                                            <Image
                                                 style={styles.deleteProduct}
                                                 source={require('../assets/Images/delete.png')}
                                             />
                                         </TouchableOpacity>
                                     </View>
                                 </View>
-    
+
                             </View>
-                            
+
                             <View style={styles.eachCartRight}>
                                 <Text style={styles.eachCartPrice}>
-                                        {prop.Price} Euro
+                                    {prop.Price} Euro
                                 </Text>
                             </View>
                         </View>
@@ -73,7 +75,7 @@ const cart = (props) => {
                 <Text style={styles.totalFee}>TOTAL</Text>
                 <Text style={styles.totalFeePrice}>{props.price} Euro</Text>
             </View>
-            <Button buttonStyle={styles.primaryBtn} color="#C75300" title="Place Order" />
+            <PlaceOrder navigation={navigate} btnStyle={styles.primaryBtn} />
         </View>
     )
 }

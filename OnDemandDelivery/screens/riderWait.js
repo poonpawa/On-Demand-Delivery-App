@@ -9,7 +9,7 @@ const riderWait = (props) => {
     const { navigate } = props.navigation;
     useEffect(() => {
 
-        const backHandler = BackHandler.addEventListener(
+        /* const backHandler = BackHandler.addEventListener(
             "hardwareBackPress",
             () => {
                 navigate.reset({
@@ -19,7 +19,7 @@ const riderWait = (props) => {
                     ]
                 })
             }
-        );
+        ); */
         messaging().onMessage((payload) => {
             if (payload.data.response) {
                 let productData = {

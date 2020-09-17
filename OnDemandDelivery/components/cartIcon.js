@@ -12,7 +12,7 @@ const cartIcon = (props) => {
                     <Icon
                         name='ios-cart'
                         type='ionicon'
-                        color='#fff'
+                        color={props.color}
                         size={28}
                     />
 
