@@ -41,9 +41,9 @@ const login = (props) => {
                 <Button title="Login" onPress={() => onlogin(email, password, navigate)} buttonStyle={styles.primarybtn} />
 
 
-                <View style={{ alignSelf: "center", marginTop: 25 }}>
-                    <Text style={{ color: "#414959", fontSize: 15, fontWeight: "bold" }}>
-                        No account?<Text style={{ color: "#C75300" }} onPress={() => { navigate("Register") }}> Sign Up</Text>
+                <View style={{ alignSelf: "center", marginTop: 16 }}>
+                    <Text style={{ color: "#505971", fontSize: 15, fontFamily: "NunitoSans-Regular", }}>
+                        Don't have an account?<Text style={{ color: "#C75300", fontFamily: "NunitoSans-SemiBold" }} onPress={() => { navigate("Register") }}> Sign Up</Text>
                     </Text>
                 </View>
 
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     form: {
-        marginTop: 20,
+        marginTop: 8,
         marginLeft: 16,
         marginRight: 16
     },
@@ -87,22 +87,27 @@ const styles = StyleSheet.create({
         marginTop: 24
     },
     inputlabel: {
-        color: '#383F51',
         fontSize: 16,
+        fontFamily: "NunitoSans-SemiBold",
+        color: '#383F51'
     },
     inputbox: {
         height: 40,
         color: '#505971',
+        fontSize: 16,
+        fontFamily: "NunitoSans-SemiBold",
         borderColor: '#C7CBD8',
         borderWidth: 1,
         borderRadius: 4,
         marginTop: 8,
         paddingLeft: 8
+        
     },
     primarybtn: {
         backgroundColor: "#C75300",
         borderRadius: 4,
         fontSize: 16,
+        fontFamily: "NunitoSans-SemiBold",
         marginTop: 40
     },
 });

@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily: "NunitoSans-Bold"
     },
     splashImage: {
         display: 'flex',
@@ -52,6 +51,7 @@ const styles = StyleSheet.create({
         textAlign: 'center', 
         color: 'white', 
         fontSize: 18,
+        fontFamily: "NunitoSans-SemiBold",
         marginTop: 16 
     },
     footer: {
