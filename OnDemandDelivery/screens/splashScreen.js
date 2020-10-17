@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { Button } from 'react-native-elements';
 
 const splashScreen = ({ navigation }) => {
@@ -16,12 +16,16 @@ const splashScreen = ({ navigation }) => {
             <Text style={styles.desc}>Fresh groceries at your doorsteps</Text>  
 
             <View style={styles.footer}>
-                <Button
-                    buttonStyle={styles.secondarybtn}
-                    title='Login' onPress={() => navigation.navigate('Auth', { screen: 'Login' })} />
-                <Button
-                    buttonStyle={styles.primarybtn}
-                    title='Sign Up' onPress={() => navigation.navigate('Auth', { screen: 'Register' })} />
+                <TouchableOpacity onPress={() => navigation.navigate('Auth', { screen: 'Login' })} style={styles.secondarybtn}>
+                    <Text style={styles.textLogin}>
+                        Login
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Auth', { screen: 'Register' })} style={styles.primarybtn}>
+                    <Text style={styles.textSignUp}>
+                        Sign Up
+                    </Text>
+                </TouchableOpacity>
             </View>    
         </View>
     )
@@ -55,25 +59,41 @@ const styles = StyleSheet.create({
         bottom: 40,
         display: 'flex',
         flexDirection: 'row',
-        marginLeft: 40,
-        marginRight: 40
+        marginLeft: 16,
+        marginRight: 16
     },
     secondarybtn: {
+        flex: 1,
+        justifyContent: 'center',
+        textAlign: 'center',
+        height: 40,
         borderRadius: 4,
         borderColor: 'white',
         borderWidth: 1,
         backgroundColor: 'transparent',
-        fontSize: 16,
-        width: 160,
-        marginRight: 12
+        marginRight: 8
     },
     primarybtn: {
+        flex: 1,
+        justifyContent: 'center',
+        textAlign: 'center',
+        height: 40,
         borderRadius: 4,
         borderColor: 'white',
         borderWidth: 1,
-        backgroundColor: 'transparent',
+        backgroundColor: 'white',
+        marginLeft: 8
+    },
+    textLogin: {
+        textAlign: 'center',
+        color: 'white',
+        fontFamily: "NunitoSans-SemiBold",
         fontSize: 16,
-        width: 160,
-        marginLeft: 12
+    },
+    textSignUp: {
+        textAlign: 'center',
+        color: '#C75300',
+        fontFamily: "NunitoSans-SemiBold",
+        fontSize: 16,
     }
 })
