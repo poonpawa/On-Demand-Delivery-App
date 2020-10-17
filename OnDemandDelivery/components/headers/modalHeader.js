@@ -6,10 +6,10 @@ const modalHeader = (props) => {
     return (
         <View>
             <Header
-                leftComponent={{ text: props.title, style: { color: '#fff' } }}
+                leftComponent={{ text: props.title, style: { color: '#383F51', fontFamily: "NunitoSans-Bold", fontSize: 24, width: 275 } }}
                 rightComponent={{
                     icon: 'close',
-                    color: '#fff',
+                    color: '#6A748A',
                     onPress:
                         () => props.navigation.goBack()
                 }}
@@ -23,8 +23,10 @@ export default modalHeader
 
 const styles = StyleSheet.create({
     mainContainer: {
-        height: 55,
-        padding: 20
+        paddingLeft: 16,
+        paddingRight: 16,
+        backgroundColor: 'white',
+        borderBottomColor: 'transparent'
     }
 
 })
