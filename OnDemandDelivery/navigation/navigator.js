@@ -27,6 +27,7 @@ const Tab = createBottomTabNavigator();
 const bottomNavigation = () => {
     return (
         <Tab.Navigator
+
             tabBarOptions={{
                 activeTintColor: '#C75300',
                 inactiveTintColor: '#6D7C8C',
@@ -42,7 +43,13 @@ const bottomNavigation = () => {
             screenOptions={{ headerShown: true }}>
             <Tab.Screen name="Order" component={OrderNavigation} options={{
                 tabBarIcon: ({ focused, color, size }) => (
-                    <Icon type='octicon' name='package' />
+                    focused
+                        ? <Image
+                        source={require('../assets/Images/orderFocused.png')}
+                        />
+                        : <Image
+                        source={require('../assets/Images/orderDefault.png')}
+                        />
                 )
             }} />
             <Tab.Screen name="Cart" component={Cart}
@@ -56,7 +63,13 @@ const bottomNavigation = () => {
                 }} />
             <Tab.Screen name="Account" component={Account} options={{
                 tabBarIcon: ({ focused, color, size }) => (
-                    <Icon name='account-box' />
+                    focused
+                        ? <Image
+                        source={require('../assets/Images/accountFocused.png')}
+                        />
+                        : <Image
+                        source={require('../assets/Images/accountDefault.png')}
+                        />
                 ),
                 header: ({ navigation }) => (
                     <ModalHeader navigation={navigation} title={'Account'} />
