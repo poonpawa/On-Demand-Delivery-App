@@ -7,17 +7,17 @@ const store = ({ navigation, route }) => {
     const listOfCategory = [
         {
             id: 'fruits',
-            name: 'Fruits',
+            name: 'Fruits Vegetables',
             imageSrc: require('../assets/Images/fruits.png'),
         },
         {
-            id: 'veggies',
-            name: 'Vegetables',
+            id: 'meat',
+            name: 'Meat',
             imageSrc: require('../assets/Images/vegetables.png'),
         },
         {
-            id: 'bakery',
-            name: 'Bakery',
+            id: 'drinks',
+            name: 'Drinks',
             imageSrc: require('../assets/Images/bakery.png'),
         },
         {
