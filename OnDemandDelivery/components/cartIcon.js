@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import { Icon, Badge } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
@@ -9,18 +9,18 @@ const cartIcon = (props) => {
         <View >
             <TouchableOpacity onPress={() => { props.navigate('Cart') }} style={styles.container}>
                 <View>
-                    <Icon
-                        name='ios-cart'
-                        type='ionicon'
-                        color={props.color}
-                        size={28}
+                    <Image
+                        source={require('../assets/Images/cartDefault.png')}
                     />
-
-                    <Badge
-                        status="error"
-                        value={props.total}
-                        containerStyle={{ position: 'absolute', top: -4, right: -4 }}
-                    />
+                    {!props.total>0 ?
+                        <View></View>
+                        :
+                        <Badge
+                            status="warning"
+                            value={props.total}
+                            containerStyle={{ position: 'absolute', top: -2, right: -4, }}
+                        />
+                    }
                 </View>
             </TouchableOpacity>
         </View>
