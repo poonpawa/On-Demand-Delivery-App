@@ -66,6 +66,9 @@ const styles = StyleSheet.create({
         marginTop: 16,
         fontFamily: "NunitoSans-Bold"
     },
+    storeImgContainer: {
+        marginBottom: 74
+    },
     eachStore: {
         width: '100%',
         marginTop: 16,
