@@ -66,6 +66,9 @@ const styles = StyleSheet.create({
         marginTop: 16,
         fontFamily: "NunitoSans-Bold"
     },
+    categoryImgContainer: {
+        marginBottom: 74
+    },
     eachCategory: {
         width: '100%',
         marginTop: 16,

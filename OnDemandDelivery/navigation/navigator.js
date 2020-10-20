@@ -20,6 +20,7 @@ import Delivered from '../screens/delivered';
 import Account from '../screens/account';
 import ModalHeader from '../components/headers/modalHeader';
 import CustomizedHeader from '../components/headers/customizedHeader';
+import LogoHeader from '../components/headers/logoHeader';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -83,11 +84,13 @@ const OrderNavigation = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: true }}>
             <Stack.Screen name="address" component={Home} options={{
-                headerShown: false
+                header: ({ navigation }) => (
+                    <LogoHeader/>
+                )
             }} />
             <Stack.Screen name="Store" component={Store} options={{
                 header: ({ navigation }) => (
-                    <ModalHeader navigation={navigation} title={'Select Store'} />
+                    <LogoHeader/>
                 )
             }} />
             <Stack.Screen name="Category" component={Category} options={{

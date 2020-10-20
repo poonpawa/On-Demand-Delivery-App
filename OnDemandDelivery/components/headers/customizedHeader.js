@@ -12,7 +12,7 @@ const modalHeader = (props) => {
         return(
             <TouchableOpacity onPress={() => props.navigation.goBack()}>
                 <Image
-                source={require('../../assets/Images/backbtn.png')}
+                source={require('../../assets/Images/backbtn.png')} 
                 />
             </TouchableOpacity>
         );
@@ -52,11 +52,12 @@ const styles = StyleSheet.create({
         paddingLeft: 16,
         paddingRight: 16,
         backgroundColor: 'white',
-        borderBottomColor: '#F3F3F3',
+        borderBottomColor: '#EAEAEA',
     },
-    rightComponent: {
+    leftComponent: {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center',
     }
 
 })
