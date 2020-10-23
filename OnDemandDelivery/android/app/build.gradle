@@ -138,6 +138,11 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["androidManifestFile": "$projectDir/src/main/AndroidManifest.xml".toString()]
+            }
+        }
     }
     splits {
         abi {
@@ -148,6 +153,14 @@ android {
         }
     }
     signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+                storeFile file(MYAPP_UPLOAD_STORE_FILE)
+                storePassword MYAPP_UPLOAD_STORE_PASSWORD
+                keyAlias MYAPP_UPLOAD_KEY_ALIAS
+                keyPassword MYAPP_UPLOAD_KEY_PASSWORD
+            }
+        }
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'
@@ -158,11 +171,13 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://facebook.github.io/react-native/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            //signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -184,7 +199,7 @@ android {
 }
 
 dependencies {
-    compile ("com.facebook.react:react-native:0.63.2") { force = true } 
+    implementation ("com.facebook.react:react-native:0.63.2") { force = true }
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-maps')
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -209,3 +224,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.android.application'
