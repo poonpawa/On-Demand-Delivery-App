@@ -21,9 +21,13 @@ import Account from '../screens/account';
 import ModalHeader from '../components/headers/modalHeader';
 import CustomizedHeader from '../components/headers/customizedHeader';
 import LogoHeader from '../components/headers/logoHeader';
+import AsyncStorage from '@react-native-community/async-storage';
+import { log } from 'react-native-reanimated';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 
 const bottomNavigation = () => {
     return (
@@ -116,7 +120,11 @@ const AppNavigation = () => {
                     headerShown: false
                 }}
             />
-            <Stack.Screen name="RiderWait" component={RiderWait} />
+            <Stack.Screen name="RiderWait" component={RiderWait} 
+                options={{
+                    headerShown: false
+                }}
+            />
             <Stack.Screen name="Tracking" component={Tracking} />
             <Stack.Screen name="Delivered" component={Delivered} />
         </Stack.Navigator>
@@ -141,9 +149,11 @@ const AuthNavigation = () => {
 
 }
 
-const navigator = () => {
+const navigator = (props) => {
     return (
-        <NavigationContainer>
+        <NavigationContainer initialState={props.initialState} onStateChange={(state) => {
+            AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+        }}>
             <Stack.Navigator initialRouteName="Loading" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Splash" component={SplashScreen} />
                 <Stack.Screen name="Loading" component={Loading} />
