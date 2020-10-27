@@ -5,7 +5,9 @@ import { useEffect, useState } from 'react'
 import { OrderService } from '../services/order-service'
 import firestore from '@react-native-firebase/firestore';
 import MapView, { Marker } from 'react-native-maps';
-import UserService from '../services/user-service'
+import UserService from '../services/user-service';
+import { BackHandler } from "react-native";
+import { CommonActions } from '@react-navigation/native';
 
 const tracking = (props) => {
     let orderId = props.route.params.orderId
@@ -14,6 +16,28 @@ const tracking = (props) => {
     const [buyerLocation, setbuyerLocation] = useState(null)
     const [riderLocation, setriderLocation] = useState(null)
     useEffect(() => {
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            async () => { 
+                props.navigation.dispatch( 
+                    CommonActions.navigate(
+                    'Home', {screen: 'Order'}
+                  ));
+                /* props.navigation.dispatch(state => {
+                    console.log(state);
+                    const route = state.routes.filter(r => r.name !== 'RiderWait');
+
+            
+                    const updatedRoutes = state.routes;
+                    return CommonActions.reset({
+                        ...state,
+                        route,
+                        index: route.length - 1,
+                      });
+                }) */
+            }
+        );
+        
         OrderService().getOrderData(orderId).then((DBdata) => {
             setData(DBdata)
             setriderStatus(DBdata.riderStatus.status)
@@ -27,9 +51,6 @@ const tracking = (props) => {
             setbuyerLocation(location)
         })
 
-
-
-
         const unsubscribe = firestore().collection("Orders").doc(orderId).onSnapshot((doc) => {
             let status = doc.get('riderStatus.status')
             setriderStatus(status)
@@ -40,6 +61,7 @@ const tracking = (props) => {
 
         return () => {
             unsubscribe();
+            backHandler.remove();
         }
 
     }, [])
