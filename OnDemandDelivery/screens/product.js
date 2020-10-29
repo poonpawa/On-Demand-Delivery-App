@@ -37,7 +37,7 @@ const product = (props) => {
                         <View style={styles.eachproductImgContainer}>
                             <Image 
                                 style={styles.eachproductImg}
-                                source={require('../assets/Images/fruits.png')} />
+                                source={{uri: prop.url}} />
                         </View>
                         <View style={styles.eachproductDesc}>
                             <Text style={styles.eachproductName}>

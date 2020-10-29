@@ -43,8 +43,8 @@ const riderWait = (props) => {
 
     return (
         <View style={styles.container}>
-            <Text>Waiting for Rider to accept the order</Text>
-            <ActivityIndicator size="large" />
+            <ActivityIndicator size="large" color="#C75300"></ActivityIndicator>
+            <Text style={styles.waitingText}>Waiting for the rider to accept the order</Text>
         </View>
     )
 }
@@ -52,8 +52,16 @@ const riderWait = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%',
+        backgroundColor: 'white',
+    },
+    waitingText: {
+        fontFamily: 'NunitoSans-SemiBold',
+        fontSize: 18,
+        color: '#383F51',
+        marginTop: 16
     }
 })
 
