@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { Button } from 'react-native-elements';
-import firebase from '@react-native-firebase/app';
+import { BackHandler } from "react-native";
 import auth from '@react-native-firebase/auth';
 import Geolocation from "../components/geolocation";
 import NotificationTokenService from "../services/notification-token-service";
-
+import { CommonActions } from '@react-navigation/native';
 
 const home = (props) => {
     let useObj = {};
@@ -15,6 +15,14 @@ const home = (props) => {
     useEffect(() => {
         //get Token for every logged-in user & store in db
         NotificationTokenService().getTokenAndStore()
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            async () => { 
+                BackHandler.exitApp();
+                return true;
+            }
+        );
+        return () => backHandler.remove();
     }, [])
 
     return (

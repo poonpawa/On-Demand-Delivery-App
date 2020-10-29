@@ -4,22 +4,23 @@ import messaging from '@react-native-firebase/messaging';
 import UserService from '../services/user-service';
 import { OrderService } from "../services/order-service";
 import { connect } from 'react-redux';
+import { BackHandler } from "react-native";
+import { useIsFocused, useNavigationState, StackActions } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
+import { CommonActions } from '@react-navigation/native';
 
 const riderWait = (props) => {
     const { navigate } = props.navigation;
+    const isFocused = useIsFocused();
     useEffect(() => {
 
-        /* const backHandler = BackHandler.addEventListener(
+        const backHandler = BackHandler.addEventListener(
             "hardwareBackPress",
-            () => {
-                navigate.reset({
-                    index: 0,
-                    actions: [
-                        NavigationActions.navigate({ routeName: 'Menu' })
-                    ]
-                })
+            async () => { 
+                BackHandler.exitApp();
+                return true;
             }
-        ); */
+        );
         messaging().onMessage((payload) => {
             if (payload.data.response) {
                 let productData = {
@@ -32,12 +33,13 @@ const riderWait = (props) => {
                 OrderService().createOrderCollection(orderId, orderDetails, payload.data).then(() => {
                     navigate('Tracking', { orderId })
                 })
-
             } else {
                 console.log('Order Rejected');
             }
         });
-    }, [])
+
+        return () => backHandler.remove();
+    }, [isFocused])
 
     return (
         <View style={styles.container}>

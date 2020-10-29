@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 const cartIcon = (props) => {
     return (
         <View >
-            <TouchableOpacity onPress={() => { props.navigate('Cart') }} style={styles.container}>
+            <TouchableOpacity onPress={() => { if (props.navigate) { props.navigate('Cart') } }} style={styles.container}>
                 <View>
                     <Image
                         source={require('../assets/Images/cartDefault.png')}
