@@ -6,24 +6,24 @@ const store = ({ navigation, route }) => {
     const selectedStore = route.params;
     const listOfCategory = [
         {
-            id: 'fruits',
+            id: 'Fruits Vegetables',
             name: 'Fruits Vegetables',
-            imageSrc: require('../assets/Images/fruits.png'),
+            imageSrc: require('../assets/Images/FruitsVeg.png'),
         },
         {
-            id: 'meat',
+            id: 'Meat',
             name: 'Meat',
-            imageSrc: require('../assets/Images/vegetables.png'),
+            imageSrc: require('../assets/Images/Meat.png'),
         },
         {
-            id: 'drinks',
+            id: 'Drinks',
             name: 'Drinks',
-            imageSrc: require('../assets/Images/bakery.png'),
+            imageSrc: require('../assets/Images/Drinks.png'),
         },
         {
-            id: 'toiletry',
-            name: 'Toiletry',
-            imageSrc: require('../assets/Images/toiletry.png'),
+            id: 'Bakery',
+            name: 'Bakery',
+            imageSrc: require('../assets/Images/Bakery.png'),
         },
     ]
 
