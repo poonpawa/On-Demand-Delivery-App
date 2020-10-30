@@ -8,22 +8,22 @@ const store = ({ navigation, route }) => {
         {
             id: 'Fruits Vegetables',
             name: 'Fruits Vegetables',
-            imageSrc: require('../assets/Images/FruitsVeg.png'),
+            imageSrc: require('../assets/Images/FruitsVeg.jpeg'),
         },
         {
             id: 'Meat',
             name: 'Meat',
-            imageSrc: require('../assets/Images/Meat.png'),
+            imageSrc: require('../assets/Images/Meat.jpeg'),
         },
         {
             id: 'Drinks',
             name: 'Drinks',
-            imageSrc: require('../assets/Images/Drinks.png'),
+            imageSrc: require('../assets/Images/Drinks.jpeg'),
         },
         {
             id: 'Bakery',
             name: 'Bakery',
-            imageSrc: require('../assets/Images/Bakery.png'),
+            imageSrc: require('../assets/Images/Bakery.jpeg'),
         },
     ]
 
