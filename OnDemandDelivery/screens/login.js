@@ -93,9 +93,9 @@ const styles = StyleSheet.create({
     },
     inputbox: {
         height: 40,
-        color: '#505971',
+        color: '#383F51',
         fontSize: 16,
-        fontFamily: "NunitoSans-SemiBold",
+        fontFamily: "NunitoSans-Regular",
         borderColor: '#C7CBD8',
         borderWidth: 1,
         borderRadius: 4,
