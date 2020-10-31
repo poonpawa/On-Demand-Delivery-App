@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, PermissionsAndroid } from 'react-native'
+import { View, StyleSheet, PermissionsAndroid, Image, TouchableOpacity } from 'react-native'
 import { Button, Text } from 'react-native-elements';
 import Geolocation from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
@@ -64,25 +64,29 @@ const geolocation = () => {
     }
 
     return (
-        <View>
-            <Button title="Get Device Location" buttonStyle={styles.btn} onPress={() => getLocation()} />
-            <Text style={styles.textContainer}>{address}</Text>
+        <View style={styles.location}>
+            {/* <Button title="Get Device Location" buttonStyle={styles.btn} onPress={() => getLocation()} />
+            <Text style={styles.textContainer}>{address}</Text> */}
+            
+                <TouchableOpacity onPress={() => getLocation()}>
+                    <Text style={styles.textlocation}>Get location <Image 
+                        style={styles.textImage}
+                        source={require('../assets/Images/gps.png')} /></Text>
+                </TouchableOpacity>
         </View>
     )
 }
 const styles = StyleSheet.create({
-    textContainer: {
-        width: 350,
-        marginTop: 20,
-        alignSelf: "center",
-        fontSize: 15,
-        height: 35
+    location: {
+        paddingTop: 8,
     },
-    btn: {
-        width: 200,
-        backgroundColor: "#C75300",
-        marginTop: 40,
-        alignSelf: "center"
+    textlocation: {
+        color: '#C75300', 
+        fontSize: 16,
+        fontFamily: "NunitoSans-SemiBold",
+    },
+    textImage: {
+        marginLeft: 12,
     }
 })
 
