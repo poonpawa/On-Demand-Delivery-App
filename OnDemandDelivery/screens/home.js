@@ -28,9 +28,10 @@ const home = (props) => {
     return (
         <View style={styles.container}>
             {/* <Text style={{ fontSize: 25 }}>Welcome <Text style={{ color: "#C75300", fontWeight: "bold" }}>{displayName}</Text></Text> */}
-            
-            <Text style={styles.heading}>Add address</Text>
-            
+            <View style={styles.headTop}>
+                <Text style={styles.heading}>Add address</Text>
+                <Geolocation />
+            </View>
             <View style={styles.inputcontainer}>
                 <Text style={styles.inputlabel}>Address</Text>
                 <TextInput style={styles.inputbox} 
@@ -47,8 +48,7 @@ const home = (props) => {
                     autoCapitalize="none"
                 ></TextInput>
             </View>
-
-            <Geolocation />
+            
             <Button title="Proceed" buttonStyle={styles.btn} onPress={() => {
                 navigate('Store')
             }} />
@@ -62,6 +62,12 @@ const styles = StyleSheet.create({
         paddingLeft: 16,
         paddingRight: 16,
         backgroundColor: 'white'
+    },
+    headTop: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
     heading: {
         fontSize: 24,
