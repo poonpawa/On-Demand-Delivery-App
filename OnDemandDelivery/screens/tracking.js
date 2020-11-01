@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react'
 import { OrderService } from '../services/order-service'
 import firestore from '@react-native-firebase/firestore';
 import MapView, { Marker } from 'react-native-maps';
-import { Right } from 'native-base';
-import UserService from '../services/user-service';
+import UserService from '../services/user-service'
+import { Right } from 'native-base'
 import { BackHandler } from "react-native";
 import { CommonActions } from '@react-navigation/native';
 

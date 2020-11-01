@@ -30,6 +30,7 @@ const riderWait = (props) => {
                 let orderDetails = { ...productData, ...JSON.parse(payload.data.orderDetails) }
                 let orderId = payload.data.orderNumber
                 UserService().AddData('orderID', orderId)
+                AsyncStorage.setItem('orderId', orderId);
                 OrderService().createOrderCollection(orderId, orderDetails, payload.data).then(() => {
                     navigate('Tracking', { orderId })
                 })
