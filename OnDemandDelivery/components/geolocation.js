@@ -17,8 +17,6 @@ const geolocation = () => {
     }, [address])
 
     const getLocation = async () => {
-
-        //const requestLocationPermission = async () => {
             try {
               const granted = await PermissionsAndroid.request(
                 PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
@@ -35,7 +33,7 @@ const geolocation = () => {
                     },
                     error => Alert.alert(error.message),
                     {
-                        enableHighAccuracy: true,
+                        enableHighAccuracy: false,
                         timeout: 20000,
                         maximumAge: 1000,
                         distanceFilter: 1 //for 1metre accuracy
@@ -47,9 +45,6 @@ const geolocation = () => {
             } catch (err) {
               console.warn(err);
             }
-          //};
-
-        
     };
 
     const getAddress = (lat, lng) => {
@@ -89,8 +84,5 @@ const styles = StyleSheet.create({
         marginLeft: 12,
     }
 })
-
-
-
 
 export default geolocation
