@@ -10,7 +10,12 @@ import { CommonActions } from '@react-navigation/native';
 const home = (props) => {
     let useObj = {};
     const { navigate } = props.navigation;
-    const displayName = auth().currentUser.displayName;
+    let displayName;
+    if (auth().currentUser) {
+        displayName = auth().currentUser.displayName;
+    } else {
+        displayName = 'default'
+    }
 
     useEffect(() => {
         //get Token for every logged-in user & store in db
