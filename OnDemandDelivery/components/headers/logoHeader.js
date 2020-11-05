@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Image, TouchableOpacity } from 'react-native'
 import { Header, Icon } from 'react-native-elements';
-import CartIcon from '../cartIcon';
 
 
 const logoHeader = (props) => {
