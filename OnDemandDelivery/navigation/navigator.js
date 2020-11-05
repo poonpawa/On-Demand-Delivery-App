@@ -22,7 +22,6 @@ import ModalHeader from '../components/headers/modalHeader';
 import CustomizedHeader from '../components/headers/customizedHeader';
 import LogoHeader from '../components/headers/logoHeader';
 import AsyncStorage from '@react-native-community/async-storage';
-import { log } from 'react-native-reanimated';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,7 +31,6 @@ const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const bottomNavigation = () => {
     return (
         <Tab.Navigator
-
             tabBarOptions={{
                 activeTintColor: '#C75300',
                 inactiveTintColor: '#6D7C8C',
@@ -101,7 +99,6 @@ const OrderNavigation = () => {
                 header: (props) => (
                     <CustomizedHeader navigation={props.navigation} title={props.scene.route.params} isSearch={true} />
                 )
-
             }} />
             <Stack.Screen name="Product" component={Product} options={{
                 header: ({ navigation }) => (
@@ -125,8 +122,16 @@ const AppNavigation = () => {
                     headerShown: false
                 }}
             />
-            <Stack.Screen name="Tracking" component={Tracking} />
-            <Stack.Screen name="Delivered" component={Delivered} />
+            <Stack.Screen name="Tracking" component={Tracking} options={{
+                header: ({ navigation }) => (
+                        <ModalHeader navigation={navigation} />    
+                    )    
+            }}/>
+            <Stack.Screen name="Delivered" component={Delivered} options={{
+                header: ({ navigation }) => (
+                        <ModalHeader navigation={navigation} />    
+                    )    
+            }}/>
         </Stack.Navigator>
     )
 }

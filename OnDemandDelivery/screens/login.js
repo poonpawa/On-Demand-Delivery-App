@@ -3,7 +3,6 @@ import { Button } from 'react-native-elements';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
-
 const login = (props) => {
     const { navigate } = props.navigation
     const [email, setEmail] = useState(null)
@@ -91,8 +90,8 @@ const login = (props) => {
                 </View>
 
                 <Text>{error}</Text>
-                <Button title="Login" onPress={() => onlogin(email, password, navigate)} buttonStyle={styles.primarybtn} />
 
+                <Button title="Login" onPress={() => onlogin(email, password, navigate)} buttonStyle={styles.primarybtn} />
 
                 <View style={{ alignSelf: "center", marginTop: 16 }}>
                     <Text style={{ color: "#505971", fontSize: 15, fontFamily: "NunitoSans-Regular", }}>
