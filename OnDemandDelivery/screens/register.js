@@ -8,12 +8,76 @@ const register = (props) => {
     const [email, setEmail] = useState(null),
         [password, setpassword] = useState(null),
         [name, setName] = useState(null),
-        [phone, setPhone] = useState(null)
+        [phone, setPhone] = useState(null),
+        [emailError, setMailError] = useState(null),
+        [error, setError] = useState(null),
+        [passError, setpassError] = useState(null),
+        [phoneError, setphoneError] = useState(null);
     const { navigate } = props.navigation
+
+
+    const onRegister = (name, email, phone, password, navigate) => {
+        if (phone.length < 10) {
+            setphoneError('Invalid Phone Number. It should be 10 digits')
+        } else {
+            auth()
+                .createUserWithEmailAndPassword(email, password)
+                .then((User) => {
+                    console.log('User account created & signed in!');
+                    User.user.updateProfile({
+                        displayName: name
+                    }).then(() => {
+                        console.log(auth().currentUser.uid);
+                        UserService().AddUserDetails({ name, email, phone })
+                        clearErrors();
+                        navigate("App")
+                    })
+        
+                })
+                .catch(error => {
+                    clearErrors();
+                    switch(error.code){
+                        case 'auth/email-already-in-use':
+                            setMailError('That email address is already in use!')
+                            break;
+                        case 'auth/invalid-email':
+                            setMailError('That email address is invalid!')
+                            break;
+                        case 'auth/weak-password':
+                            setpassError('Your Password is too weak.It should be 6 letters')
+                            break;
+                        case 'auth/operation-not allowed':
+                            setError('Credentials are not allowed')
+                            break;
+                        default:
+                            setError(error.message)
+                    }   
+                });
+            }
+        }
+
+    const clearErrors = () => {
+        setMailError(null)
+        setError(null);
+        setpassError(null)
+        setphoneError(null)
+    }
+
+    const clearText = (e, field) => {
+        if (e.nativeEvent.key === 'Backspace') {
+            if (field === 'email') {
+                setMailError(null)
+            } else if (field === 'pass') {
+                setpassError(null)
+            } else {
+                setError(null)
+            }
+        }
+    }
+    
 
     return (
         <View style={styles.container}>
-
             <View style={styles.form}>
                 <View style={styles.inputcontainer}>
                     <Text style={styles.inputlabel}>Name</Text>
@@ -36,21 +100,25 @@ const register = (props) => {
                         autoCapitalize="none"
                         onChangeText={email => setEmail(email)}
                         value={email}
+                        onKeyPress={(e) => clearText(e, 'email')}
                     ></TextInput>
                 </View>
+                <Text>{emailError}</Text>
 
                 <View style={styles.inputcontainer}>
                     <Text style={styles.inputlabel}>Phone number</Text>
                     <TextInput style={styles.inputbox}
                         underlineColorAndroid = "transparent" 
                         selectionColor ='#C75300'
+                        keyboardType='numeric'
                         placeholder="Phone"
                         autoCapitalize="none"
                         onChangeText={phone => setPhone(phone)}
                         value={phone}
+                        onKeyPress={(e) => clearText(e, 'phone')}
                     ></TextInput>
                 </View>
-
+                <Text>{phoneError}</Text>
 
                 <View style={styles.inputcontainer}>
                     <Text style={styles.inputlabel}>Password</Text>
@@ -62,8 +130,12 @@ const register = (props) => {
                         secureTextEntry={true}
                         onChangeText={password => setpassword(password)}
                         value={password}
+                        onKeyPress={(e) => clearText(e, 'pass')}
                     ></TextInput>
                 </View>
+                <Text>{passError}</Text>
+
+                <Text>{error}</Text>
 
                 <Button title="Sign Up" onPress={() => onRegister(name, email, phone, password, navigate)} buttonStyle={styles.primarybtn} />
 
@@ -79,32 +151,6 @@ const register = (props) => {
     )
 }
 
-const onRegister = (name, email, phone, password, navigate) => {
-    auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then((User) => {
-            console.log('User account created & signed in!');
-            User.user.updateProfile({
-                displayName: name
-            }).then(() => {
-                console.log(auth().currentUser.uid);
-                UserService().AddUserDetails({ name, email, phone })
-                navigate("App")
-            })
-
-        })
-        .catch(error => {
-            if (error.code === 'auth/email-already-in-use') {
-                console.log('That email address is already in use!');
-            }
-
-            if (error.code === 'auth/invalid-email') {
-                console.log('That email address is invalid!');
-            }
-
-            console.error(error);
-        });
-}
 
 const styles = StyleSheet.create({
     container: {
