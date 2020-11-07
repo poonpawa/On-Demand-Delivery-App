@@ -12,6 +12,7 @@ const login = (props) => {
     const [passError, setpassError] = useState(null)
 
     const onlogin = (email, password, navigate) => {
+        if (email !== null && password !== null) {
         auth()
             .signInWithEmailAndPassword(email, password)
             .then(() => {
@@ -39,6 +40,9 @@ const login = (props) => {
                         setError(error.message)
                 }   
             });
+        } else {
+            setError('Please fill the fields before login')
+        }
     }
 
     const clearErrors = () => {

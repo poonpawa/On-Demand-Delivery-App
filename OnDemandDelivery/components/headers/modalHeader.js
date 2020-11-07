@@ -5,8 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const modalHeader = (props) => {
     const [title, setTitle] = useState('')
-    useEffect(() => {
-        
+    useEffect(() => {      
         if (!props.title) {
             AsyncStorage.getItem('orderId').then((id) => setTitle('ORDER ID #' + id))
         } else {

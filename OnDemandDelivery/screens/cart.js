@@ -9,10 +9,11 @@ const cart = (props) => {
     
     return (
         <View style={styles.cartContainer}>
-            <Text style={styles.cartHeading}>Cart</Text>
-            {props.products.length>0 ?
+             <Text style={styles.cartHeading}>Cart</Text> 
+            
+            {props.products.length> 0 ?
                 <View>
-                    
+                <Text>{props.store}</Text>
                     {props.products.map((prop, key) => {
                         return (
                             <View key={key}>

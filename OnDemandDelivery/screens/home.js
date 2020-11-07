@@ -55,7 +55,7 @@ const home = (props) => {
             </View>
             
             <Button title="Proceed" buttonStyle={styles.btn} onPress={() => {
-                navigate('Store')
+                navigate('Home')
             }} />
         </View>
     )
