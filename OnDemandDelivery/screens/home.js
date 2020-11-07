@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         marginTop: 70,
     },
     textLocationDefault: {
-        fontSize: 14,
+        fontSize: 16,
         color: '#6A748A',
         fontFamily: "NunitoSans-Regular",
         marginTop: 12

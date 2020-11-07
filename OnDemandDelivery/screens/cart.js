@@ -13,7 +13,7 @@ const cart = (props) => {
             
             {props.products.length> 0 ?
                 <View>
-                <Text>{props.store}</Text>
+                <Text style={styles.cartTotalItems}>TOTAL ITEMS:</Text>
                     {props.products.map((prop, key) => {
                         return (
                             <View key={key}>
@@ -124,6 +124,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
+    },
+    cartTotalItems: {
+        color: '#6A748A',
+        fontFamily: "NunitoSans-SemiBold",
+        fontSize: 14,
+        marginTop: 16
     },
     imgEmptyCart: {
         marginTop: -100
