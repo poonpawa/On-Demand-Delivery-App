@@ -68,15 +68,15 @@ const mapDispatchToProps = (dispatch) => {
 const selectStore = (oldStore, newStore, navigate, props) => {
     if (oldStore !== '' && oldStore !== newStore && props.products.length > 0) {
         Alert.alert(
-            "Confirm Dialog",
-            "You are about to change the store.If you continue your cart will be cleared",
+            "Change store",
+            "You are about to change the store. If you continue your cart will be cleared",
             [
               {
                 text: "Cancel",
                 onPress: () => console.log("Cancel Pressed"),
                 style: "cancel"
               },
-              { text: "OK", onPress: () => {
+              { text: "Change store", onPress: () => {
                   props.clearCart()
                   navigate('Category', newStore)
                }}])

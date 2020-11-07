@@ -17,16 +17,16 @@ const checkout = (props) => {
     return (
         <View style={styles.container}>
             <View style={styles.inputcontainer}>
-                <Text style={styles.inputlabel}>AMOUNT TO PAY</Text>
-                <Text style={styles.labelValue}>{price} Euro </Text>
-            </View>
-            <View style={styles.inputcontainer}>
                 <Text style={styles.inputlabel}>STORE</Text>
                 <Text style={styles.labelValue}>{store}</Text>
             </View>
             <View style={styles.inputcontainer}>
                 <Text style={styles.inputlabel}>ADDRESS</Text>
                 <Text style={styles.labelValue}>{address}</Text>
+            </View>
+            <View style={styles.inputcontainer}>
+                <Text style={styles.inputlabel}>AMOUNT TO PAY</Text>
+                <Text style={styles.labelValue}>{price} Euro </Text>
             </View>
             <View style={styles.inputcontainer}>
                 <Text style={styles.inputlabel}>PAYMENT</Text>
