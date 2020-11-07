@@ -108,7 +108,7 @@ const OrderNavigation = () => {
                 header: (props) => {
                     let store = props.scene.route.params.store;
                     return (
-                        <CustomizedHeader navigation={props.navigation} title={store} isRight={true} isSearch={true} />
+                        <CustomizedHeader navigation={props.navigation} title={store} isRight={false} isSearch={false} />
                     )
                 } 
 
@@ -136,7 +136,14 @@ const AppNavigation = () => {
                 }}
             />
 
-            <Stack.Screen name="Checkout" component={Checkout} />
+            <Stack.Screen name="Checkout" component={Checkout} options={{
+                header: (props) => {
+                    return (
+                        <CustomizedHeader navigation={props.navigation} title={'Place Order'} isRight={false} isSearch={false} />
+                    )
+                }
+            }}/>
+
             <Stack.Screen name="Tracking" component={Tracking} options={{
                 header: ({ navigation }) => (
                         <ModalHeader navigation={navigation} />    
