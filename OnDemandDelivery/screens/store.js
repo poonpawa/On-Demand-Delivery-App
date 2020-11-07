@@ -21,11 +21,6 @@ const store = (props) => {
             imageSrc: require('../assets/Images/Lidl.png'),
         },
         {
-            id: 'centra',
-            name: 'SuperValu',
-            imageSrc: require('../assets/Images/SuperValu.png'),
-        },
-        {
             id: 'spar',
             name: 'Spar',
             imageSrc: require('../assets/Images/spar.png'),

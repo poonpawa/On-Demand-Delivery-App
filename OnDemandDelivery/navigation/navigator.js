@@ -63,7 +63,11 @@ const bottomNavigation = () => {
                         focused
                         ? <CartIconFocused color={color} />
                         : <CartIcon color={color} />
+                    ),
+                    header: ({ navigation }) => (
+                        <ModalHeader navigation={navigation} title={'Cart'} />
                     )
+                    
             }} />
             <Tab.Screen name="Account" component={Account} options={{
                 tabBarIcon: ({ focused, color, size }) => (
@@ -86,11 +90,7 @@ const bottomNavigation = () => {
 const OrderNavigation = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: true }}>
-            <Stack.Screen name="address" component={Home} options={{
-                header: ({ navigation }) => (
-                    <LogoHeader/>
-                )
-            }} />
+            
             <Stack.Screen name="Store" component={Store} options={{
                 header: ({ navigation }) => (
                     <LogoHeader/>
@@ -119,7 +119,12 @@ const OrderNavigation = () => {
 
 const AppNavigation = () => {
     return (
-        <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: true }}>
+        <Stack.Navigator initialRouteName="address" screenOptions={{ headerShown: true }}>
+            <Stack.Screen name="address" component={Home} options={{
+                header: ({ navigation }) => (
+                    <LogoHeader/>
+                )
+            }} />
             <Stack.Screen name="Home" component={bottomNavigation}
                 options={{
                     headerShown: false
