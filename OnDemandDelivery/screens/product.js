@@ -9,6 +9,7 @@ const product = (props) => {
 
     useEffect(() => {
         let array = [], product;
+
         StoreService().getProducts(props.route.params.store, props.route.params.category).then((querySnapshot) => {
             querySnapshot.forEach(function (doc) {
                 product = getQuantityFromStore(props, doc.data().ProductId);
@@ -19,6 +20,8 @@ const product = (props) => {
         }).catch((err) => {
             console.log(err);
         });
+
+        props.updateStore(props.route.params.store)
 
     }, [])
 
@@ -73,7 +76,8 @@ const mapStateToProps = (state) => {
     return {
         products: state.products,
         total: state.total,
-        price: state.price
+        price: state.price,
+        state: state.store
     }
 }
 
@@ -81,6 +85,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addToCart: (product) => dispatch({ type: 'ADD_TO_CART', product: product }),
         removeFromCart: (product) => dispatch({ type: 'REMOVE_FROM_CART', product: product }),
+        updateStore: (store) => dispatch({type: 'UPDATE_STORE', store: store}) 
     }
 }
 

@@ -1,7 +1,10 @@
+import { act } from "react-test-renderer";
+
 const initialState = {
     products: [],
     total: 0,
     price: 0,
+    store: ''
 
 }
 
@@ -14,7 +17,8 @@ export default (state = initialState, action) => {
             return {
                 products: productInStore ? state.products : [...state.products, action.product],
                 total: state.total + 1,
-                price: +newPrice.toFixed(2)
+                price: +newPrice.toFixed(2),
+                store: state.store
             }
         case 'REMOVE_FROM_CART':
             let remainingPrice = state.price - action.product.Price;
@@ -26,7 +30,8 @@ export default (state = initialState, action) => {
                     ? state.products.filter(item => item.ProductId !== action.product.ProductId)
                     : state.products,
                 total: state.total - 1,
-                price: +remainingPrice.toFixed(2)
+                price: +remainingPrice.toFixed(2),
+                store: state.store
             }
         case 'DELETE_ITEM':
             let itemPrice = state.price - (action.product.Price * action.product.quantity);
@@ -37,9 +42,17 @@ export default (state = initialState, action) => {
                 products: state.products.filter(item => item.ProductId !== action.product.ProductId),
                 total: state.total - itemQuantity,
                 price: +itemPrice.toFixed(2),
-
+                store: state.store
 
             }
+        case 'UPDATE_STORE':
+            return {
+                products: state.products,
+                total: state.total,
+                price: state.price,
+                store: action.store
+            }
+
         default:
             return state
     }

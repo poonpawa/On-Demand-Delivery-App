@@ -25,18 +25,6 @@ const tracking = (props) => {
                     CommonActions.navigate(
                     'Home', {screen: 'Order'}
                   ));
-                /* props.navigation.dispatch(state => {
-                    console.log(state);
-                    const route = state.routes.filter(r => r.name !== 'RiderWait');
-
-            
-                    const updatedRoutes = state.routes;
-                    return CommonActions.reset({
-                        ...state,
-                        route,
-                        index: route.length - 1,
-                      });
-                }) */
             }
         );
         

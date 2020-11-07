@@ -18,6 +18,7 @@ import RiderWait from '../screens/riderWait';
 import Tracking from '../screens/tracking';
 import Delivered from '../screens/delivered';
 import Account from '../screens/account';
+import Checkout from '../screens/checkout';
 import ModalHeader from '../components/headers/modalHeader';
 import CustomizedHeader from '../components/headers/customizedHeader';
 import LogoHeader from '../components/headers/logoHeader';
@@ -32,7 +33,6 @@ const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const bottomNavigation = () => {
     return (
         <Tab.Navigator
-
             tabBarOptions={{
                 activeTintColor: '#C75300',
                 inactiveTintColor: '#6D7C8C',
@@ -98,15 +98,22 @@ const OrderNavigation = () => {
                 )
             }} />
             <Stack.Screen name="Category" component={Category} options={{
-                header: ({ navigation }) => (
-                    <CustomizedHeader navigation={navigation} title={'Store Name'} isSearch={true} />
-                )
+                header: (props) => {
+                    let store = props.scene.route.params;
+                    return (
+                        <CustomizedHeader navigation={props.navigation} title={store} isSearch={true} />
+                    )
+                } 
 
             }} />
             <Stack.Screen name="Product" component={Product} options={{
-                header: ({ navigation }) => (
-                    <CustomizedHeader navigation={navigation} title={'Category'} isRight={true} isSearch={true} />
-                )
+                header: (props) => {
+                    let category = props.scene.route.params.category;
+                    return (
+                        <CustomizedHeader navigation={props.navigation} title={category} isRight={true} isSearch={true} />
+                    )
+                } 
+
             }} />
         </Stack.Navigator>
     )
@@ -125,6 +132,7 @@ const AppNavigation = () => {
                     headerShown: false
                 }}
             />
+            <Stack.Screen name="Checkout" component={Checkout} />
             <Stack.Screen name="Tracking" component={Tracking} />
             <Stack.Screen name="Delivered" component={Delivered} />
         </Stack.Navigator>

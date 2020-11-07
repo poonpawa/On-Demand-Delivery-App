@@ -2,20 +2,20 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { StyleSheet, View, Image, TouchableOpacity, Text } from 'react-native'
 import { ListItem, Button, Divider, Icon } from 'react-native-elements';
-import PlaceOrder from "../components/placeOrder";
+
 
 const cart = (props) => {
     const { navigate } = props.navigation;
+    
     return (
         <View style={styles.cartContainer}>
             <Text style={styles.cartHeading}>Carts</Text>
+            <Text>{props.store}</Text>
             {props.products.map((prop, key) => {
                 return (
                     <View key={key}>
                         <View style={styles.eachCartContainer}>
-
                             <View style={styles.eachCartLeft}>
-
                                 <View style={styles.eachproductImgContainer}>
                                     <Image
                                         style={styles.eachproductImg}
@@ -75,7 +75,12 @@ const cart = (props) => {
                 <Text style={styles.totalFee}>TOTAL</Text>
                 <Text style={styles.totalFeePrice}>{props.price} Euro</Text>
             </View>
-            <PlaceOrder navigation={navigate} btnStyle={styles.primaryBtn} />
+            <Button title="Checkout" buttonStyle={styles.primaryBtn} onPress={() => {
+                let price = props.price,
+                store = props.store; 
+                navigate('Checkout', {price, store})
+            }} />
+
         </View>
     )
 }
@@ -84,7 +89,8 @@ const mapStateToProps = (state) => {
     return {
         products: state.products,
         total: state.totalItems,
-        price: state.price
+        price: state.price,
+        store: state.store
     }
 }
 
