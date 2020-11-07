@@ -6,12 +6,13 @@ export const OrderService = (props) => {
         console.log(props);
         let orderDbData = await firestore().collection('Orders').doc(orderId).get();
         let buyerId = firebase.auth().currentUser.uid;
+        let orderData = JSON.parse(orderdata.buyer);
 
         //check wheather the order data already exits
         if (!orderDbData.exists) {
             return await firestore().collection('Orders').doc(orderId).set({
                 id: orderdata.orderNumber,
-                shippingAddress: orderdata.address,
+                shippingAddress: orderData.address,
                 store: orderdata.store,
                 riderStatus: {
                     status: 'Rider Assigned',

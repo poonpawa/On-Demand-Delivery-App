@@ -13,6 +13,7 @@ import Cart from '../screens/cart';
 import Login from '../screens/login';
 import Register from '../screens/register';
 import CartIcon from '../components/cartIcon';
+import CartIconFocused from '../components/cartIconFocused';
 import Loading from '../screens/loading';
 import RiderWait from '../screens/riderWait';
 import Tracking from '../screens/tracking';
@@ -23,7 +24,6 @@ import ModalHeader from '../components/headers/modalHeader';
 import CustomizedHeader from '../components/headers/customizedHeader';
 import LogoHeader from '../components/headers/logoHeader';
 import AsyncStorage from '@react-native-community/async-storage';
-import { log } from 'react-native-reanimated';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -60,12 +60,11 @@ const bottomNavigation = () => {
             <Tab.Screen name="Cart" component={Cart}
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
-                        <CartIcon color={color} />
-                    ),
-                    header: ({ navigation }) => (
-                        <ModalHeader navigation={navigation} title={'Cart'} />
+                        focused
+                        ? <CartIconFocused color={color} />
+                        : <CartIcon color={color} />
                     )
-                }} />
+            }} />
             <Tab.Screen name="Account" component={Account} options={{
                 tabBarIcon: ({ focused, color, size }) => (
                     focused
@@ -103,8 +102,7 @@ const OrderNavigation = () => {
                     return (
                         <CustomizedHeader navigation={props.navigation} title={store} isSearch={true} />
                     )
-                } 
-
+                }
             }} />
             <Stack.Screen name="Product" component={Product} options={{
                 header: (props) => {
@@ -132,9 +130,19 @@ const AppNavigation = () => {
                     headerShown: false
                 }}
             />
+
             <Stack.Screen name="Checkout" component={Checkout} />
-            <Stack.Screen name="Tracking" component={Tracking} />
-            <Stack.Screen name="Delivered" component={Delivered} />
+            <Stack.Screen name="Tracking" component={Tracking} options={{
+                header: ({ navigation }) => (
+                        <ModalHeader navigation={navigation} />    
+                    )    
+            }}/>
+            <Stack.Screen name="Delivered" component={Delivered} options={{
+                header: ({ navigation }) => (
+                        <ModalHeader navigation={navigation} />    
+                    )    
+            }}/>
+
         </Stack.Navigator>
     )
 }
