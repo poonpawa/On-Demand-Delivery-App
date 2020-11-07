@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#C75300',
         fontFamily: "NunitoSans-Bold",
         fontSize: 16,
-        marginTop: 16
+        marginTop: 40
     },
     cartContainer: {
         backgroundColor: 'white',
@@ -231,8 +231,8 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     eachproductImgContainer: {
-        width: 106,
-        height: 84,
+        width: 100,
+        height: 50,
         paddingRight: 16
     },
     eachproductImg: {

@@ -17,17 +17,20 @@ const checkout = (props) => {
     return (
         <View style={styles.container}>
             <View style={styles.inputcontainer}>
-                <Text style={styles.inputlabel}>OrderDetails</Text>
-                <Text style={styles.labelValue}>Total Cost:  {price} Euro </Text>
-                <Text style={styles.labelValue}>Store:  {store} </Text>
+                <Text style={styles.inputlabel}>AMOUNT TO PAY</Text>
+                <Text style={styles.labelValue}>{price} Euro </Text>
             </View>
             <View style={styles.inputcontainer}>
-                <Text style={styles.inputlabel}>Address</Text>
-                <Text style={styles.labelValue}>Home: {address} </Text>
+                <Text style={styles.inputlabel}>STORE</Text>
+                <Text style={styles.labelValue}>{store}</Text>
             </View>
             <View style={styles.inputcontainer}>
-            <Text style={styles.inputlabel}>Payment Method</Text>
-                <Text style={styles.labelValue}>Cash On Delivery</Text>
+                <Text style={styles.inputlabel}>ADDRESS</Text>
+                <Text style={styles.labelValue}>{address}</Text>
+            </View>
+            <View style={styles.inputcontainer}>
+                <Text style={styles.inputlabel}>PAYMENT</Text>
+                <Text style={styles.labelValue}>Cash on delivery</Text>
             </View>
             
             <PlaceOrder navigation={navigate} btnStyle={styles.btn} />
@@ -45,38 +48,19 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         backgroundColor: 'white'
     },
-    headTop: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-    },
-    heading: {
-        fontSize: 35,
-        color: '#383F51',
-        marginTop: 16,
-        fontFamily: "NunitoSans-Bold"
-    },
     inputcontainer: {
         marginTop: 24
     },
     inputlabel: {
-        fontSize: 20,
+        fontSize: 14,
         fontFamily: "NunitoSans-SemiBold",
-        color: '#383F51'
+        color: '#6A748A'
     },
     labelValue: {
-        height: 40,
-        color: '#505971',
+        color: '#383F51',
         fontSize: 16,
         fontFamily: "NunitoSans-SemiBold",
-        borderColor: '#C7CBD8',
-        //borderWidth: 1,
-        borderRadius: 4,
         marginTop: 8,
-        padding: 8,
-        height : 60
-        
     },
     btn: {
         backgroundColor: "#C75300",

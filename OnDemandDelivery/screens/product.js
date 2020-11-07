@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     productHeading: {
-        fontSize: 20,
+        fontSize: 24,
         color: '#383F51',
         fontFamily: "NunitoSans-Bold",
         marginTop: 20,
