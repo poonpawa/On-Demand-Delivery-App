@@ -37,7 +37,7 @@ const modalHeader = (props) => {
                     }
                 }}
                 
-                centerComponent={{ text: props.title, style: { color: '#383F51', fontFamily: "NunitoSans-Bold", fontSize: 18 } }}
+                centerComponent={{ text: props.title, style: { color: '#383F51', fontFamily: "NunitoSans-Bold", fontSize: 22 } }}
                 leftComponent={() => renderCustomLeftIcon()}
                 containerStyle={styles.mainContainer}
             />

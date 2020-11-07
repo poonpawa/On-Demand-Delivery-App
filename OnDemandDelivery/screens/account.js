@@ -43,15 +43,9 @@ const account = (props) => {
 
                             <View key={key} style={styles.previousContainer}>
                                 <View style={styles.eachOrder}>
-                                    <Text style={styles.firstTitle}>
-                                        Order Id: <Text>{item.id}</Text>
-                                    </Text>
-                                    <Text style={styles.secondTitle}>
-                                        Store: <Text>{item.store}</Text>
-                                    </Text>
-                                    <Text style={styles.lastTitle}>
-                                        Amount Paid: <Text>{item.totalPrice} Euro</Text>
-                                    </Text>
+                                    <Text style={styles.firstTitle}>Order Id: {item.id}</Text>
+                                    <Text style={styles.secondTitle}>Store: {item.store}</Text>
+                                    <Text style={styles.lastTitle}>Amount Paid: {item.totalPrice} Euro</Text>
                                 </View>
                             </View>
 
@@ -64,6 +58,10 @@ const account = (props) => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#FAFAFA',
+        height: '100%'
+    },
     fixHead: {
         color: '#383F51',
         textAlign: 'center',
@@ -74,10 +72,6 @@ const styles = StyleSheet.create({
         borderBottomColor: '#F3F3F3',
         borderBottomWidth: 1,
         backgroundColor: 'white'
-    },
-    container: {
-        backgroundColor: '#FAFAFA',
-        height: '100%'
     },
     previousContainer: {
         backgroundColor: 'white',
