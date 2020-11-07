@@ -1,8 +1,14 @@
-import React from 'react'
-import { StyleSheet, ScrollView, View, Image, TouchableOpacity, Text } from 'react-native'
+import React, {useEffect} from 'react'
+import { connect } from 'react-redux';
+import { StyleSheet, ScrollView, View, Image, TouchableOpacity, Text, Alert } from 'react-native'
 
 const store = (props) => {
     const { navigate } = props.navigation;
+    useEffect(() => {
+        console.log(props.products);
+        
+    }, []);
+    
     const listOfStores = [
         {
             id: 'tesco',
@@ -33,7 +39,7 @@ const store = (props) => {
                 <View style={styles.storeImgContainer}>
                     {listOfStores.map((prop, key) => {
                         return (
-                            <TouchableOpacity key={prop.id} onPress={() => selectStore(prop.name, navigate)}>
+                            <TouchableOpacity key={prop.id} onPress={() => selectStore(props.store, prop.name, navigate, props)}>
                                 <Image
                                     style={styles.eachStore}
                                     key={prop.id}
@@ -49,9 +55,39 @@ const store = (props) => {
     )
 }
 
-const selectStore = (props, navigate) => {
-    console.log(props);
-    navigate('Category', props)
+const mapStateToProps = (state) => {
+    return {
+        products: state.products,
+        total: state.totalItems,
+        price: state.price,
+        store: state.store
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        clearCart: () => dispatch({type: 'CLEAR_CART'})
+    }
+}
+
+const selectStore = (oldStore, newStore, navigate, props) => {
+    if (oldStore !== '' && oldStore !== newStore && props.products.length > 0) {
+        Alert.alert(
+            "Confirm Dialog",
+            "You are about to change the store.If you continue your cart will be cleared",
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+              },
+              { text: "OK", onPress: () => {
+                  props.clearCart()
+                  navigate('Category', newStore)
+               }}])
+    } else {
+        navigate('Category', newStore)
+    }
 }
 
 const styles = StyleSheet.create({
@@ -76,4 +112,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default store
+export default connect(mapStateToProps, mapDispatchToProps)(store)

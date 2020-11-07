@@ -52,7 +52,13 @@ export default (state = initialState, action) => {
                 price: state.price,
                 store: action.store
             }
-
+        case 'CLEAR_CART':
+            return {
+                products: initialState.products,
+                total: initialState.total,
+                price: initialState.price,
+                store: state.store
+            }
         default:
             return state
     }
