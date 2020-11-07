@@ -13,6 +13,7 @@ import Cart from '../screens/cart';
 import Login from '../screens/login';
 import Register from '../screens/register';
 import CartIcon from '../components/cartIcon';
+import CartIconFocused from '../components/cartIconFocused';
 import Loading from '../screens/loading';
 import RiderWait from '../screens/riderWait';
 import Tracking from '../screens/tracking';
@@ -58,12 +59,11 @@ const bottomNavigation = () => {
             <Tab.Screen name="Cart" component={Cart}
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
-                        <CartIcon color={color} />
-                    ),
-                    header: ({ navigation }) => (
-                        <ModalHeader navigation={navigation} title={'Cart'} />
+                        focused
+                        ? <CartIconFocused color={color} />
+                        : <CartIcon color={color} />
                     )
-                }} />
+            }} />
             <Tab.Screen name="Account" component={Account} options={{
                 tabBarIcon: ({ focused, color, size }) => (
                     focused

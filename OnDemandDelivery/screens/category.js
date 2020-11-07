@@ -29,8 +29,8 @@ const store = ({ navigation, route }) => {
 
     return (
         <View style={styles.category}>
-            <Text style={styles.heading}>Choose category</Text>
             <ScrollView>
+                <Text style={styles.heading}>Choose category</Text>
                 <View style={styles.categoryImgContainer}>
                     {listOfCategory.map((prop, key) => {
                         return (
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         fontFamily: "NunitoSans-Bold"
     },
     categoryImgContainer: {
-        marginBottom: 74
+        marginBottom: 24
     },
     eachCategory: {
         width: '100%',

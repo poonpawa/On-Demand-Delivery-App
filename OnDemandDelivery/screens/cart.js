@@ -8,74 +8,87 @@ const cart = (props) => {
     const { navigate } = props.navigation;
     return (
         <View style={styles.cartContainer}>
-            <Text style={styles.cartHeading}>Carts</Text>
-            {props.products.map((prop, key) => {
-                return (
-                    <View key={key}>
-                        <View style={styles.eachCartContainer}>
+            <Text style={styles.cartHeading}>Cart</Text>
+            {props.products.length>0 ?
+                <View>
+                    
+                    {props.products.map((prop, key) => {
+                        return (
+                            <View key={key}>
+                                <View style={styles.eachCartContainer}>
 
-                            <View style={styles.eachCartLeft}>
+                                    <View style={styles.eachCartLeft}>
 
-                                <View style={styles.eachproductImgContainer}>
-                                    <Image
-                                        style={styles.eachproductImg}
-                                        source={{uri: prop.url}} />
-                                </View>
+                                        <View style={styles.eachproductImgContainer}>
+                                            <Image
+                                                style={styles.eachproductImg}
+                                                source={{uri: prop.url}} />
+                                        </View>
 
-                                <View style={styles.eachCartDescContainer}>
-                                    <View style={styles.eachCartDesc}>
-                                        <Text style={styles.eachproductName}>
-                                            {prop.quantity} x {prop.ProductName}
+                                        <View style={styles.eachCartDescContainer}>
+                                            <View style={styles.eachCartDesc}>
+                                                <Text style={styles.eachproductName}>
+                                                    {prop.quantity} x {prop.ProductName}
+                                                </Text>
+                                            </View>
+                                            <View style={styles.quantityView}>
+                                                <TouchableOpacity onPress={() => props.removeFromCart(prop)}>
+                                                    <Image
+                                                        style={styles.removeProduct}
+                                                        source={require('../assets/Images/removeProduct.png')}
+                                                    />
+                                                </TouchableOpacity>
+                                                <Text style={styles.productQuantity}>{prop.quantity}</Text>
+                                                <TouchableOpacity onPress={() => props.addToCart(prop)}>
+                                                    <Image
+                                                        style={styles.addProduct}
+                                                        source={require('../assets/Images/addProduct.png')}
+                                                    />
+                                                </TouchableOpacity>
+                                                <TouchableOpacity onPress={() => props.removeFromCart(prop)}>
+                                                    <Image
+                                                        style={styles.deleteProduct}
+                                                        source={require('../assets/Images/delete.png')}
+                                                    />
+                                                </TouchableOpacity>
+                                            </View>
+                                        </View>
+
+                                    </View>
+
+                                    <View style={styles.eachCartRight}>
+                                        <Text style={styles.eachCartPrice}>
+                                            {prop.Price} Euro
                                         </Text>
                                     </View>
-                                    <View style={styles.quantityView}>
-                                        <TouchableOpacity onPress={() => props.removeFromCart(prop)}>
-                                            <Image
-                                                style={styles.removeProduct}
-                                                source={require('../assets/Images/removeProduct.png')}
-                                            />
-                                        </TouchableOpacity>
-                                        <Text style={styles.productQuantity}>{prop.quantity}</Text>
-                                        <TouchableOpacity onPress={() => props.addToCart(prop)}>
-                                            <Image
-                                                style={styles.addProduct}
-                                                source={require('../assets/Images/addProduct.png')}
-                                            />
-                                        </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => props.removeFromCart(prop)}>
-                                            <Image
-                                                style={styles.deleteProduct}
-                                                source={require('../assets/Images/delete.png')}
-                                            />
-                                        </TouchableOpacity>
-                                    </View>
                                 </View>
-
                             </View>
+                        )
+                    })}
 
-                            <View style={styles.eachCartRight}>
-                                <Text style={styles.eachCartPrice}>
-                                    {prop.Price} Euro
-                                </Text>
-                            </View>
-                        </View>
+                    <View style={styles.itemsTotalContainer}>
+                        <Text style={styles.itemsTotal}>Items Total</Text>
+                        <Text style={styles.itemsTotalPrice}>{props.price} Euro</Text>
                     </View>
-                )
-            })}
+                    <View style={styles.deliveryFeeContainer}>
+                        <Text style={styles.deliveryFee}>Delivery Fee</Text>
+                        <Text style={styles.deliveryFeePrice}>0.45 Euro</Text>
+                    </View>
+                    <View style={styles.totalContainer}>
+                        <Text style={styles.totalFee}>TOTAL</Text>
+                        <Text style={styles.totalFeePrice}>{props.price} Euro</Text>
+                    </View>
+                    <PlaceOrder navigation={navigate} btnStyle={styles.primaryBtn} />
 
-            <View style={styles.itemsTotalContainer}>
-                <Text style={styles.itemsTotal}>Items Total</Text>
-                <Text style={styles.itemsTotalPrice}>{props.price} Euro</Text>
-            </View>
-            <View style={styles.deliveryFeeContainer}>
-                <Text style={styles.deliveryFee}>Delivery Fee</Text>
-                <Text style={styles.deliveryFeePrice}>0.45 Euro</Text>
-            </View>
-            <View style={styles.totalContainer}>
-                <Text style={styles.totalFee}>TOTAL</Text>
-                <Text style={styles.totalFeePrice}>{props.price} Euro</Text>
-            </View>
-            <PlaceOrder navigation={navigate} btnStyle={styles.primaryBtn} />
+                </View>
+                :
+                <View style={styles.emptycontainer}>
+                        <Image style={styles.imgEmptyCart} source={require('../assets/Images/cartEmpty.png')}
+                        />
+                        <Text style={styles.textEmptyHead}>Cart is empty</Text>
+                        <Text style={styles.textEmptyTitle}>You haven’t added anything to cart</Text>
+                </View>
+            }
         </View>
     )
 }
@@ -99,6 +112,27 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps, mapDispatchToProps)(cart)
 
 const styles = StyleSheet.create({
+    emptycontainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%',
+    },
+    imgEmptyCart: {
+        marginTop: -100
+    },
+    textEmptyHead: {
+        color: '#383F51',
+        fontFamily: "NunitoSans-SemiBold",
+        fontSize: 18,
+        marginTop: 16
+    },
+    textEmptyTitle: {
+        color: '#6A748A',
+        fontFamily: "NunitoSans-Regular",
+        fontSize: 16,
+        marginTop: 4
+    },
     itemsTotalContainer: {
         marginTop: 12,
         flexDirection: 'row',

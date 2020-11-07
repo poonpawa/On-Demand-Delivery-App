@@ -28,8 +28,8 @@ const store = (props) => {
 
     return (
         <View style={styles.store}>
-            <Text style={styles.heading}>Select store</Text>
             <ScrollView>
+                <Text style={styles.heading}>Select store</Text>
                 <View style={styles.storeImgContainer}>
                     {listOfStores.map((prop, key) => {
                         return (
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         fontFamily: "NunitoSans-Bold"
     },
     storeImgContainer: {
-        marginBottom: 74
+        marginBottom: 24
     },
     eachStore: {
         width: '100%',
