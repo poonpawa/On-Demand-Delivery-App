@@ -15,9 +15,9 @@ const modalHeader = (props) => {
     }, [])
     
     return (
-        <View>
+        <View style={styles.container}>
             <Header
-                leftComponent={{ text: title, style: { color: '#383F51', fontFamily: "NunitoSans-Bold", fontSize: 18, width: 275 } }}
+                leftComponent={{ text: title, style: { color: '#383F51', fontFamily: "NunitoSans-Bold", fontSize: 24, width: 275,  } }}
                 rightComponent={{
                     icon: 'close',
                     color: '#6A748A',

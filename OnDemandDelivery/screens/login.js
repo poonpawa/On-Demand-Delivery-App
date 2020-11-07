@@ -41,7 +41,7 @@ const login = (props) => {
                 }   
             });
         } else {
-            setError('Please fill the fields before login')
+            setError('Please enter all the fields')
         }
     }
 
@@ -75,7 +75,10 @@ const login = (props) => {
                         value={email}
                         onKeyPress={(e) => clearText(e, 'email')}
                     ></TextInput>
-                    <Text>{emailError}</Text>
+                    {emailError!=null ?
+                        <Text style={styles.error}>{emailError}</Text>
+                        :<View></View>
+                    }
                 </View>
 
 
@@ -90,10 +93,16 @@ const login = (props) => {
                         value={password}
                         onKeyPress={(e) => clearText(e, 'pass')}
                     ></TextInput>
-                    <Text>{passError}</Text>
+                    {passError!=null ?
+                        <Text style={styles.error}>{passError}</Text>
+                        :<View></View>
+                    }
                 </View>
-
-                <Text>{error}</Text>
+                
+                {error!=null ?
+                    <Text style={styles.error}>{error}</Text>
+                    :<View></View>
+                }
 
                 <Button title="Login" onPress={() => onlogin(email, password, navigate)} buttonStyle={styles.primarybtn} />
 
@@ -118,6 +127,12 @@ const styles = StyleSheet.create({
         marginTop: 8,
         marginLeft: 16,
         marginRight: 16
+    },
+    error: {
+        fontSize: 14,
+        fontFamily: "NunitoSans-SemiBold",
+        color: '#EF2C2C',
+        marginTop: 8
     },
     inputcontainer: {
         marginTop: 24
