@@ -5,6 +5,7 @@ import { OrderService } from '../services/order-service'
 import firebase from "@react-native-firebase/app"
 import { ListItem, Button, Text } from 'react-native-elements'
 import auth from '@react-native-firebase/auth';
+import { CommonActions } from '@react-navigation/native'
 
 const account = (props) => {
     const [orders, setOrders] = useState([])
@@ -13,13 +14,20 @@ const account = (props) => {
         OrderService().getAllOrders(userId).then((data) => {
             setOrders(data)
         })
-    })
+    }, [])
 
     const signOut = (navigate) => {
         auth().signOut()
             .then(() => {
                 console.log('User signed out!')
-                navigate('Auth')
+                props.navigation.dispatch(
+                    CommonActions.reset({
+                        index: 0,
+                        key: null,
+                        routes: [{name: 'Login'}]
+                    })
+                )
+                //navigate('Auth')
             });
     }
 

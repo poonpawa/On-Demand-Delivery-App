@@ -6,6 +6,7 @@ import { OrderService } from "../services/order-service";
 import { connect } from 'react-redux';
 import { BackHandler } from "react-native";
 import { useIsFocused, useNavigationState, StackActions } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const riderWait = (props) => {
     const { navigate } = props.navigation;
