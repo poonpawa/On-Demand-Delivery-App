@@ -6,11 +6,12 @@ import { connect } from 'react-redux';
 
 const product = (props) => {
     const [productList, setproductList] = useState([])
+    let category = props.route.params.category;
 
     useEffect(() => {
         let array = [], product;
 
-        StoreService().getProducts(props.route.params.store, props.route.params.category).then((querySnapshot) => {
+        StoreService().getProducts(props.route.params.store, category).then((querySnapshot) => {
             querySnapshot.forEach(function (doc) {
                 product = getQuantityFromStore(props, doc.data().ProductId);
                 doc.data()['quantity'] = product ? product.quantity : 0;
@@ -32,7 +33,7 @@ const product = (props) => {
 
     return (
         <View style={styles.productContainer}>
-            <Text style={styles.productHeading}>Product List</Text>
+            <Text style={styles.productHeading}>{category}</Text>
             {productList.map((prop, key) => {
                 return (
                     <View style={styles.eachproduct}

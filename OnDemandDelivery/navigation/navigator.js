@@ -106,9 +106,9 @@ const OrderNavigation = () => {
             }} />
             <Stack.Screen name="Product" component={Product} options={{
                 header: (props) => {
-                    let category = props.scene.route.params.category;
+                    let store = props.scene.route.params.store;
                     return (
-                        <CustomizedHeader navigation={props.navigation} title={category} isRight={true} isSearch={true} />
+                        <CustomizedHeader navigation={props.navigation} title={store} isRight={true} isSearch={true} />
                     )
                 } 
 
