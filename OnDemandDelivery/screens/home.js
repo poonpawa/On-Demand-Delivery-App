@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Image, TextInput } from 'react-native';
 import { Button } from 'react-native-elements';
 import { BackHandler } from "react-native";
 import auth from '@react-native-firebase/auth';
@@ -33,8 +33,15 @@ const home = (props) => {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.heading}>Add Address</Text>
             <View style={styles.headTop}>
-                <Geolocation parentCallback={(loadingData) => {setisLocationUpdated(loadingData)}}/>
+            {isLocationUpdated ? 
+                <View>
+                    <Geolocation parentCallback={(loadingData) => {setisLocationUpdated(loadingData)}}/>
+                </View> 
+                :
+                <View></View>
+            }
             </View>
             {/* <View style={styles.inputcontainer}>
                 <Text style={styles.inputlabel}>Address</Text>
@@ -60,8 +67,12 @@ const home = (props) => {
                 }} />
             </View> 
             : 
-            <View>
-                <Text>Location not updated yet</Text>
+            <View style={styles.addressDefaultContainer}>
+                <Image style={styles.removeProduct}
+                    source={require('../assets/Images/addressDefault.png')}
+                />
+                <Text style={styles.textLocationDefault}>No location detected, {"\n"} get current location</Text>
+                <Geolocation parentCallback={(loadingData) => {setisLocationUpdated(loadingData)}}/>
             </View>} 
 
 
@@ -77,6 +88,18 @@ const styles = StyleSheet.create({
         paddingLeft: 16,
         paddingRight: 16,
         backgroundColor: 'white'
+    },
+    addressDefaultContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 70,
+    },
+    textLocationDefault: {
+        fontSize: 14,
+        color: '#6A748A',
+        fontFamily: "NunitoSans-Regular",
+        marginTop: 12
     },
     headTop: {
         display: 'flex',
@@ -115,7 +138,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         fontSize: 16,
         fontFamily: "NunitoSans-SemiBold",
-        marginTop: 200
+        marginTop: 70
     }
 })
 

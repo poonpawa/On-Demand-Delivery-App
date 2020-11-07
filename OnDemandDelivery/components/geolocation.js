@@ -92,7 +92,8 @@ const styles = StyleSheet.create({
     locationValue: {
         fontSize: 16,
         fontFamily: "NunitoSans-SemiBold",
-        paddingHorizontal: 20
+        marginTop: 24,
+        color: '#383F51', 
     },
     textlocation: {
         color: '#C75300', 
