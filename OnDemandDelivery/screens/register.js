@@ -57,7 +57,7 @@ const register = (props) => {
                     });
                 }
         } else {
-            setError('Please fill the fields before login')
+            setError('Please enter all the fields')
         }
     }
 
@@ -108,7 +108,10 @@ const register = (props) => {
                         onKeyPress={(e) => clearText(e, 'email')}
                     ></TextInput>
                 </View>
-                <Text>{emailError}</Text>
+                {emailError!=null ?
+                    <Text style={styles.error}>{emailError}</Text>
+                    :<View></View>
+                }
 
                 <View style={styles.inputcontainer}>
                     <Text style={styles.inputlabel}>Phone number</Text>
@@ -123,7 +126,10 @@ const register = (props) => {
                         onKeyPress={(e) => clearText(e, 'phone')}
                     ></TextInput>
                 </View>
-                <Text>{phoneError}</Text>
+                {phoneError!=null ?
+                    <Text style={styles.error}>{phoneError}</Text>
+                    :<View></View>
+                }
 
                 <View style={styles.inputcontainer}>
                     <Text style={styles.inputlabel}>Password</Text>
@@ -138,9 +144,15 @@ const register = (props) => {
                         onKeyPress={(e) => clearText(e, 'pass')}
                     ></TextInput>
                 </View>
-                <Text>{passError}</Text>
+                {passError!=null ?
+                    <Text style={styles.error}>{passError}</Text>
+                    :<View></View>
+                }
 
-                <Text>{error}</Text>
+                {error!=null ?
+                    <Text style={styles.error}>{error}</Text>
+                    :<View></View>
+                }
 
                 <Button title="Sign Up" onPress={() => onRegister(name, email, phone, password, navigate)} buttonStyle={styles.primarybtn} />
 
@@ -166,6 +178,12 @@ const styles = StyleSheet.create({
         marginTop: 8,
         marginLeft: 16,
         marginRight: 16
+    },
+    error: {
+        fontSize: 14,
+        fontFamily: "NunitoSans-SemiBold",
+        color: '#EF2C2C',
+        marginTop: 8
     },
     inputcontainer: {
         marginTop: 24
