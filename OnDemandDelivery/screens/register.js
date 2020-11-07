@@ -17,44 +17,49 @@ const register = (props) => {
 
 
     const onRegister = (name, email, phone, password, navigate) => {
-        if (phone.length < 10) {
-            setphoneError('Invalid Phone Number. It should be 10 digits')
-        } else {
-            auth()
-                .createUserWithEmailAndPassword(email, password)
-                .then((User) => {
-                    console.log('User account created & signed in!');
-                    User.user.updateProfile({
-                        displayName: name
-                    }).then(() => {
-                        console.log(auth().currentUser.uid);
-                        UserService().AddUserDetails({ name, email, phone })
-                        clearErrors();
-                        navigate("App")
+        if (name && email && phone && password) {
+            setError(null)
+            if (phone.length < 10) {
+                setphoneError('Invalid Phone Number. It should be 10 digits')
+            } else {
+                auth()
+                    .createUserWithEmailAndPassword(email, password)
+                    .then((User) => {
+                        console.log('User account created & signed in!');
+                        User.user.updateProfile({
+                            displayName: name
+                        }).then(() => {
+                            console.log(auth().currentUser.uid);
+                            UserService().AddUserDetails({ name, email, phone })
+                            clearErrors();
+                            navigate("App")
+                        })
+            
                     })
-        
-                })
-                .catch(error => {
-                    clearErrors();
-                    switch(error.code){
-                        case 'auth/email-already-in-use':
-                            setMailError('That email address is already in use!')
-                            break;
-                        case 'auth/invalid-email':
-                            setMailError('That email address is invalid!')
-                            break;
-                        case 'auth/weak-password':
-                            setpassError('Your Password is too weak.It should be 6 letters')
-                            break;
-                        case 'auth/operation-not allowed':
-                            setError('Credentials are not allowed')
-                            break;
-                        default:
-                            setError(error.message)
-                    }   
-                });
-            }
+                    .catch(error => {
+                        clearErrors();
+                        switch(error.code){
+                            case 'auth/email-already-in-use':
+                                setMailError('That email address is already in use!')
+                                break;
+                            case 'auth/invalid-email':
+                                setMailError('That email address is invalid!')
+                                break;
+                            case 'auth/weak-password':
+                                setpassError('Your Password is too weak.It should be 6 letters')
+                                break;
+                            case 'auth/operation-not allowed':
+                                setError('Credentials are not allowed')
+                                break;
+                            default:
+                                setError(error.message)
+                        }   
+                    });
+                }
+        } else {
+            setError('Please fill the fields before login')
         }
+    }
 
     const clearErrors = () => {
         setMailError(null)
