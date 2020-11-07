@@ -19,6 +19,7 @@ import RiderWait from '../screens/riderWait';
 import Tracking from '../screens/tracking';
 import Delivered from '../screens/delivered';
 import Account from '../screens/account';
+import Checkout from '../screens/checkout';
 import ModalHeader from '../components/headers/modalHeader';
 import CustomizedHeader from '../components/headers/customizedHeader';
 import LogoHeader from '../components/headers/logoHeader';
@@ -96,14 +97,21 @@ const OrderNavigation = () => {
                 )
             }} />
             <Stack.Screen name="Category" component={Category} options={{
-                header: (props) => (
-                    <CustomizedHeader navigation={props.navigation} title={props.scene.route.params} isSearch={true} />
-                )
+                header: (props) => {
+                    let store = props.scene.route.params;
+                    return (
+                        <CustomizedHeader navigation={props.navigation} title={store} isSearch={true} />
+                    )
+                }
             }} />
             <Stack.Screen name="Product" component={Product} options={{
-                header: ({ navigation }) => (
-                    <CustomizedHeader navigation={navigation} title={'Category'} isRight={true} isSearch={true} />
-                )
+                header: (props) => {
+                    let category = props.scene.route.params.category;
+                    return (
+                        <CustomizedHeader navigation={props.navigation} title={category} isRight={true} isSearch={true} />
+                    )
+                } 
+
             }} />
         </Stack.Navigator>
     )
@@ -122,6 +130,8 @@ const AppNavigation = () => {
                     headerShown: false
                 }}
             />
+
+            <Stack.Screen name="Checkout" component={Checkout} />
             <Stack.Screen name="Tracking" component={Tracking} options={{
                 header: ({ navigation }) => (
                         <ModalHeader navigation={navigation} />    
@@ -132,6 +142,7 @@ const AppNavigation = () => {
                         <ModalHeader navigation={navigation} />    
                     )    
             }}/>
+
         </Stack.Navigator>
     )
 }
