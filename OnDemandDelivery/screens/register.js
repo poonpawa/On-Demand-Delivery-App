@@ -43,10 +43,10 @@ const register = (props) => {
                                 setMailError('That email address is already in use!')
                                 break;
                             case 'auth/invalid-email':
-                                setMailError('That email address is invalid!')
+                                setMailError('Email address is invalid')
                                 break;
                             case 'auth/weak-password':
-                                setpassError('Your Password is too weak.It should be 6 letters')
+                                setpassError('Password should be at least 6 characters')
                                 break;
                             case 'auth/operation-not allowed':
                                 setError('Credentials are not allowed')
@@ -57,7 +57,7 @@ const register = (props) => {
                     });
                 }
         } else {
-            setError('Please enter all the fields')
+            setError('Please enter all the above fields')
         }
     }
 
@@ -83,6 +83,7 @@ const register = (props) => {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.head}>All below fields are required</Text>
             <View style={styles.form}>
                 <View style={styles.inputcontainer}>
                     <Text style={styles.inputlabel}>Name</Text>
@@ -101,7 +102,7 @@ const register = (props) => {
                     <TextInput style={styles.inputbox}
                         underlineColorAndroid = "transparent" 
                         selectionColor ='#C75300'
-                        placeholder="Email address"
+                        placeholder="Email address will be used to login"
                         autoCapitalize="none"
                         onChangeText={email => setEmail(email)}
                         value={email}
@@ -119,7 +120,7 @@ const register = (props) => {
                         underlineColorAndroid = "transparent" 
                         selectionColor ='#C75300'
                         keyboardType='numeric'
-                        placeholder="Phone"
+                        placeholder="10 digit phone number"
                         autoCapitalize="none"
                         onChangeText={phone => setPhone(phone)}
                         value={phone}
@@ -136,7 +137,7 @@ const register = (props) => {
                     <TextInput style={styles.inputbox} 
                         underlineColorAndroid = "transparent"
                         selectionColor ='#C75300'
-                        placeholder="Password"
+                        placeholder="At least 6 characters"
                         autoCapitalize="none"
                         secureTextEntry={true}
                         onChangeText={password => setpassword(password)}
@@ -149,12 +150,13 @@ const register = (props) => {
                     :<View></View>
                 }
 
-                {error!=null ?
-                    <Text style={styles.error}>{error}</Text>
-                    :<View></View>
-                }
-
-                <Button title="Sign Up" onPress={() => onRegister(name, email, phone, password, navigate)} buttonStyle={styles.primarybtn} />
+                <View style={styles.button}>
+                    {error!=null ?
+                        <Text style={styles.errorAll}>{error}</Text>
+                        :<View></View>
+                    }
+                    <Button title="Sign Up" onPress={() => onRegister(name, email, phone, password, navigate)} buttonStyle={styles.primarybtn} />
+                </View>
 
 
                 <View style={{ alignSelf: "center", marginTop: 16 }}>
@@ -174,6 +176,13 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white'
     },
+    head: {
+        fontSize: 16,
+        fontFamily: "NunitoSans-SemiBold",
+        color: '#383F51',
+        marginTop: 0,
+        paddingLeft: 16
+    },
     form: {
         marginTop: 8,
         marginLeft: 16,
@@ -184,6 +193,12 @@ const styles = StyleSheet.create({
         fontFamily: "NunitoSans-SemiBold",
         color: '#EF2C2C',
         marginTop: 8
+    },
+    errorAll: {
+        fontSize: 14,
+        fontFamily: "NunitoSans-SemiBold",
+        color: '#EF2C2C',
+        marginBottom: 8
     },
     inputcontainer: {
         marginTop: 24
@@ -204,12 +219,14 @@ const styles = StyleSheet.create({
         marginTop: 8,
         paddingLeft: 8
     },
+    button: {
+        marginTop: 40
+    },
     primarybtn: {
         backgroundColor: "#C75300",
         borderRadius: 4,
         fontSize: 16,
-        fontFamily: "NunitoSans-SemiBold",
-        marginTop: 40
+        fontFamily: "NunitoSans-SemiBold",  
     },
 });
 

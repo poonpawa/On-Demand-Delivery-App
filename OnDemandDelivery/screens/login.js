@@ -99,12 +99,14 @@ const login = (props) => {
                     }
                 </View>
                 
-                {error!=null ?
-                    <Text style={styles.error}>{error}</Text>
-                    :<View></View>
-                }
-
-                <Button title="Login" onPress={() => onlogin(email, password, navigate)} buttonStyle={styles.primarybtn} />
+                
+                <View style={styles.button}>
+                    {error!=null ?
+                        <Text style={styles.errorAll}>{error}</Text>
+                        :<View></View>
+                    }
+                    <Button title="Login" onPress={() => onlogin(email, password, navigate)} buttonStyle={styles.primarybtn} />
+                </View>
 
                 <View style={{ alignSelf: "center", marginTop: 16 }}>
                     <Text style={{ color: "#505971", fontSize: 15, fontFamily: "NunitoSans-Regular", }}>
@@ -134,6 +136,12 @@ const styles = StyleSheet.create({
         color: '#EF2C2C',
         marginTop: 8
     },
+    errorAll: {
+        fontSize: 14,
+        fontFamily: "NunitoSans-SemiBold",
+        color: '#EF2C2C',
+        marginBottom: 8
+    },
     inputcontainer: {
         marginTop: 24
     },
@@ -159,6 +167,8 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         fontSize: 16,
         fontFamily: "NunitoSans-SemiBold",
+    },
+    button: {
         marginTop: 40
     },
 });
