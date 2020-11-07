@@ -10,6 +10,7 @@ import { CommonActions } from '@react-navigation/native';
 const home = (props) => {
     let useObj = {};
     const { navigate } = props.navigation;
+    const [isLocationUpdated, setisLocationUpdated] = useState(false)
     let displayName;
     if (auth().currentUser) {
         displayName = auth().currentUser.displayName;
@@ -32,12 +33,10 @@ const home = (props) => {
 
     return (
         <View style={styles.container}>
-            {/* <Text style={{ fontSize: 25 }}>Welcome <Text style={{ color: "#C75300", fontWeight: "bold" }}>{displayName}</Text></Text> */}
             <View style={styles.headTop}>
-                <Text style={styles.heading}>Add address</Text>
-                <Geolocation />
+                <Geolocation parentCallback={(loadingData) => {setisLocationUpdated(loadingData)}}/>
             </View>
-            <View style={styles.inputcontainer}>
+            {/* <View style={styles.inputcontainer}>
                 <Text style={styles.inputlabel}>Address</Text>
                 <TextInput style={styles.inputbox} 
                     underlineColorAndroid = "transparent"
@@ -52,11 +51,22 @@ const home = (props) => {
                     selectionColor ='#C75300'
                     autoCapitalize="none"
                 ></TextInput>
-            </View>
+            </View> */}
             
-            <Button title="Proceed" buttonStyle={styles.btn} onPress={() => {
-                navigate('Home')
-            }} />
+            {isLocationUpdated ? 
+            <View>
+                <Button title="Proceed" buttonStyle={styles.btn} onPress={() => {
+                    navigate('Home')
+                }} />
+            </View> 
+            : 
+            <View>
+                <Text>Location not updated yet</Text>
+            </View>} 
+
+
+
+            
         </View>
     )
 }
@@ -105,7 +115,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         fontSize: 16,
         fontFamily: "NunitoSans-SemiBold",
-        marginTop: 40
+        marginTop: 200
     }
 })
 
