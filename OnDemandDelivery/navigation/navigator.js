@@ -80,7 +80,7 @@ const bottomNavigation = () => {
                         />
                 ),
                 header: ({ navigation }) => (
-                    <ModalHeader navigation={navigation} title={'Account'} />
+                    <ModalHeader navigation={navigation} title={'Account'} goBack={'Store'}/>
                 )
             }} />
         </Tab.Navigator>
@@ -146,12 +146,12 @@ const AppNavigation = () => {
 
             <Stack.Screen name="Tracking" component={Tracking} options={{
                 header: ({ navigation }) => (
-                        <ModalHeader navigation={navigation} />    
+                        <ModalHeader navigation={navigation} goBack={'Store'} />    
                     )    
             }}/>
             <Stack.Screen name="Delivered" component={Delivered} options={{
                 header: ({ navigation }) => (
-                        <ModalHeader navigation={navigation} />    
+                        <ModalHeader navigation={navigation} goBack={'Store'}/>    
                     )    
             }}/>
 

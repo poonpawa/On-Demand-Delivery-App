@@ -10,8 +10,7 @@ const modalHeader = (props) => {
             AsyncStorage.getItem('orderId').then((id) => setTitle('ORDER ID #' + id))
         } else {
             setTitle(props.title);
-        }
-        
+        }  
     }, [])
     
     return (
@@ -21,8 +20,14 @@ const modalHeader = (props) => {
                 rightComponent={{
                     icon: 'close',
                     color: '#6A748A',
-                    onPress:
-                        () => props.navigation.goBack()
+                    onPress: () => {
+                        if (props.goBack) {
+                            props.navigation.navigate(props.goBack)
+                        } else {
+                            props.navigation.goBack();
+                        }
+                    }  
+                        
                 }}
                 containerStyle={styles.mainContainer}
             />

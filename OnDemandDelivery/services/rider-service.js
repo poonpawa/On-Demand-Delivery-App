@@ -9,12 +9,16 @@ const RiderService = () => {
     }
     //need Rider ID for getting the location
 
-    /* const getCurrentLocation = async () => {
-        return await firestore
-    } */
+     const getRiderDetails = async (id) => {
+        let data;
+        await firestore().collection('Riders').doc(id).get().then((doc) => {
+            data = doc.data();
+        })
+        return data;
+    }
 
     return {
-        getAvailableRiders
+        getAvailableRiders, getRiderDetails
     }
 }
 

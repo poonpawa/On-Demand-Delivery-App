@@ -1,12 +1,12 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Text } from 'react-native-elements'
+import { Text, Button } from 'react-native-elements'
 import { useEffect, useState } from 'react'
 import { OrderService } from '../services/order-service'
 import firestore from '@react-native-firebase/firestore';
 import MapView, { Marker } from 'react-native-maps';
 import UserService from '../services/user-service'
-import { Right } from 'native-base'
+import {Linking} from 'react-native'
 import { BackHandler } from "react-native";
 import { CommonActions } from '@react-navigation/native';
 
@@ -83,7 +83,10 @@ const tracking = (props) => {
                             </MapView> : null
                         }
                         <View style={styles.timeline}>
-                            <Text style={styles.timelineOrderId}>Order Id: {orderId}</Text>
+                            <Text style={styles.timelineOrderId}>Call <Text style={{fontFamily: "NunitoSans-Bold"}}>{data.riderName}</Text>: {data.riderPhone}</Text>
+                            <Button title="Call" buttonStyle={styles.btn} onPress={() => {
+                                Linking.openURL(`tel:${data.riderPhone}`)
+                            }} />
                             <View style={{height: 1, backgroundColor: '#ECECF6'}}></View>
                             <View style={styles.timelineStatus}>
                                 <Text style={styles.timelineStatusRider}>{riderStatus}</Text>
@@ -91,9 +94,10 @@ const tracking = (props) => {
                             </View>
                             <View style={{backgroundColor: '#F3F3F3', height: 8}}></View>
                             <View style={styles.timelineFooter}>
-                                <Text style={styles.timelinePrice}>Total Price:</Text>
+                                <Text style={styles.timelinePrice}>Total Price: {data.totalPrice}</Text>
                                 <Text style={styles.timelinePay}>Cash on delivery</Text>    
                             </View>
+                            
                         </View>
                     </View>
                    
@@ -168,6 +172,10 @@ const styles = StyleSheet.create({
     },
     map: {
         ...StyleSheet.absoluteFillObject,
+    },
+    btn: {
+        width: 50,
+        height: 30
     }
 })
 
