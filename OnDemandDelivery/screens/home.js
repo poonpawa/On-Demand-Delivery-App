@@ -34,31 +34,22 @@ const home = (props) => {
     return (
         <View style={styles.container}>
             <Text style={styles.heading}>Add Address</Text>
-            <View style={styles.headTop}>
-            {isLocationUpdated ? 
+
+            <View style={styles.addressDefaultContainer}>
+                
+                {!isLocationUpdated? 
                 <View>
-                    <Geolocation parentCallback={(loadingData) => {setisLocationUpdated(loadingData)}}/>
-                </View> 
-                :
-                <View></View>
-            }
-            </View>
-            {/* <View style={styles.inputcontainer}>
-                <Text style={styles.inputlabel}>Address</Text>
-                <TextInput style={styles.inputbox} 
-                    underlineColorAndroid = "transparent"
-                    selectionColor ='#C75300'
-                    autoCapitalize="none"
-                ></TextInput>
-            </View>
-            <View style={styles.inputcontainer}>
-                <Text style={styles.inputlabel}>EIR code</Text>
-                <TextInput style={styles.inputbox} 
-                    underlineColorAndroid = "transparent"
-                    selectionColor ='#C75300'
-                    autoCapitalize="none"
-                ></TextInput>
-            </View> */}
+                    <Image style={styles.removeProduct}
+                        source={require('../assets/Images/addressDefault.png')}
+                    />
+                    <Text style={styles.textLocationDefault}>No location detected, {"\n"} get current location</Text>
+                </View> : 
+                <View>
+                    <Text style={styles.textLocationDefault}>location detected</Text>
+                </View>}
+                
+                <Geolocation parentCallback={(loadingData) => {setisLocationUpdated(loadingData)}}/> 
+            </View> 
             
             {isLocationUpdated ? 
             <View>
@@ -67,13 +58,7 @@ const home = (props) => {
                 }} />
             </View> 
             : 
-            <View style={styles.addressDefaultContainer}>
-                <Image style={styles.removeProduct}
-                    source={require('../assets/Images/addressDefault.png')}
-                />
-                <Text style={styles.textLocationDefault}>No location detected, {"\n"} get current location</Text>
-                <Geolocation parentCallback={(loadingData) => {setisLocationUpdated(loadingData)}}/>
-            </View>} 
+            null} 
 
 
 

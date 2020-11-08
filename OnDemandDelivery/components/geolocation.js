@@ -65,8 +65,7 @@ const geolocation = (props) => {
     }
 
     return (
-        <View style={styles.location}>
-            
+        <View style={styles.location}> 
                 <TouchableOpacity onPress={() => getLocation()}>
                     <Text style={styles.textlocation}>Get location <Image 
                         style={styles.textImage}
@@ -77,7 +76,7 @@ const geolocation = (props) => {
                 <View style={styles.locationValue}>
                     <ActivityIndicator size="large" color='#C75300' />
                 </View> : 
-                <View>
+                <View style={{ height: 90 }}>
                     <Text style={styles.locationValue}>{address}</Text>
                 </View>}
                
@@ -94,6 +93,8 @@ const styles = StyleSheet.create({
         fontFamily: "NunitoSans-SemiBold",
         marginTop: 24,
         color: '#383F51', 
+        flex: 1,
+        justifyContent: "center"
     },
     textlocation: {
         color: '#C75300', 
