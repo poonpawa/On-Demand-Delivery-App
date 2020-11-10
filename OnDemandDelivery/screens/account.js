@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { RecyclerViewBackedScrollViewComponent, StyleSheet, View } from 'react-native'
+import { RecyclerViewBackedScrollViewComponent, StyleSheet, View, TouchableOpacity } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { OrderService } from '../services/order-service'
 import firebase from "@react-native-firebase/app"
@@ -86,9 +86,11 @@ const account = (props) => {
                                 </View>
                                 {(item.id === currentOrderId) ? 
                                 <View>
-                                    <Button title="ViewDetails" buttonStyle={styles.btn} onPress={() => {
+                                    <TouchableOpacity onPress={() => {
                                         props.navigation.navigate('Tracking', {orderId: currentOrderId})
-                                    }} />
+                                    }}>
+                                        <Text style={styles.btnViewDetails}>View details</Text>
+                                    </TouchableOpacity>
                                 </View> : null}
                             </View>
                         ))
@@ -146,6 +148,13 @@ const styles = StyleSheet.create({
         fontFamily: "NunitoSans-SemiBold",
         fontSize: 15,
         marginTop: 8,
+        marginBottom: 16,
+    },
+    btnViewDetails: {
+        color: '#C75300',
+        fontFamily: "NunitoSans-Bold",
+        fontSize: 15,
+        marginTop: -8,
         marginBottom: 16,
     },
     eachOrder: {
