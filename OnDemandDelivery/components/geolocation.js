@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, PermissionsAndroid, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { Button, Text } from 'react-native-elements';
 import Geolocation from '@react-native-community/geolocation';
+//import Geolocation from 'react-native-geolocation-service';
 import Geocoder from 'react-native-geocoding';
 import UserService from "../services/user-service";
 

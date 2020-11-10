@@ -28,7 +28,7 @@ const NotificationTokenService = () => {
             });
     }
 
-    const sendOrderRequestToRiders = async (listOfRiders, orderNo) => {
+    const sendOrderRequestToRiders = async (listOfRiders, orderNo, store) => {
         const URL = 'https://fcm.googleapis.com/fcm/send'
 
         let headers = new Headers({
@@ -50,7 +50,7 @@ const NotificationTokenService = () => {
                     location: details.Location
                 },
                 number: '987889746',
-                store: 'Tesco',
+                store: store,
             },
             priority: 'high',
             notification: {

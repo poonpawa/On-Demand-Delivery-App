@@ -1,7 +1,15 @@
-import React from 'react'
+import AsyncStorage from '@react-native-community/async-storage'
+import React, { useEffect} from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 
+
 const delivered = (props) => {
+
+    const goHome = () => {
+        AsyncStorage.removeItem('orderId', () => console.log('orderId removed'))
+        props.navigation.navigate('Home')
+    }
+
     return (
         <View style={styles.container}>
             <Image
@@ -10,7 +18,7 @@ const delivered = (props) => {
             />
             <Text style={styles.heading}>Order Delivered</Text>
             <Text style={styles.title}>Your Order was Delivered</Text>
-            <Text style={styles.linkText} onPress={() => props.navigation.navigate('Home')}>Deliver another order</Text>
+            <Text style={styles.linkText} onPress={() => goHome()}>Deliver another order</Text>
         </View>
     )
 }

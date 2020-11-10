@@ -24,6 +24,7 @@ import ModalHeader from '../components/headers/modalHeader';
 import CustomizedHeader from '../components/headers/customizedHeader';
 import LogoHeader from '../components/headers/logoHeader';
 import AsyncStorage from '@react-native-community/async-storage';
+import TitleHeader from '../components/headers/titleHeader';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -146,12 +147,12 @@ const AppNavigation = () => {
 
             <Stack.Screen name="Tracking" component={Tracking} options={{
                 header: ({ navigation }) => (
-                        <ModalHeader navigation={navigation} goBack={'Store'} />    
+                        <ModalHeader navigation={navigation} goBack={'Home'} />    
                     )    
             }}/>
             <Stack.Screen name="Delivered" component={Delivered} options={{
                 header: ({ navigation }) => (
-                        <ModalHeader navigation={navigation} goBack={'Store'}/>    
+                        <TitleHeader navigation={navigation} />    
                     )    
             }}/>
 

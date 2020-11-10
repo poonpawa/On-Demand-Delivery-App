@@ -35,18 +35,17 @@ const home = (props) => {
         <View style={styles.container}>
             <Text style={styles.heading}>Add Address</Text>
 
-            <View style={styles.addressDefaultContainer}>
+            <View style={styles.addressContainer}>
                 
                 {!isLocationUpdated? 
-                <View>
+                <View style={styles.addressDefaultContainer}>
                     <Image style={styles.removeProduct}
                         source={require('../assets/Images/addressDefault.png')}
                     />
                     <Text style={styles.textLocationDefault}>No location detected, {"\n"} get current location</Text>
                 </View> : 
-                <View>
-                    <Text style={styles.textLocationDefault}>location detected</Text>
-                </View>}
+                <View></View>
+                }
                 
                 <Geolocation parentCallback={(loadingData) => {setisLocationUpdated(loadingData)}}/> 
             </View> 
@@ -73,6 +72,12 @@ const styles = StyleSheet.create({
         paddingLeft: 16,
         paddingRight: 16,
         backgroundColor: 'white'
+    },
+    addressContainer: {
+        marginTop: 12,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     addressDefaultContainer: {
         display: 'flex',
@@ -123,7 +128,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         fontSize: 16,
         fontFamily: "NunitoSans-SemiBold",
-        marginTop: 70
+        marginTop: 110
     }
 })
 

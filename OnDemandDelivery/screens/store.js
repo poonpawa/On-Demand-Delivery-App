@@ -89,7 +89,8 @@ const styles = StyleSheet.create({
     store: {
         paddingLeft: 16,
         paddingRight: 16,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        height: '100%'
     },
     heading: {
         fontSize: 24,

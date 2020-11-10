@@ -11,7 +11,7 @@ const placeOrder = (props) => {
     const navigate = props.navigation;
     return (
         <View>
-            <Button title="Place Order" onPress={() => assignRider(navigate)} buttonStyle={props.btnStyle} />
+            <Button title="Place Order" onPress={() => assignRider(navigate, props.store)} buttonStyle={props.btnStyle} />
         </View>
     )
 }
@@ -48,10 +48,10 @@ const findNearestRiders = async () => {
     return _.find(riderTokens, { location: riderCoordinates }).token
 }
 
-const assignRider = (navigate) => {
+const assignRider = (navigate, store) => {
     findNearestRiders().then(
         (riderToken) => {
-            NotificationTokenService().sendOrderRequestToRiders(riderToken, Math.random().toString(10).substr(2, 7))
+            NotificationTokenService().sendOrderRequestToRiders(riderToken, Math.random().toString(10).substr(2, 7), store)
                 .then((rider) => {
                     navigate('RiderWait')
 

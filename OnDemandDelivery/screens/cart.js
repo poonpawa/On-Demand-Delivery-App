@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { StyleSheet, View, Image, TouchableOpacity, Text } from 'react-native'
 import { ListItem, Button, Divider, Icon } from 'react-native-elements';
 
-
 const cart = (props) => {
     const { navigate } = props.navigation;
     
@@ -60,7 +59,7 @@ const cart = (props) => {
 
                                     <View style={styles.eachCartRight}>
                                         <Text style={styles.eachCartPrice}>
-                                            {prop.Price} Euro
+                                        € {prop.Price}
                                         </Text>
                                     </View>
                                 </View>
@@ -70,15 +69,15 @@ const cart = (props) => {
 
                     <View style={styles.itemsTotalContainer}>
                         <Text style={styles.itemsTotal}>Items Total</Text>
-                        <Text style={styles.itemsTotalPrice}>{props.price} Euro</Text>
+                        <Text style={styles.itemsTotalPrice}>€ {props.price}</Text>
                     </View>
                     <View style={styles.deliveryFeeContainer}>
                         <Text style={styles.deliveryFee}>Delivery Fee</Text>
-                        <Text style={styles.deliveryFeePrice}>0.45 Euro</Text>
+                        <Text style={styles.deliveryFeePrice}>€ 0.45</Text>
                     </View>
                     <View style={styles.totalContainer}>
                         <Text style={styles.totalFee}>TOTAL</Text>
-                        <Text style={styles.totalFeePrice}>{props.price} Euro</Text>
+                        <Text style={styles.totalFeePrice}>€ {props.price}</Text>
                     </View>
                     
                   <Button title="Checkout" buttonStyle={styles.primaryBtn} onPress={() => {

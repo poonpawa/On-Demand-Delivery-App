@@ -1,14 +1,13 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Dimensions, Image, Linking, BackHandler } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 import { useEffect, useState } from 'react'
 import { OrderService } from '../services/order-service'
 import firestore from '@react-native-firebase/firestore';
 import MapView, { Marker } from 'react-native-maps';
 import UserService from '../services/user-service'
-import {Linking} from 'react-native'
-import { BackHandler } from "react-native";
 import { CommonActions } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const tracking = (props) => {
@@ -17,6 +16,8 @@ const tracking = (props) => {
     const [riderStatus, setriderStatus] = useState()
     const [buyerLocation, setbuyerLocation] = useState(null)
     const [riderLocation, setriderLocation] = useState(null)
+    
+    
     useEffect(() => {
         const backHandler = BackHandler.addEventListener(
             "hardwareBackPress",
@@ -45,7 +46,7 @@ const tracking = (props) => {
             let status = doc.get('riderStatus.status')
             setriderStatus(status)
             if (status === 'Order Delivered') {
-                props.navigation.navigate('Delivered')
+                props.navigation.navigate('Delivered', {orderId: orderId})
             }
         });
 
@@ -83,18 +84,40 @@ const tracking = (props) => {
                             </MapView> : null
                         }
                         <View style={styles.timeline}>
-                            <Text style={styles.timelineOrderId}>Call <Text style={{fontFamily: "NunitoSans-Bold"}}>{data.riderName}</Text>: {data.riderPhone}</Text>
-                            <Button title="Call" buttonStyle={styles.btn} onPress={() => {
+                            <View style={styles.callPhone}>
+                                <Text style={styles.timelineOrderId}>Rider: <Text style={styles.timelineOrderId}>{data.riderName}</Text></Text>
+                                <TouchableOpacity onPress={() => {
+                                    Linking.openURL(`tel:${data.riderPhone}`)
+                                }}>
+                                    <Image 
+                                        style={styles.textImage}
+                                        source={require('../assets/Images/Call.jpeg')} />
+                                </TouchableOpacity>
+                            </View>
+                           {/*  <Button title="Call" buttonStyle={styles.btn} onPress={() => {
                                 Linking.openURL(`tel:${data.riderPhone}`)
-                            }} />
+                            }} /> */}
                             <View style={{height: 1, backgroundColor: '#ECECF6'}}></View>
                             <View style={styles.timelineStatus}>
                                 <Text style={styles.timelineStatusRider}>{riderStatus}</Text>
-                                <Text style={styles.timelineLocation}><Text style={{fontFamily: "NunitoSans-Bold"}}>{data.riderName}</Text> is on the way to <Text style={{fontFamily: "NunitoSans-Bold"}}>{data.store}</Text></Text>
+                                {(riderStatus === 'Rider Assigned')? <View>
+                                    <Text style={styles.timelineLocation}><Text style={{fontFamily: "NunitoSans-Bold"}}>{data.riderName}
+                                    </Text> is on the way to <Text style={{fontFamily: "NunitoSans-Bold"}}>{data.store}</Text></Text>
+                                </View> 
+                                : (riderStatus === 'Rider is at the store')? <View>
+                                    <Text style={styles.timelineLocation}><Text style={{fontFamily: "NunitoSans-Bold"}}>{data.riderName}
+                                    </Text> is picking your items from <Text style={{fontFamily: "NunitoSans-Bold"}}>{data.store}</Text></Text>
+                                </View> : 
+                                <View>
+                                <Text style={styles.timelineLocation}><Text style={{fontFamily: "NunitoSans-Bold"}}>{data.riderName}
+                                    </Text> has picked the order</Text>
+                                </View>}
+
+                                
                             </View>
                             <View style={{backgroundColor: '#F3F3F3', height: 8}}></View>
                             <View style={styles.timelineFooter}>
-                                <Text style={styles.timelinePrice}>Total Price: {data.totalPrice}</Text>
+                                <Text style={styles.timelinePrice}>Total Price: € {data.totalPrice} </Text>
                                 <Text style={styles.timelinePay}>Cash on delivery</Text>    
                             </View>
                             
@@ -108,13 +131,34 @@ const tracking = (props) => {
     )
 }
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        height: '100%',
+    },
+    mapContainer: {
+        ...StyleSheet.absoluteFillObject,
+        height: windowHeight,
+        width: windowWidth,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
+    map: {
+        ...StyleSheet.absoluteFillObject,
+    },
+    callPhone: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingRight: 16,
     },
     timelineOrderId: {
         color: '#383F51',
-        fontSize: 16,
+        fontSize: 15,
         fontFamily: "NunitoSans-SemiBold",
         marginTop: 12,
         marginBottom: 12,
@@ -127,7 +171,7 @@ const styles = StyleSheet.create({
     timelineStatusRider: {
         color: '#383F51',
         fontSize: 18,
-        fontFamily: "NunitoSans-SemiBold",
+        fontFamily: "NunitoSans-Bold",
         marginTop: 8, 
     },
     timelineLocation: {
@@ -140,11 +184,11 @@ const styles = StyleSheet.create({
     timeline: {
       position: 'absolute',
       width: '100%',
-      bottom: 0,
+      bottom: 60,
       backgroundColor: 'white',
     },
     timelineFooter:{
-        width: '90%',
+        width: '100%',
         flexDirection: 'row',
         display: 'flex',
         justifyContent: 'space-between',
@@ -162,16 +206,6 @@ const styles = StyleSheet.create({
         color: '#383F51',
         fontSize: 15,
         fontFamily: "NunitoSans-SemiBold",
-    },
-    mapContainer: {
-        ...StyleSheet.absoluteFillObject,
-        height: 600,
-        width: 450,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-    },
-    map: {
-        ...StyleSheet.absoluteFillObject,
     },
     btn: {
         width: 50,

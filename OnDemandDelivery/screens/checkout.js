@@ -26,14 +26,14 @@ const checkout = (props) => {
             </View>
             <View style={styles.inputcontainer}>
                 <Text style={styles.inputlabel}>AMOUNT TO PAY</Text>
-                <Text style={styles.labelValue}>{price} Euro </Text>
+                <Text style={styles.labelValue}>€ {price} </Text>
             </View>
             <View style={styles.inputcontainer}>
                 <Text style={styles.inputlabel}>PAYMENT</Text>
                 <Text style={styles.labelValue}>Cash on delivery</Text>
             </View>
             
-            <PlaceOrder navigation={navigate} btnStyle={styles.btn} />
+            <PlaceOrder navigation={navigate} btnStyle={styles.btn} store={store} />
         </View>
     )
 }
