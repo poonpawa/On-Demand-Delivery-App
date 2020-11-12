@@ -21,15 +21,20 @@ export default (state = initialState, action) => {
                 store: state.store
             }
         case 'REMOVE_FROM_CART':
-            let remainingPrice = state.price - action.product.Price;
+            let remainingPrice = 0;         
             if (action.product.quantity > 0) {
+                remainingPrice = state.price - action.product.Price;
                 action.product.quantity--;
+            }
+
+            if (state.total > 0) {
+                state.total--;
             }
             return {
                 products: action.product.quantity === 0
                     ? state.products.filter(item => item.ProductId !== action.product.ProductId)
                     : state.products,
-                total: state.total - 1,
+                total: state.total,
                 price: +remainingPrice.toFixed(2),
                 store: state.store
             }
