@@ -51,12 +51,21 @@ const product = (props) => {
                                 {prop.Price} Euro
                             </Text>
                             <View style={styles.quantityView}>
+                                {prop.quantity>0? 
                                 <TouchableOpacity onPress={() => props.removeFromCart(prop)}>
                                     <Image 
                                         style={styles.removeProduct}
                                         source={require('../assets/Images/removeProduct.png')}
                                     />
                                 </TouchableOpacity>
+                                :
+                                <View>
+                                    <Image 
+                                        style={styles.removeProduct}
+                                        source={require('../assets/Images/removeProduct.png')}
+                                    />
+                                </View>
+                                }
                                 <Text style={styles.productQuantity}>{prop.quantity}</Text>
                                 <TouchableOpacity onPress={() => props.addToCart(prop)    }>
                                     <Image 
