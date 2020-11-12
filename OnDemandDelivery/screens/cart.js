@@ -46,7 +46,7 @@ const cart = (props) => {
                                                         source={require('../assets/Images/addProduct.png')}
                                                     />
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => props.removeFromCart(prop)}>
+                                                <TouchableOpacity onPress={() => props.deleteItem(prop)}>
                                                     <Image
                                                         style={styles.deleteProduct}
                                                         source={require('../assets/Images/delete.png')}
@@ -77,7 +77,7 @@ const cart = (props) => {
                     </View>
                     <View style={styles.totalContainer}>
                         <Text style={styles.totalFee}>TOTAL</Text>
-                        <Text style={styles.totalFeePrice}>€ {props.price}</Text>
+                        <Text style={styles.totalFeePrice}>€ {props.price + 0.45}</Text>
                     </View>
                     
                   <Button title="Checkout" buttonStyle={styles.primaryBtn} onPress={() => {
