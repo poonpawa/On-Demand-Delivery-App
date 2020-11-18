@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { StyleSheet, View, Image, TouchableOpacity, Text } from 'react-native'
+import { StyleSheet, ScrollView, View, Image, TouchableOpacity, Text } from 'react-native'
 import { ListItem, Button, Divider, Icon } from 'react-native-elements';
 
 const cart = (props) => {
@@ -8,6 +8,7 @@ const cart = (props) => {
     
     return (
         <View style={styles.cartContainer}>
+            <ScrollView>
              <Text style={styles.cartHeading}>Cart</Text> 
             
             {props.products.length> 0 ?
@@ -103,6 +104,7 @@ const cart = (props) => {
                         <Text style={styles.textEmptyTitle}>You haven’t added anything to cart</Text>
                 </View>
             }
+            </ScrollView>
         </View>
     )
 }
@@ -127,11 +129,15 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps, mapDispatchToProps)(cart)
 
 const styles = StyleSheet.create({
+    cartContainer: {
+        height: '100%',
+        display: 'flex',
+    },
     emptycontainer: {
+        marginTop: 270,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100%',
     },
     cartTotalItems: {
         color: '#6A748A',

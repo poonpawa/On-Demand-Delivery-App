@@ -16,7 +16,7 @@ const checkout = (props) => {
     }, [])
     return (
         <View style={styles.container}>
-            <View style={styles.inputcontainer}>
+            <View style={styles.inputcontainerFirst}>
                 <Text style={styles.inputlabel}>STORE</Text>
                 <Text style={styles.labelValue}>{store}</Text>
             </View>
@@ -26,7 +26,7 @@ const checkout = (props) => {
             </View>
             <View style={styles.inputcontainer}>
                 <Text style={styles.inputlabel}>AMOUNT TO PAY</Text>
-                <Text style={styles.labelValue}>€ {price} </Text>
+                <Text style={styles.labelValue}>€ {price + 0.45} </Text>
             </View>
             <View style={styles.inputcontainer}>
                 <Text style={styles.inputlabel}>PAYMENT</Text>
@@ -50,6 +50,9 @@ const styles = StyleSheet.create({
     },
     inputcontainer: {
         marginTop: 24
+    },
+    inputcontainerFirst: {
+        marginTop: 12
     },
     inputlabel: {
         fontSize: 14,
