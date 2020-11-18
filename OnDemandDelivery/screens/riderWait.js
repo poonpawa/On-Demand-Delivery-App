@@ -32,7 +32,7 @@ const riderWait = (props) => {
                 AsyncStorage.setItem('orderId', orderId);
                 OrderService().createOrderCollection(orderId, orderDetails, payload.data).then(() => {
                     navigate('Tracking', { orderId })
-                })
+                })  
             } else {
                 console.log('Order Rejected');
             }

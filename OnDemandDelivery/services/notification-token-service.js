@@ -28,7 +28,7 @@ const NotificationTokenService = () => {
             });
     }
 
-    const sendOrderRequestToRiders = async (listOfRiders, orderNo, store) => {
+    const sendOrderRequestToRiders = async (listOfRiders, orderNo, store, props) => {
         const URL = 'https://fcm.googleapis.com/fcm/send'
 
         let headers = new Headers({
@@ -37,6 +37,7 @@ const NotificationTokenService = () => {
         })
 
         const details = await UserService().getBuyerDetails();
+        const buyerId = firebase.auth().currentUser.uid;
 
         console.log(details);
         const message = {
@@ -45,10 +46,13 @@ const NotificationTokenService = () => {
                 orderNumber: orderNo,
                 time: new Date().toLocaleTimeString(),
                 buyer: {
+                    id: buyerId,
                     address: details.Address,
                     token: details.NotificationTokens,
                     location: details.Location
                 },
+                products: props.products,
+                totalprice: props.price,
                 number: '987889746',
                 store: store,
             },

@@ -6,12 +6,14 @@ import RiderService from "../services/rider-service";
 import UserService from "../services/user-service";
 import NotificationTokenService from "../services/notification-token-service";
 import * as _ from 'lodash';
+import { connect } from 'react-redux';
 
 const placeOrder = (props) => {
+    console.log('props placeorder', props)
     const navigate = props.navigation;
     return (
         <View>
-            <Button title="Place Order" onPress={() => assignRider(navigate, props.store)} buttonStyle={props.btnStyle} />
+            <Button title="Place Order" onPress={() => assignRider(navigate, props.store, props)} buttonStyle={props.btnStyle} />
         </View>
     )
 }
@@ -48,10 +50,10 @@ const findNearestRiders = async () => {
     return _.find(riderTokens, { location: riderCoordinates }).token
 }
 
-const assignRider = (navigate, store) => {
+const assignRider = (navigate, store, props) => {
     findNearestRiders().then(
         (riderToken) => {
-            NotificationTokenService().sendOrderRequestToRiders(riderToken, Math.random().toString(10).substr(2, 7), store)
+            NotificationTokenService().sendOrderRequestToRiders(riderToken, Math.random().toString(10).substr(2, 7), store, props)
                 .then((rider) => {
                     navigate('RiderWait')
 
@@ -60,7 +62,17 @@ const assignRider = (navigate, store) => {
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+        products: state.products,
+        total: state.total,
+        price: state.price,
+        state: state.store
+    }
+}
+
 
 const styles = StyleSheet.create({})
 
-export default placeOrder
+
+export default connect(mapStateToProps)(placeOrder)
