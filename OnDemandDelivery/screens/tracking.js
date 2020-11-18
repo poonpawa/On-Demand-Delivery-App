@@ -141,6 +141,8 @@ const styles = StyleSheet.create({
     },
     mapContainer: {
         ...StyleSheet.absoluteFillObject,
+        position: 'absolute',
+        top: 0,
         height: windowHeight,
         width: windowWidth,
         justifyContent: 'flex-end',
@@ -184,7 +186,7 @@ const styles = StyleSheet.create({
     timeline: {
       position: 'absolute',
       width: '100%',
-      bottom: 60,
+      bottom: 80,
       backgroundColor: 'white',
     },
     timelineFooter:{
