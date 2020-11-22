@@ -16,12 +16,15 @@ const account = (props) => {
     const navigate = props.navigation;
     const isFocused = useIsFocused();
     useEffect(() => {
-        const userId = firebase.auth().currentUser.uid;
-       AsyncStorage.getItem('orderId').then((id) => setcurrentOrderId(id));
-        OrderService().getAllOrders(userId).then((data) => {
-            setOrders(data)
-            setactiveOrderDetails(orders.find((item) => item.id === currentOrderId))
-        })
+        if (firebase.auth().currentUser) {
+            const userId = firebase.auth().currentUser.uid;
+        
+            AsyncStorage.getItem('orderId').then((id) => setcurrentOrderId(id));
+            OrderService().getAllOrders(userId).then((data) => {
+                setOrders(data)
+                setactiveOrderDetails(orders.find((item) => item.id === currentOrderId))
+            })
+        }
     }, [isFocused])
 
     const signOut = (navigate) => {
