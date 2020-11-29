@@ -2,18 +2,20 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { StyleSheet, ScrollView, View, Image, TouchableOpacity, Text } from 'react-native'
 import { ListItem, Button, Divider, Icon } from 'react-native-elements';
+import * as _ from 'lodash';
 
 const cart = (props) => {
     const { navigate } = props.navigation;
     
     return (
         <View style={styles.cartContainer}>
-            <ScrollView>
-             <Text style={styles.cartHeading}>Cart</Text> 
             
+             <Text style={styles.cartHeading}>Cart</Text> 
+             <Text style={styles.cartTotalItems}>TOTAL ITEMS: {props.products.length}</Text>
             {props.products.length> 0 ?
-                <View>
-                <Text style={styles.cartTotalItems}>TOTAL ITEMS:</Text>
+                <View style={{height: 650}}><ScrollView>
+                    
+                    
                     {props.products.map((prop, key) => {
                         return (
                             <View key={key}>
@@ -76,6 +78,7 @@ const cart = (props) => {
                             </View>
                         )
                     })}
+                    </ScrollView>
 
                     <View style={styles.itemsTotalContainer}>
                         <Text style={styles.itemsTotal}>Items Total</Text>
@@ -87,7 +90,7 @@ const cart = (props) => {
                     </View>
                     <View style={styles.totalContainer}>
                         <Text style={styles.totalFee}>TOTAL</Text>
-                        <Text style={styles.totalFeePrice}>€ {props.price + 0.45}</Text>
+                        <Text style={styles.totalFeePrice}>€ {_.ceil(props.price + 0.45, 2)}</Text>
                     </View>
                     
                   <Button title="Checkout" buttonStyle={styles.primaryBtn} onPress={() => {
@@ -104,7 +107,7 @@ const cart = (props) => {
                         <Text style={styles.textEmptyTitle}>You haven’t added anything to cart</Text>
                 </View>
             }
-            </ScrollView>
+            
         </View>
     )
 }
@@ -113,7 +116,7 @@ const mapStateToProps = (state) => {
     return {
         products: state.products,
         total: state.totalItems,
-        price: state.price,
+        price: _.ceil(state.price, 2),
         store: state.store
     }
 }
@@ -143,7 +146,7 @@ const styles = StyleSheet.create({
         color: '#6A748A',
         fontFamily: "NunitoSans-SemiBold",
         fontSize: 14,
-        marginTop: 16
+        paddingVertical: 3
     },
     imgEmptyCart: {
         marginTop: -100

@@ -12,7 +12,7 @@ const login = (props) => {
     const [passError, setpassError] = useState(null)
 
     const onlogin = (email, password, navigate) => {
-        if (email !== null && password !== null) {
+        if (email && password) {
         auth()
             .signInWithEmailAndPassword(email, password)
             .then(() => {
@@ -41,6 +41,7 @@ const login = (props) => {
                 }   
             });
         } else {
+            clearErrors()
             setError('Please enter all the fields')
         }
     }

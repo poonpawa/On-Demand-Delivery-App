@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import PlaceOrder from "../components/placeOrder";
 import UserService from '../services/user-service';
+import * as _ from 'lodash';
 
 const checkout = (props) => {
     const { navigate } = props.navigation;
@@ -26,7 +27,7 @@ const checkout = (props) => {
             </View>
             <View style={styles.inputcontainer}>
                 <Text style={styles.inputlabel}>AMOUNT TO PAY</Text>
-                <Text style={styles.labelValue}>€ {price + 0.45} </Text>
+                <Text style={styles.labelValue}>€ {_.ceil(price + 0.45, 2)} </Text>
             </View>
             <View style={styles.inputcontainer}>
                 <Text style={styles.inputlabel}>PAYMENT</Text>

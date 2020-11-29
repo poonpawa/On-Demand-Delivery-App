@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, View, ActivityIndicator, Alert } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import UserService from '../services/user-service';
 import { OrderService } from "../services/order-service";
@@ -10,9 +10,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const riderWait = (props) => {
     const { navigate } = props.navigation;
+    const [timePassed, settimePassed] = useState(false)
     const isFocused = useIsFocused();
+    setTimeout(() => {settimePassed(true)}, 15000)
     useEffect(() => {
-
+        
         const backHandler = BackHandler.addEventListener(
             "hardwareBackPress",
             async () => { 
@@ -38,13 +40,33 @@ const riderWait = (props) => {
             }
         });
 
+        if (timePassed) {
+            Alert.alert(
+                "Rider Unavailable",
+                "Sorry no Rider available at the moment. Please try again after sometime",
+                [
+                  {
+                    text: "Ok",
+                    onPress: () => { 
+                        settimePassed(false);  
+                        navigate('Home')
+                    },
+                    style: "cancel"
+                  }
+                ])
+            
+        }
+
         return () => backHandler.remove();
-    }, [isFocused])
+    }, [isFocused, timePassed])
 
     return (
         <View style={styles.container}>
-            <ActivityIndicator size="large" color="#C75300"></ActivityIndicator>
-            <Text style={styles.waitingText}>Waiting for the rider to accept the order</Text>
+            <View>
+                <ActivityIndicator size="large" color="#C75300"></ActivityIndicator>
+                <Text style={styles.waitingText}>Waiting for the rider to accept the order</Text>
+            </View>
+            
         </View>
     )
 }
@@ -56,6 +78,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: '100%',
         backgroundColor: 'white',
+    },
+    insideContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     waitingText: {
         fontFamily: 'NunitoSans-SemiBold',
